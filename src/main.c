@@ -25,27 +25,31 @@ t_env	global_env;
 
 int	main(int argc, char **argv, char **env)
 {
-	char	*str;
+	// char	*str;
 	t_token	*tokens;
 	t_ast	*tree;
 
 	// init_env(env);
-	init_signals();
+	// init_signals();
 	while (1)
 	{
-		str = readline("MINIHELL> ");
-		if (!str)
-			exit(EXIT_FAILURE);
-		add_history(str);
-		tokens = tokenizer(str, tokens);
-		// // print_tokens(tokens);
-		tree = parser(tokens);
-		// // print_tree(tree, tokens);
-		executor(tree);
-		free(str);
-		free(tokens);
-		free(tree);
-		// str = NULL;
+		char str[100];
+		if (fgets(str, 100, stdin))
+		{
+			// str = readline("MINIHELL> ");
+			// if (!str)
+			// 	exit(EXIT_FAILURE);
+			// add_history(str);
+			tokens = tokenizer(str, tokens);
+			// print_tokens(tokens);
+			tree = parser(tokens);
+			// print_tree(tree, tokens);
+			executor(tree);
+			// free(str);
+			free(tokens);
+			free(tree);
+			// str = NULL;
+		}
 	}
 }
 

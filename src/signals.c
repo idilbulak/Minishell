@@ -1,5 +1,6 @@
 #include "../inc/signals.h"
 #include <readline/readline.h>
+#include <readline/history.h>
 #include <signal.h>
 #include <unistd.h>
 #include <stdlib.h>
