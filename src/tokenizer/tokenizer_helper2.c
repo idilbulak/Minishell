@@ -89,21 +89,3 @@ int	check_ifredirection(t_token *tokens)
 		return (1);
 	return (0);
 }
-
-int	n_token_withoutredirection(t_token *tokens)
-{
-	int	n;
-
-	n = 0;
-	while (tokens->next != NULL)
-	{
-		if (check_ifredirection(tokens) == 1)
-			tokens = tokens->next;
-		else
-		{
-			n++;
-			tokens = tokens->next;
-		}
-	}
-	return (n);
-}

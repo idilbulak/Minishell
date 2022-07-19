@@ -67,16 +67,12 @@ char		*typeoftoken(char *str, t_token *new_token, t_state state);
 t_token		*find_path(t_token *tokens);
 int			check_ifpath(t_token *tokens);
 int			check_ifredirection(t_token *tokens);
-int			n_token_withoutredirection(t_token *tokens);
 
 // tokenlist_utils
 t_token		*init_tokens(t_token *tokens, t_state state);
 t_token		*addto_emptylist(t_token *head, t_token *new);
 t_token		*addto_end(t_token *head, t_token *new);
 void		print_tokens(t_token *head);
-int			n_token(t_token *tokens);
-int			n_command(t_token *tokens);
-int			find_command_index(t_token *tokens, char *token);
 
 // libft
 int			ft_isdigit(int c);

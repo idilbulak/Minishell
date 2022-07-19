@@ -10,10 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/exec.h"
 #include "../../inc/tokenizer.h"
-#include "../../inc/parser.h"
-#include "../../inc/env.h"
 
 t_state	if_endofdata(char *str, t_state state)
 {

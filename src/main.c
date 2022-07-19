@@ -43,8 +43,8 @@ int	main(int argc, char **argv, char **env)
 			tokens = tokenizer(str, tokens);
 			// print_tokens(tokens);
 			word_list = parser(tokens);
-			print_wordlist(word_list);
-			// executor(tree);
+			// print_wordlist(word_list);
+			// executor(word_list);
 			// free(str);
 			free(tokens);
 			free(word_list);
