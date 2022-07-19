@@ -44,7 +44,7 @@ char	*parse_unquotedstring(char *str, t_token *new_token)
 
 	temp_str = str;
 	len = 0;
-	while (*str != '>' && *str != '<' && *str != '|')
+	while (*str != '>' && *str != '<' && *str != '|' && *str != ' ')
 	{
 		len++;
 		str++;

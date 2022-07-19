@@ -25,6 +25,8 @@ int	check_pipe(t_token *tokens)
 		{
 			if (tokens->next->data == NULL)
 				return (-1);
+			if (tokens->next->tokentype == TOKEN_PIPE)
+				return (-1);
 		}
 		tokens = tokens->next;
 	}
@@ -39,6 +41,10 @@ int	check_redirection(t_token *tokens)
 		{
 			if (tokens->next->data == NULL)
 				return (-1);
+			if (check_ifredirection(tokens->next) == 1)
+				return (-1);
+			if (tokens->next->tokentype == TOKEN_PIPE)
+				return (-1);
 		}
 		tokens = tokens->next;
 	}
@@ -50,6 +56,7 @@ int	parser_checks(t_token *tokens)
 	int	n;
 
 	n = 0;
+
 	if (if_pipe(tokens) == 42)
 		n = check_pipe(tokens);
 	if (check_ifpath(tokens) == 1)

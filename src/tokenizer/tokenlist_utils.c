@@ -64,7 +64,7 @@ void	print_tokens(t_token *head)
 		return ;
 	while (current != NULL )
 	{
-		printf("token[%d]:%s  type:%u", i, current -> data, current->tokentype);
+		printf("token[%d]:%s type:%u", i, current -> data, current->tokentype);
 		printf("\n");
 		i++;
 		current = current->next;

@@ -9,20 +9,19 @@ SRCS_LIST = \
 	tokenizer/tokenizer.c tokenizer/tokenlist_utils.c tokenizer/tokenizer_helper.c \
 	tokenizer/tokenizer_helper2.c \
 	parser/parser.c parser/parser_utils.c parser/parser_checks.c \
-	executor/exec.c \
-	main.c libft.c signals.c
+	main.c libft.c
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_LIST))
 OBJS = $(SRCS:.c=.o)
 FLAGS = -lreadline
-# LDFLAGS			=	-L/opt/homebrew/opt/readline/lib
-# CPPFLAGS		=	-I/opt/homebrew/opt/readline/include
+export LDFLAGS="-L/opt/homebrew/opt/readline/lib"
+  export CPPFLAGS="-I/opt/homebrew/opt/readline/include"
 INC = -I ./inc
 
 all: $(NAME)
 
 $(NAME): $(OBJS) 
 	@echo "$(PURPLE) compiling minishell $(RESET)"
-	$(CC) $(FLAGS) $(INC) $(SRCS) -o $(NAME)
+	$(CC)  $(INC) $(SRCS) -o $(NAME) $(FLAGS) $(LDFLAGS) $(CPPFLAGS)
 
 %.o: %.c
 	$(CC) -c $(INC) $< -o $@

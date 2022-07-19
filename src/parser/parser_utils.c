@@ -16,52 +16,60 @@
 #include "../../inc/env.h"
 #include <stdio.h>
 
-t_ast	*init_tree(t_ast *tree, t_token *tokens)
+t_word_list	*init_word_list(t_word_list *word_list)
 {
-	int	n_args;
-	int	i;
-
-	i = 0;
-	tree = malloc(sizeof(t_ast));
-	if (!tree)
+	word_list = malloc(sizeof(t_word_list));
+	if (!word_list)
 		exit(EXIT_FAILURE);
-	tree->cmd_number = calculate_n_cmd(tokens);
-	n_args = calculate_n_args(tokens);
-	tree->args = malloc(sizeof(t_args *) * (n_args + 1));
-	if (!(tree->args))
-		exit(EXIT_FAILURE);
-	while (i < n_args)
-	{
-		tree->args[i] = malloc(sizeof(t_args));
-		if (!(tree->args[i]))
-			exit(EXIT_FAILURE);
-		i++;
-	}
-	return (tree);
+	word_list->next = NULL;
+	word_list->word = NULL;
+	return (word_list);
 }
 
-void	print_tree(t_ast *tree, t_token *tokens)
+t_word_list	*init_new_word(t_word_list *new_word, t_token *tokens)
+{
+	new_word = malloc(sizeof(t_word_list));
+	if (!new_word)
+		exit(EXIT_FAILURE);
+	new_word->next = NULL;
+	new_word->word = malloc(sizeof(t_word_desc));
+	if (!new_word->word)
+		exit(EXIT_FAILURE);
+	new_word->word->flags = tokens->tokentype;
+	new_word->word->word = tokens->data;
+	return (new_word);
+}
+
+t_word_list	*addto_wend(t_word_list *head, t_word_list *new)
+{
+	t_word_list	*temp_next;
+
+	temp_next = malloc(sizeof(t_word_list));
+	temp_next->word = new->word;
+	temp_next->next = NULL;
+	while (head->next != NULL)
+		head = head->next;
+	head->next = temp_next;
+	return (head);
+}
+
+t_word_list	*addto_empty_wlist(t_word_list *head, t_word_list *new)
+{
+	head->word = new->word;
+	head->next = NULL;
+	return (head);
+}
+
+void	print_wordlist(t_word_list *word_list)
 {
 	int	i;
-	int	j;
 	i = 0;
-	j = 0;
-	printf("total command number: %d\n", tree->cmd_number);
-	printf("total arg number: %d\n", calculate_n_args(tokens));
+	while(word_list != NULL)
 	{
-		printf("tree->args[0]->type: %d\n", tree->args[0]->type);
-		printf("tree->args[0]->data[0]: echo? %s\n", tree->args[0]->data[0]);
-		printf("tree->args[0]->data[1]: idil? %s\n", tree->args[0]->data[1]);
-		printf("tree->args[0]->data[2]: null? %s\n", tree->args[0]->data[2]);
-		printf("tree->args[1]->type: %d\n", tree->args[1]->type);
-		printf("tree->args[1]->data[0]: file? %s\n", tree->args[1]->data[0]);
-		printf("tree->args[1]->data[1]: null? %s\n", tree->args[1]->data[1]);
-		printf("tree->args[2]->type: %d\n", tree->args[2]->type);
-		printf("tree->args[2]->data[0]: file? %s\n", tree->args[2]->data[0]);
-		printf("tree->args[2]->data[1]: null? %s\n", tree->args[2]->data[1]);
-		printf("tree->args[3]->type: %d\n", tree->args[3]->type);
-		printf("tree->args[3]->data[0]: file? %s\n", tree->args[3]->data[0]);
-		printf("tree->args[3]->data[1]: null? %s\n", tree->args[3]->data[1]);
-		// printf("tree->args[2]->data[2]: null? %s\n", tree->args[2]->data[2]);
+		printf("word_list[%d]: \n", i);
+		printf("\t word: %s\n", word_list->word->word);
+		printf("\t flag: %d\n", word_list->word->flags);
+		i++;
+		word_list = word_list->next;
 	}
 }

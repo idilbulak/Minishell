@@ -12,6 +12,6 @@ typedef struct	s_filed
 	int		out;
 }	t_filed;
 
-void	executor(t_ast *ast);
+// void	executor(t_ast *ast);
 
 #endif

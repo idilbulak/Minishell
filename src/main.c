@@ -26,8 +26,8 @@ t_env	global_env;
 int	main(int argc, char **argv, char **env)
 {
 	// char	*str;
-	t_token	*tokens;
-	t_ast	*tree;
+	t_token		*tokens;
+	t_word_list	*word_list;
 
 	// init_env(env);
 	// init_signals();
@@ -42,12 +42,12 @@ int	main(int argc, char **argv, char **env)
 			// add_history(str);
 			tokens = tokenizer(str, tokens);
 			// print_tokens(tokens);
-			tree = parser(tokens);
-			// print_tree(tree, tokens);
-			executor(tree);
+			word_list = parser(tokens);
+			print_wordlist(word_list);
+			// executor(tree);
 			// free(str);
 			free(tokens);
-			free(tree);
+			free(word_list);
 			// str = NULL;
 		}
 	}
