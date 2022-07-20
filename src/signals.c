@@ -4,32 +4,33 @@
 #include <signal.h>
 #include <unistd.h>
 #include <stdlib.h>
+# include <sys/wait.h>
 
+static void	sig_handler(int sig)
+{
 // delete the previous buffer and give a prompt on new line
-static void	sigint_handler(int sig)
-{
-	write(1, "\n", 1);
-	rl_on_new_line();
-	write(2, "\b \b\b \b", 6);
-	rl_replace_line("", 1);
-	rl_redisplay();
-}
-
+	if (sig == SIGINT)
+	{
+		rl_replace_line("", 1);
+		write(1, "\n", 1);
+		rl_on_new_line();
+		rl_redisplay();
+	}
 // does nothing, give just a prompt
-static void	sigquit_handler(int sig)
-{
-	rl_on_new_line();
-	rl_redisplay();
+	if (sig == SIGQUIT)
+	{
+		rl_replace_line("", 1);
+		rl_on_new_line();
+		rl_redisplay();
+	}
 }
 
 void	init_signals(void)
 {
 	//ctrl-c
-	if (signal(SIGINT, sigint_handler) == SIG_ERR)
-		exit(EXIT_FAILURE);
+	signal(SIGINT, sig_handler);
 	//ctrl-4
-	if (signal(SIGQUIT, sigquit_handler) == SIG_ERR)
-		exit(EXIT_FAILURE);
+	signal(SIGQUIT, sig_handler);
 }
 
 /*

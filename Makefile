@@ -20,7 +20,7 @@ $(NAME):	$(OBJS)
 	$(GCC) $(FLAGS) -L/opt/homebrew/opt/readline/lib -I/opt/homebrew/opt/readline/include -lreadline -o $(NAME) $(OBJS)
 
 %.o: %.c $(HEADER)
-	$(GCC) -c $< -I/usr/local/opt/readline/include   -o  $(<:.c=.o)
+	$(GCC) $(FLAGS) -c $< -o  $(<:.c=.o)
 
 clean:
 	rm -f $(OBJS)

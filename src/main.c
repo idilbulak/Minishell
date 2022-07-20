@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:25:01 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/07/20 10:56:22 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/07/06 15:01:29 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 t_env	global_env;
 
-int	main(int argc, char **argv, char **env)
+int	main()
 {
 	char		*str;
 	t_token		*tokens;
@@ -40,7 +40,7 @@ int	main(int argc, char **argv, char **env)
 		tokens = tokenizer(str, tokens);
 		// print_tokens(tokens);
 		word_list = parser(tokens);
-		print_wordlist(word_list);
+		// print_wordlist(word_list);
 		// executor(word_list);
 		// free(str);
 		free(tokens);

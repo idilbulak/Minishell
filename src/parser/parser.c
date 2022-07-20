@@ -23,6 +23,7 @@ t_word_list	*parser(t_token *tokens)
 
 	if (parser_checks(tokens) == -1)
 		exit(EXIT_FAILURE);
+	word_list = NULL;
 	word_list = init_word_list(word_list);
 	while (tokens->data != NULL)
 	{

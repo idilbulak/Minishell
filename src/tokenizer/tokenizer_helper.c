@@ -87,7 +87,7 @@ char	*greaterthan_helper(char *str, t_token *new_token)
 	return (str);
 }
 
-char	*find_delimiter( char *str, t_token *new_token, t_state state)
+char	*find_delimiter( char *str, t_token *new_token)
 {
 	if (*str == '|')
 	{
