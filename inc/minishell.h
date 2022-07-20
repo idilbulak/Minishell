@@ -6,7 +6,6 @@
 # include <readline/history.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include "libft.h"
 # include "tokenizer.h"
 # include "parser.h"
 # include "signals.h"

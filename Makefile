@@ -1,43 +1,32 @@
-NAME = minishell
-GCC	= gcc
-SRC_DIR = src/
-SRC	= \
-	tokenizer/tokenizer.c \
-	tokenizer/tokenlist_utils.c \
-	tokenizer/tokenizer_helper.c \
-	tokenizer/tokenizer_helper2.c \
-	parser/parser.c \
-	parser/parser_utils.c \
-	parser/parser_checks.c \
-	signals/signals.c \
-	main.c 
-OBJ_DIR = obj/
-SUB_DIR = tokenizer,parser,executor,environment,signals
-OBJ	= $(SRC:%.c=$(OBJ_DIR)%.o)
-FLAGS = -Wall -Wextra -Werror
-INC = -I inc #-I libft
-#HEADER = inc/minishell.h
+SRCS	=	src/tokenizer/tokenizer.c src/tokenizer/tokenlist_utils.c src/tokenizer/tokenizer_helper.c \
+	src/tokenizer/tokenizer_helper2.c \
+	src/parser/parser.c src/parser/parser_utils.c src/parser/parser_checks.c \
+	src/main.c src/libft.c src/signals.c
 
-all: $(NAME)
+OBJS	= $(SRCS:.c=.o)
 
-$(NAME): $(OBJ) libft/libft.a
-	$(GCC) $(FLAGS) -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/lib -lreadline -o $(NAME) $^
+NAME	= minishell
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c #$(HEADER)
-	@mkdir -p $(OBJ_DIR){$(SUB_DIR)}
-	$(GCC) $(INC) -c $< -o $@
+GCC		= gcc
 
-libft/libft.a:
-	$(MAKE) -C libft
+FLAGS	= -Wall -Wextra -Werror
+
+HEADER = inc/minishell.h
+
+
+all:	$(NAME)
+
+$(NAME):	$(OBJS)
+	$(GCC) $(FLAGS) -L/opt/homebrew/opt/readline/lib -I/opt/homebrew/opt/readline/include -lreadline -o $(NAME) $(OBJS)
+
+%.o: %.c $(HEADER)
+	$(GCC) $(FLAGS) -c $< -o  $(<:.c=.o)
 
 clean:
-	rm -f $(OBJ)
-	rm -rdf $(OBJ_DIR)
-	$(MAKE) -C libft clean
+	rm -f $(OBJS)
 
 fclean: clean
 	rm -f $(NAME)
-	rm -f libft/libft.a
 
 re: fclean all
 

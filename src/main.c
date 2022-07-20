@@ -6,11 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:25:01 by ibulak        #+#    #+#                 */
-<<<<<<< HEAD
-/*   Updated: 2022/07/20 12:57:35 by daansaat      ########   odam.nl         */
-=======
 /*   Updated: 2022/07/06 15:01:29 by ibulak        ########   odam.nl         */
->>>>>>> 42cbbb6414cad4c5419969f249773f6d25b241af
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +20,6 @@
 #include "../inc/env.h"
 #include "../inc/signals.h"
 #include <unistd.h>
-// #include "minishell.h"
-// #include "libft.h"
 
 t_env	global_env;
 
@@ -45,7 +39,7 @@ int	main()
 		add_history(str);
 		tokens = tokenizer(str, tokens);
 		print_tokens(tokens);
-		// word_list = parser(tokens);
+		word_list = parser(tokens);
 		print_wordlist(word_list);
 		// executor(word_list);
 		// free(str);

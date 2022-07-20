@@ -6,10 +6,10 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:39:46 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/07/20 12:28:15 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/07/06 11:54:12 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
+#include "../../inc/exec.h"
 #include "../../inc/tokenizer.h"
 #include "../../inc/parser.h"
 #include "../../inc/env.h"
@@ -89,8 +89,7 @@ char	*greaterthan_helper(char *str, t_token *new_token)
 
 char	*find_delimiter( char *str, t_token *new_token)
 {
-	// (void)state;
-    if (*str == '|')
+	if (*str == '|')
 	{
 		new_token->tokentype = TOKEN_PIPE;
 		new_token->data = ft_substr(str, 0, 1);
