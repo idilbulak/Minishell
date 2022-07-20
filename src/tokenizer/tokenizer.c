@@ -19,23 +19,17 @@ t_state	if_endofdata(char *str, t_state state)
 	return (state);
 }
 
-char	*find_startofdata(char *str, t_state state)
+char	*find_startofdata(char *str)
 {
 	while (*str == '\n' || *str == '\r')
-	{
-		state = STATE_FindStartOfData;
 		str++;
-	}
 	return (str);
 }
 
-char	*find_startoftoken(char *str, t_state state)
+char	*find_startoftoken(char *str)
 {
 	while (*str == ' ' || *str == '\t')
-	{
-		state = STATE_FindStartOfToken;
 		str++;
-	}
 	return (str);
 }
 
@@ -45,14 +39,14 @@ t_token	*tokenizer(char *str, t_token *tokens)
 	t_state		state;
 
 	state = STATE_FindStartOfData;
-	tokens = init_tokens(tokens, state);
+	tokens = init_tokens(tokens);
 	while (state != STATE_ParseError && state != STATE_EndOfData)
 	{
 		state = if_endofdata(str, state);
-		str = find_startofdata(str, state);
-		str = find_startoftoken(str, state);
-		new_token = init_tokens(new_token, state);
-		str = typeoftoken(str, new_token, state);
+		str = find_startofdata(str);
+		str = find_startoftoken(str);
+		new_token = init_tokens(new_token);
+		str = typeoftoken(str, new_token);
 		if (tokens->data == NULL)
 			tokens = addto_emptylist(tokens, new_token);
 		else

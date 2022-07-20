@@ -15,24 +15,19 @@
 #include "../../inc/parser.h"
 #include "../../inc/env.h"
 
-char	*typeoftoken(char *str, t_token *new_token, t_state state)
+char	*typeoftoken(char *str, t_token *new_token)
 {
 	if (*str == '|' || *str == '>' || *str == '<')
-	{
-		state = STATE_FindDelimiter;
-		str = find_delimiter(str, new_token, state);
-	}
+		str = find_delimiter(str, new_token);
 	else
 	{
 		if (*str == '"' || *str == '\'')
 		{
 			str++;
-			state = STATE_ParseQuotedString;
 			str = parse_quotedstring(str, new_token);
 		}
 		else if (*str != '\0')
 		{
-			state = STATE_ParseUnquotedString;
 			str = parse_unquotedstring(str, new_token);
 		}
 	}

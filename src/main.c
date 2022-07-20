@@ -6,7 +6,11 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:25:01 by ibulak        #+#    #+#                 */
+<<<<<<< HEAD
 /*   Updated: 2022/07/20 12:57:35 by daansaat      ########   odam.nl         */
+=======
+/*   Updated: 2022/07/06 15:01:29 by ibulak        ########   odam.nl         */
+>>>>>>> 42cbbb6414cad4c5419969f249773f6d25b241af
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +29,7 @@
 
 t_env	global_env;
 
-int	main(int argc, char **argv, char **env)
+int	main()
 {
 	char		*str;
 	t_token		*tokens;

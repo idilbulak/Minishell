@@ -16,11 +16,11 @@
 #include "../../inc/env.h"
 #include <stdio.h>
 
-t_token	*init_tokens(t_token *tokens, t_state state)
+t_token	*init_tokens(t_token *tokens)
 {
 	tokens = malloc(sizeof(t_token));
 	if (!tokens)
-		state = STATE_ParseError;
+		exit(EXIT_FAILURE);
 	tokens->next = NULL;
 	tokens->data = NULL;
 	tokens->prev = NULL;

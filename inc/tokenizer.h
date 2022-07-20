@@ -53,23 +53,23 @@ typedef struct s_token
 
 // tokenizer
 t_state		if_endofdata(char *str, t_state state);
-char		*find_startofdata(char *str, t_state state);
-char		*find_startoftoken(char *str, t_state state);
+char		*find_startofdata(char *str);
+char		*find_startoftoken(char *str);
 t_token		*tokenizer(char *line, t_token *tokens);
 
 // tokenizer helper
-char		*find_delimiter( char *str, t_token *new_token, t_state state);
+char		*find_delimiter( char *str, t_token *new_token);
 char		*parse_quotedstring( char *str, t_token *new_token);
 char		*parse_unquotedstring(char *str, t_token *new_token);
 
 // tokenizer helper2
-char		*typeoftoken(char *str, t_token *new_token, t_state state);
+char		*typeoftoken(char *str, t_token *new_token);
 t_token		*find_path(t_token *tokens);
 int			check_ifpath(t_token *tokens);
 int			check_ifredirection(t_token *tokens);
 
 // tokenlist_utils
-t_token		*init_tokens(t_token *tokens, t_state state);
+t_token		*init_tokens(t_token *tokens);
 t_token		*addto_emptylist(t_token *head, t_token *new);
 t_token		*addto_end(t_token *head, t_token *new);
 void		print_tokens(t_token *head);
