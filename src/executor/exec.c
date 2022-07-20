@@ -55,24 +55,28 @@ static char	**set_args(t_word_list **list)
 	i = 0;
 	tmp = *list;
     args = malloc(sizeof(char*) * 255);
-	while (tmp && tmp->word->flags != TOKEN_PIPE)
+	while (tmp)
 	{
+        if (tmp->word->flags == TOKEN_PIPE)
+        {
+            tmp = tmp->next;
+            break;
+        }
 		if (tmp->word->flags == TOKEN_STRING)
 		{
 			args[i] = malloc(sizeof(char) * ft_strlen(tmp->word->word) + 1);
 			ft_strlcpy(args[i], tmp->word->word, ft_strlen(tmp->word->word) + 1);
 			i++;
 		}
-		else if (tmp->word->flags != TOKEN_STRING)
-			tmp = tmp->next;
-		tmp = tmp->next;
+		if (tmp->word->flags == TOKEN_GREATER || tmp->word->flags == TOKEN_LESS ||
+            tmp->word->flags == TOKEN_DOUBLEGREATER || tmp->word->flags == TOKEN_DOUBLELESS)
+			tmp = tmp->next->next;
+        else
+		    tmp = tmp->next;
 	}
 	args[i] = NULL;
-	if (tmp->word->flags == TOKEN_PIPE)
-		tmp = tmp->next;
 	*list = tmp;
 	return (args);
-
 }
 
 void	executor(t_word_list *list)
@@ -82,20 +86,13 @@ void	executor(t_word_list *list)
     char    **args;
 	int		status;
 
-	init_fd(&fd);
-	while (list)//ast->args[i])
+    init_fd(&fd);
+	while (list)
 	{
 		set_fd(list, &fd);
         args = set_args(&list);
 		do_simple_command(args, &child);
 		free(args);
-        // if (ast->args[i] && ast->args[i]->type == TOKEN_STRING) 
-		// {
-		// 	set_fd(ast, &fd, i, num_cmd, ast->cmd_number);
-		// 	do_simple_command(ast, &child, i);
-		// 	num_cmd++;
-		// }
-		// i++;
 	}
 	if (waitpid(child.pid, &status, 0) == -1 && errno != ECHILD) 
 	{

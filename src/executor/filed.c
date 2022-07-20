@@ -61,7 +61,7 @@ void	set_fd(t_word_list *list, t_filed *fd)
 
 void    init_fd(t_filed *fd)
 {
-	fd->tmpin = dup(STDIN_FILENO);
+    fd->tmpin = dup(STDIN_FILENO);
 	fd->tmpout = dup(STDOUT_FILENO);
 	fd->in = dup(STDIN_FILENO);
 	fd->out = dup(STDOUT_FILENO);
