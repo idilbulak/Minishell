@@ -52,7 +52,7 @@ static char	**set_args(t_word_list *list)
 	int			i;
 
 	i = 0;
-    args = malloc(sizeof(char*) * 255);
+	args = malloc(sizeof(char*) * 255);
 	while (list && list->word->flags != TOKEN_PIPE)
 	{
 		if (list->word->flags == TOKEN_STRING)
@@ -62,10 +62,10 @@ static char	**set_args(t_word_list *list)
 			i++;
 		}
 		if (list->word->flags == TOKEN_GREATER || list->word->flags == TOKEN_LESS ||
-            list->word->flags == TOKEN_DOUBLEGREATER || list->word->flags == TOKEN_DOUBLELESS)
+			list->word->flags == TOKEN_DOUBLEGREATER || list->word->flags == TOKEN_DOUBLELESS)
 			list = list->next->next;
-        else
-		    list = list->next;
+		else
+			list = list->next;
 	}
 	args[i] = NULL;
 	return (args);
@@ -75,19 +75,19 @@ void	executor(t_word_list *list)
 {
 	t_filed	fd;
 	t_child child;
-    char    **args;
+	char    **args;
 	int		status;
 
-    init_fd(&fd);
+	init_fd(&fd);
 	while (list)
 	{
 		set_fd(list, &fd);
-        args = set_args(list);
+		args = set_args(list);
 		do_simple_command(args, &child);
 		free(args);
-        while (list->next && list->word->flags != TOKEN_PIPE)
-            list = list->next;
-        list = list->next;
+		while (list->next && list->word->flags != TOKEN_PIPE)
+			list = list->next;
+		list = list->next;
 	}
 	if (waitpid(child.pid, &status, 0) == -1 && errno != ECHILD) 
 	{
