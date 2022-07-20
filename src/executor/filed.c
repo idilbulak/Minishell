@@ -28,7 +28,7 @@ void	create_pipe(t_filed *fd)
 	fd->out = fdpipe[1]; // fdpipe[1] - write -output
 }
 
-static int	is_last_cmd(t_word_list *list)
+static int	is_final_cmd(t_word_list *list)
 {
 	while (list)
 	{
@@ -47,7 +47,7 @@ void	set_fd(t_word_list *list, t_filed *fd)
 		exit(EXIT_FAILURE);
 	}
 	close(fd->in);
-	if (is_last_cmd(list))
+	if (is_final_cmd(list))
 		fd->out = dup(fd->tmpout);
 	else
 		create_pipe(fd);
