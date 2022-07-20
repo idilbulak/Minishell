@@ -1,30 +1,26 @@
-YELLOW = \033[0;33m
-PURPLE = \033[0;35m
-GREEN = \033[0;32m
-RESET = \033[0m
+SRCS	=	src/tokenizer/tokenizer.c src/tokenizer/tokenlist_utils.c src/tokenizer/tokenizer_helper.c \
+	src/tokenizer/tokenizer_helper2.c \
+	src/parser/parser.c src/parser/parser_utils.c src/parser/parser_checks.c \
+	src/main.c src/libft.c src/signals.c
 
-NAME = minishell
-SRCS_DIR = src/
-SRCS_LIST = \
-	tokenizer/tokenizer.c tokenizer/tokenlist_utils.c tokenizer/tokenizer_helper.c \
-	tokenizer/tokenizer_helper2.c \
-	parser/parser.c parser/parser_utils.c parser/parser_checks.c \
-	main.c libft.c
-SRCS = $(addprefix $(SRCS_DIR), $(SRCS_LIST))
-OBJS = $(SRCS:.c=.o)
-FLAGS = -lreadline
-export LDFLAGS="-L/opt/homebrew/opt/readline/lib"
-  export CPPFLAGS="-I/opt/homebrew/opt/readline/include"
-INC = -I ./inc
+OBJS	= $(SRCS:.c=.o)
 
-all: $(NAME)
+NAME	= minishell
 
-$(NAME): $(OBJS) 
-	@echo "$(PURPLE) compiling minishell $(RESET)"
-	$(CC)  $(INC) $(SRCS) -o $(NAME) $(FLAGS) $(LDFLAGS) $(CPPFLAGS)
+GCC		= gcc
 
-%.o: %.c
-	$(CC) -c $(INC) $< -o $@
+FLAGS	= -Wall -Wextra -Werror
+
+HEADER = inc/minishell.h
+
+
+all:	$(NAME)
+
+$(NAME):	$(OBJS)
+	$(GCC) $(FLAGS) -L/opt/homebrew/opt/readline/lib -I/opt/homebrew/opt/readline/include -lreadline -o $(NAME) $(OBJS)
+
+%.o: %.c $(HEADER)
+	$(GCC) -c $< -I/usr/local/opt/readline/include   -o  $(<:.c=.o)
 
 clean:
 	rm -f $(OBJS)
@@ -32,51 +28,6 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
-re: clean fclean all
-# GREEN = \033[32m
-# BLUE = \033[34m
-# YELLOW = \e[0;33m
-# RESET = \033[0m
+re: fclean all
 
-# NAME			=	minishell
-
-# NAME_BONUS		=	checker
-
-# SRCS_DIR		=	./src/
-
-# INCLUDES		=	./inc/
-
-# AR				=	ar
-# ARFLAGS			=	rcs
-
-# SRCS_F			=	tokenizer/tokenizer.c tokenizer/tokenlist_utils.c tokenizer/tokenizer_helper.c \
-# 					tokenizer/tokenizer_helper2.c \
-# 					parser/parser.c parser/parser_utils.c parser/parser_checks.c \
-# 					executor/exec.c \
-# 					main.c libft.c signals.c
-		
-
-# SRCS			= 	$(addprefix $(SRCS_DIR), $(SRCS_F))
-
-# OBJS 			= $(SRCS:.c=.o)
-
-# CC				=	gcc
-# CC_FLAGS		= 	-lreadline  #-Wall -Wextra -Werror
-# LDFLAGS			=	-L/opt/homebrew/opt/readline/lib
-# CPPFLAGS		=	-I/opt/homebrew/opt/readline/include
-
-# all:			$(NAME)
-
-# $(NAME):		$(OBJS)
-# 				$(CC) $(CC_FLAGS) $(INCLUDES) $(SRCS) $(LDFLAGS) $(CPPFLAGS) -o $(NAME)
-# 				@echo "$(GREEN)MINIHELL$(RESET)"
-
-# %.o: %.c:			
-# 				$(CC) -c $(INCLUDES)  $< -o $@
-
-# clean:
-# 	rm -f $(OBJS)
-# fclean: clean
-# 	rm -f $(NAME)
-# re: fclean all
-# .PHONY: all clean fclean re bonus
+.PHONY:	clean fclean re

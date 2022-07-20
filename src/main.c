@@ -19,37 +19,34 @@
 #include "../inc/exec.h"
 #include "../inc/env.h"
 #include "../inc/signals.h"
-#include <stdio.h>
+#include <unistd.h>
 
 t_env	global_env;
 
 int	main(int argc, char **argv, char **env)
 {
-	// char	*str;
+	char		*str;
 	t_token		*tokens;
 	t_word_list	*word_list;
 
 	// init_env(env);
-	// init_signals();
+	init_signals();
 	while (1)
 	{
-		char str[100];
-		if (fgets(str, 100, stdin))
-		{
-			// str = readline("MINIHELL> ");
-			// if (!str)
-			// 	exit(EXIT_FAILURE);
-			// add_history(str);
-			tokens = tokenizer(str, tokens);
-			// print_tokens(tokens);
-			word_list = parser(tokens);
-			// print_wordlist(word_list);
-			// executor(word_list);
-			// free(str);
-			free(tokens);
-			free(word_list);
-			// str = NULL;
-		}
+		str = readline("minishell$  ");
+		if (!str)
+			exit(EXIT_FAILURE);
+		add_history(str);
+		tokens = tokenizer(str, tokens);
+		// print_tokens(tokens);
+		word_list = parser(tokens);
+		// print_wordlist(word_list);
+		// executor(word_list);
+		// free(str);
+		free(tokens);
+		free(word_list);
+		// str = NULL;
+		printf("ïf no seg faults, say YEAYYY!\n");
 	}
 }
 
