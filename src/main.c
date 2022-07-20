@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:25:01 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/07/20 18:41:42 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/07/20 18:51:08 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,21 @@ int	main()
 	init_signals();
 	while (1)
 	{
+        printf("1: loop OK\n");
         str = readline("minishell$  ");
 		if (!str)
 			exit(EXIT_FAILURE);
+        printf("2: readline OK\n");
 		add_history(str);
+        printf("3: add_history OK\n");
 		tokens = tokenizer(str, tokens);
 		// print_tokens(tokens);
+        printf("4: tokenizer OK\n");
 		word_list = parser(tokens);
 		// print_wordlist(word_list);
+        printf("5: parser OK\n");
 		executor(word_list);
+        printf("6: executor OK\n");
 		free(str);
 		free(tokens);
 		free(word_list);
