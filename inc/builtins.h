@@ -9,7 +9,7 @@ typedef struct  s_builtins
 }				t_builtins;
 
 void	init_builtins(t_builtins *builtins);
-int     is_builtin(t_ast *ast, t_child *child, int i);
+int     is_builtin(char **args, t_child *child);
 int		ft_echo(char **argv);
 int		ft_cd(char **argv);
 int		ft_pwd(char **argv);

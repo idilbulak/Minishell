@@ -1,6 +1,6 @@
-#include "libft.h"
-#include "exec.h"
-#include "builtins.h"
+#include "../../libft/libft.h"
+#include "../../inc/exec.h"
+#include "../../inc/builtins.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -33,7 +33,7 @@ void    init_builtins(t_builtins *builtins)
 	builtins[1].name = NULL;
 }
 
-int		is_builtin(t_ast *ast, t_child *child, int i)
+int		is_builtin(char **args, t_child *child)
 {
 	t_builtins  builtins[7];
 	int         j;
@@ -42,9 +42,9 @@ int		is_builtin(t_ast *ast, t_child *child, int i)
 	init_builtins(builtins);
 	while (builtins[j].name)
 	{
-		if (ft_strcmp(ast->args[i]->data[0], builtins[j].name) == 0)
+		if (ft_strcmp(args[0], builtins[j].name) == 0)
 		{
-			child->return_status = builtins[j].funct(ast->args[i]->data);
+			child->return_status = builtins[j].funct(args);
 			return (1);
 		}
 		j++;

@@ -1,5 +1,5 @@
-#include "libft.h"
-#include "exec.h"
+#include "../../libft/libft.h"
+#include "../../inc/exec.h"
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <time.h>

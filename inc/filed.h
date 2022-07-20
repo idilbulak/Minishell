@@ -11,12 +11,12 @@ typedef struct	s_filed
 }				t_filed;
 
 void    init_fd(t_filed *fd);
-void	set_fd(t_ast *ast, t_filed *fd, int i, int num_cmd, int total_num_cmd);
+void	set_fd(t_word_list *list, t_filed *fd);
 void	create_pipe(t_filed *fd);
 void    reset_fd(t_filed *fd);
 
 void    read_till_delimiter(t_filed *fd, char *delimiter);
-void    check_redirections_in(t_ast *ast, t_filed *fd, int i);
-void    check_redirections_out(t_ast *ast, t_filed *fd, int i);
+void    check_redirections_in(t_word_list *list, t_filed *fd);
+void    check_redirections_out(t_word_list *list, t_filed *fd);
 
 # endif

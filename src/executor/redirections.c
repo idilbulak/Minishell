@@ -1,5 +1,5 @@
-#include "filed.h"
-#include "libft.h"
+#include "../../inc/filed.h"
+#include "../../libft/libft.h"
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdio.h>
@@ -30,42 +30,42 @@ void    read_till_delimiter(t_filed *fd, char *delimiter)
 	unlink("tmp.txt");
 }
 
-void    check_redirections_in(t_ast *ast, t_filed *fd, int i)
+void    check_redirections_in(t_word_list *list, t_filed *fd)
 {
-	while (ast->args[i] && ast->args[i]->type != TOKEN_STRING) 
+	while (list && list->word->flags != TOKEN_PIPE)
 	{
-		if (ast->args[i]->type == TOKEN_LESS) {
+		if (list->word->flags == TOKEN_LESS) {
 			close(fd->in);
-			fd->in = open(ast->args[i]->data[0], O_RDONLY);
+			fd->in = open(list->next->word->word, O_RDONLY);
 		}
-		if (ast->args[i]->type == TOKEN_DOUBLELESS) {
+		if (list->word->flags == TOKEN_DOUBLELESS) {
 			close(fd->in);
-			read_till_delimiter(fd, ast->args[i]->data[0]); //make it child process??
+			read_till_delimiter(fd, list->next->word->word); //make it child process??
 		}
 		if (fd->in == -1) {
 			perror("open(1)");
 			exit(EXIT_FAILURE);
 		}
-		i++;
+		list = list->next;
 	}
 }
 
-void    check_redirections_out(t_ast *ast, t_filed *fd, int i)
+void    check_redirections_out(t_word_list *list, t_filed *fd)
 {
-	while (ast->args[i] && ast->args[i]->type != TOKEN_STRING) 
+	while (list && list->word->flags != TOKEN_PIPE) 
 	{
-		if (ast->args[i]->type == TOKEN_GREATER) {
+		if (list->word->flags == TOKEN_GREATER) {
 			close(fd->out);
-			fd->out = open(ast->args[i]->data[0], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+			fd->out = open(list->next->word->word, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		}
-		if (ast->args[i]->type == TOKEN_DOUBLEGREATER) {
+		if (list->word->flags == TOKEN_DOUBLEGREATER) {
 			close(fd->out);
-			fd->out = open(ast->args[i]->data[0], O_WRONLY | O_CREAT | O_APPEND, 0644);
+			fd->out = open(list->next->word->word, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		}
 		if (fd->out == -1) {
 			perror("open(2)");
 			exit(EXIT_FAILURE);
 		}
-		i++;
+		list = list->next;
 	}
 }

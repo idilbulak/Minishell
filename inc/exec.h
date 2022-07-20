@@ -1,17 +1,17 @@
 #ifndef EXEC_H
 # define EXEC_H
+# include <unistd.h>
+# include <errno.h>
+# include "parser.h"
 
-#include "parser.h"
-
-typedef struct	s_filed
+typedef struct	s_child
 {
-	int		tmpin;
-	int		tmpout;
-    int     redirect_out;
-	int		in;
-	int		out;
-}	t_filed;
+	pid_t	pid;
+	int		return_status;
+	int		state;
+}				t_child;
 
-// void	executor(t_ast *ast);
+void	executor(t_word_list *cmds);
+char    *search_path(char *cmd);
 
-#endif
+# endif

@@ -10,7 +10,12 @@ SRCS =	\
 	parser/parser_utils.c \
 	parser/parser_checks.c \
 	main.c \
-	signals.c
+	signals/signals.c \
+	executor/exec.c \
+	executor/filed.c \
+	executor/redirections.c \
+	executor/cmd_search.c \
+	executor/builtins.c 
 OBJS_DIR = obj/
 SUB_DIR = tokenizer,parser,executor,environment,signals
 OBJS = $(SRCS:%.c=$(OBJS_DIR)%.o)
