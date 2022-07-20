@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:25:01 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/07/20 10:56:22 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/07/20 12:57:35 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 #include "../inc/env.h"
 #include "../inc/signals.h"
 #include <unistd.h>
+// #include "minishell.h"
+// #include "libft.h"
 
 t_env	global_env;
 
@@ -38,8 +40,8 @@ int	main(int argc, char **argv, char **env)
 			exit(EXIT_FAILURE);
 		add_history(str);
 		tokens = tokenizer(str, tokens);
-		// print_tokens(tokens);
-		word_list = parser(tokens);
+		print_tokens(tokens);
+		// word_list = parser(tokens);
 		print_wordlist(word_list);
 		// executor(word_list);
 		// free(str);
