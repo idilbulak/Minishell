@@ -14,19 +14,7 @@
 # define TOKENIZER_H
 # include <stdio.h>
 # include <stdlib.h>
-
-typedef enum e_state
-{
-	STATE_FindStartOfData,
-	STATE_FindStartOfToken,
-	STATE_ParseQuotedString,
-	STATE_ParseUnquotedString,
-	STATE_ParseNumber,
-	STATE_FindDelimiter,
-	STATE_CheckEndOfString,
-	STATE_ParseError,
-	STATE_EndOfData
-}	t_state;
+# include <stdbool.h>
 
 typedef enum e_tokentype
 {
@@ -52,7 +40,7 @@ typedef struct s_token
 }	t_token;
 
 // tokenizer
-t_state		if_endofdata(char *str, t_state state);
+bool		if_endofdata(char *str, bool state);
 char		*find_startofdata(char *str);
 char		*find_startoftoken(char *str);
 t_token		*tokenizer(char *line, t_token *tokens);

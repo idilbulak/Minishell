@@ -33,26 +33,26 @@ int	main()
 	init_signals();
 	while (1)
 	{
-        printf("1: loop OK\n");
+        // printf("1: loop OK\n");
         str = readline("minishell$  ");
 		if (!str)
 			exit(EXIT_FAILURE);
-        printf("2: readline OK\n");
+        // printf("2: readline OK\n");
 		add_history(str);
-        printf("3: add_history OK\n");
+        // printf("3: add_history OK\n");
 		tokens = tokenizer(str, tokens);
+        // printf("4: tokenizer OK\n");
 		// print_tokens(tokens);
-        printf("4: tokenizer OK\n");
 		word_list = parser(tokens);
+        // printf("5: parser OK\n");
 		// print_wordlist(word_list);
-        printf("5: parser OK\n");
 		executor(word_list);
-        printf("6: executor OK\n");
+        // printf("6: executor OK\n");
 		free(str);
 		free(tokens);
 		free(word_list);
 		// str = NULL;
-		// printf("ïf no seg faults, say YEAYYY!\n");
+		printf("ïf no seg faults, say YEAYYY!\n");
 	}
 }
 

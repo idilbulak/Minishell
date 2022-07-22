@@ -22,19 +22,23 @@ char	*parse_quotedstring( char *str, t_token *new_token)
 	int		len;
 
 	temp_str = str;
+	str++;
 	len = 0;
 	while (*str != '"' && *str != '\'')
 	{
-		if (*str == '|' && *str == '>' && *str == '<')
-			break ;
 		len++;
 		str++;
 	}
 	if (*str == '"')
+	{
 		new_token->tokentype = TOKEN_STRING;
+		new_token->data = ft_substr(temp_str, 0, len + 2);
+	}
 	else if (*str == '\'')
+	{
 		new_token->tokentype = TOKEN_STRING;
-	new_token->data = ft_substr(temp_str, 0, len);
+		new_token->data = ft_substr(temp_str, 1, len);
+	}
 	return (str);
 }
 
@@ -45,7 +49,7 @@ char	*parse_unquotedstring(char *str, t_token *new_token)
 
 	temp_str = str;
 	len = 0;
-	while (*str != '>' && *str != '<' && *str != '|' && *str != ' ')
+	while (*str != '>' && *str != '<' && *str != '|' && *str != ' ' && *str != '\0')
 	{
 		len++;
 		str++;

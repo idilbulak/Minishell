@@ -26,9 +26,6 @@ t_word_list	*addto_empty_wlist(t_word_list *head, t_word_list *new);
 void	print_wordlist(t_word_list *word_list);
 
 //checks
-int	if_pipe(t_token *tokens);
-int	check_pipe(t_token *tokens);
-int	check_redirection(t_token *tokens);
 int	parser_checks(t_token *tokens);
 
 #endif

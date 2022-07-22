@@ -11,11 +11,12 @@
 /* ************************************************************************** */
 
 #include "../../inc/tokenizer.h"
+#include <stdbool.h>
 
-t_state	if_endofdata(char *str, t_state state)
+bool	if_endofdata(char *str, bool state)
 {
 	if (*str == '\0')
-		state = STATE_EndOfData;
+		state = false;
 	return (state);
 }
 
@@ -36,13 +37,12 @@ char	*find_startoftoken(char *str)
 t_token	*tokenizer(char *str, t_token *tokens)
 {
 	t_token		*new_token;
-	t_state		state;
+	bool		state;
 
-	state = STATE_FindStartOfData;
+	state = true;
 	tokens = init_tokens(tokens);
-	while (state != STATE_ParseError && state != STATE_EndOfData)
+	while (if_endofdata(str, state))
 	{
-		state = if_endofdata(str, state);
 		str = find_startofdata(str);
 		str = find_startoftoken(str);
 		new_token = init_tokens(new_token);
@@ -53,7 +53,5 @@ t_token	*tokenizer(char *str, t_token *tokens)
 			addto_end(tokens, new_token);
 		str++;
 	}
-	if (check_ifpath(tokens) == 1)
-		tokens = find_path(tokens);
 	return (tokens);
 }

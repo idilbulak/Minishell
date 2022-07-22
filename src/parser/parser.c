@@ -23,15 +23,20 @@ t_word_list	*parser(t_token *tokens)
 
 	if (parser_checks(tokens) == -1)
 		exit(EXIT_FAILURE);
-	word_list = NULL;
+	word_list = malloc(sizeof(t_word_list));
+	if (!word_list)
+		exit(EXIT_FAILURE);
 	word_list = init_word_list(word_list);
-	while (tokens->data != NULL)
+	while (tokens)
 	{
+		new_word = NULL;
 		new_word = init_new_word(new_word, tokens);
 		if (word_list->word == NULL)
-			word_list = addto_empty_wlist(word_list, new_word);
+			addto_empty_wlist(word_list, new_word);
 		else
+		{
 			addto_wend(word_list, new_word);
+		}
 		tokens = tokens->next;
 	}
 	return (word_list);

@@ -22,58 +22,46 @@ char	*typeoftoken(char *str, t_token *new_token)
 	else
 	{
 		if (*str == '"' || *str == '\'')
-		{
-			str++;
 			str = parse_quotedstring(str, new_token);
-		}
 		else if (*str != '\0')
-		{
 			str = parse_unquotedstring(str, new_token);
-		}
 	}
 	return (str);
 }
 
 t_token	*find_path(t_token *tokens)
 {
-	while (tokens->next != NULL)
-	{
-		if (tokens->tokentype == TOKEN_GREATER)
-		{
-			if (check_ifredirection(tokens) == 0 && if_pipe(tokens) == -1)
-				tokens->next->tokentype = TOKEN_FILEPATH;
-		}
-		if (tokens->tokentype == TOKEN_LESS)
-		{
-			if (check_ifredirection(tokens) == 0 && if_pipe(tokens) == -1)
-				tokens->next->tokentype = TOKEN_FILEPATH;
-		}
-		if (tokens->tokentype == TOKEN_DOUBLEGREATER)
-		{
-			if (check_ifredirection(tokens) == 0 && if_pipe(tokens) == -1)
-				tokens->next->tokentype = TOKEN_FILEPATH;
-		}
-		if (tokens->tokentype == TOKEN_DOUBLELESS)
-		{
-			if (check_ifredirection(tokens) == 0 && if_pipe(tokens) == 1)
-				tokens->next->tokentype = TOKEN_FILEPATH;
-		}
-		tokens = tokens->next;
-	}
-	while (tokens->prev != NULL)
-		tokens = tokens->prev;
+	// while(tokens->next)
+	// {
+	// 	if (check_ifredirection(tokens) == 1)
+	// 	{
+	// 	printf("err\n");
+	// 		while(check_ifredirection(tokens) == 1)
+	// 			tokens = tokens->next;
+	// 		tokens->tokentype = TOKEN_FILEPATH;
+	// 	}
+	// 	// tokens = tokens->next;
+		
+	// }
+	// while (tokens->prev)
+	// 	tokens = tokens->prev;
 	return (tokens);
 }
 
 int	check_ifpath(t_token *tokens)
 {
-	while (tokens->next != NULL)
+	while(tokens->next)
 	{
-		if (tokens->tokentype == 2 || tokens->tokentype == 3
-			|| tokens->tokentype == 4 || tokens->tokentype == 5)
+		if (check_ifredirection(tokens) == 1)
+		{
+			while(check_ifredirection(tokens) == 1)
+				tokens = tokens->next;
 			return (1);
+		}
 		tokens = tokens->next;
 	}
+	while (tokens->prev)
+		tokens = tokens->prev;
 	return (0);
 }
 
