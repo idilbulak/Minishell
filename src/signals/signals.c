@@ -6,12 +6,13 @@
 #include <stdlib.h>
 # include <sys/wait.h>
 
-static void	sig_handler(int sig)
+void	sig_handler(int sig)
 {
+	// write (1, "\b \b\b \b", 6);
+	// rl_replace_line("", 1);
 // delete the previous buffer and give a prompt on new line
 	if (sig == SIGINT)
 	{
-		rl_replace_line("", 1);
 		write(1, "\n", 1);
 		rl_on_new_line();
 		rl_redisplay();
@@ -19,7 +20,6 @@ static void	sig_handler(int sig)
 // does nothing, give just a prompt
 	if (sig == SIGQUIT)
 	{
-		rl_replace_line("", 1);
 		rl_on_new_line();
 		rl_redisplay();
 	}
