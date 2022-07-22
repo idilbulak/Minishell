@@ -12,6 +12,7 @@ SRCS =	\
 	main.c \
 	signals/signals.c \
 	executor/exec.c \
+	executor/exec_utils.c \
 	executor/filed.c \
 	executor/redirections.c \
 	executor/cmd_search.c \

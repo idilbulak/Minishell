@@ -7,7 +7,7 @@
 
 #include <string.h>
 
-pid_t	do_execute(char **args)
+void	do_execute(char **args)
 {
 	char    *pathname;
 
@@ -16,11 +16,11 @@ pid_t	do_execute(char **args)
 	if (!ft_strchr(pathname, '/'))
 		pathname = search_path(args[0]);
 	if (!pathname)
-		return (0); //perror("command not found");
+		return ;//(0); //perror("command not found");
 	execve(pathname, args, NULL);
 	// perror("execve()");
 	free(pathname);
-	return (0); // exit(EXIT_FAILURE);
+	// return (0); // exit(EXIT_FAILURE);
 }
 
 void    do_simple_command(char **args, t_child *child)
@@ -37,62 +37,40 @@ void    do_simple_command(char **args, t_child *child)
 	if (child->pid == 0)
 	{
 		do_execute(args);
+		printf("6\n");
 		if (errno == ENOENT)
-			ft_exit(127, args[0]);
+			ft_error(127, args[0]);
 		else if (errno == EACCES)
-			ft_exit(126, args[0]);
+			ft_error(126, args[0]);
 		else
-			ft_exit(EXIT_FAILURE, "execve() failed");
+			ft_error(EXIT_FAILURE, "execve() failed");
 	}
 }
 
-static char	**set_args(t_word_list *list)
-{
-	char		**args;
-	int			i;
-
-	i = 0;
-	args = malloc(sizeof(char*) * 255);
-	while (list && list->word->flags != TOKEN_PIPE)
-	{
-		if (list->word->flags == TOKEN_STRING)
-		{
-			args[i] = malloc(sizeof(char) * ft_strlen(list->word->word) + 1);
-			ft_strlcpy(args[i], list->word->word, ft_strlen(list->word->word) + 1);
-			i++;
-		}
-		if (list->word->flags == TOKEN_GREATER || list->word->flags == TOKEN_LESS ||
-			list->word->flags == TOKEN_DOUBLEGREATER || list->word->flags == TOKEN_DOUBLELESS)
-			list = list->next->next;
-		else
-			list = list->next;
-	}
-	args[i] = NULL;
-	return (args);
-}
-
-void	executor(t_word_list *list)
+int	executor(t_word_list *list)
 {
 	t_filed	fd;
 	t_child child;
 	char    **args;
-	int		status;
 
 	init_fd(&fd);
 	while (list)
 	{
-		set_fd(list, &fd);
-		args = set_args(list);
-		do_simple_command(args, &child);
-		free(args);
+		child.exit_code = 0;
+		if (set_fd(list, &fd, &child) == 0)
+		{
+			args = create_args_array(list);
+			do_simple_command(args, &child);
+			free(args);
+		}
 		while (list->next && list->word->flags != TOKEN_PIPE)
 			list = list->next;
 		list = list->next;
 	}
-	if (waitpid(child.pid, &status, 0) == -1 && errno != ECHILD) 
-	{
-		perror("waitpid()");
-		exit(EXIT_FAILURE);
-	}
+	if (waitpid(child.pid, &child.status, 0) == -1 && errno != ECHILD) 
+		ft_error(EXIT_FAILURE, "waitpid() failed");
+	if (WIFEXITED(child.status))
+		child.exit_code = WEXITSTATUS(child.status);
 	reset_fd(&fd);
+	return(child.exit_code);
 }

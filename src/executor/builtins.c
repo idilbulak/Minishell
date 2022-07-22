@@ -4,26 +4,23 @@
 #include <stdio.h>
 #include <string.h>
 
-void	ft_exit(int errornumber, char *errormessage)
-{
-	// fprintf(stderr, "error: failed to execute command: %s\n", 
-	// strerror(errno));
-	perror(errormessage);
-	exit(errornumber);
-}
-
 int		ft_echo(char **argv)
 {
 	int i;
 
 	i = 1;
-	while (argv[i])
+	while (argv[i]) //'\n' not in list
 	{    
-		printf("%s ", argv[i]);
-		i++;
+        if (i == 1 && argv[i] && ft_strcmp(argv[i], "-n") == 0)
+            i++;
+        if (argv[i])
+            printf("%s ", argv[i]);
+        i++;
 	}
+    if (argv[1] && ft_strcmp(argv[1], "-n") == 0)
+        return (0);
 	printf("\n");
-	return (0);//(errno);
+	return (0);
 }
 
 void    init_builtins(t_builtins *builtins)
@@ -44,7 +41,7 @@ int		is_builtin(char **args, t_child *child)
 	{
 		if (ft_strcmp(args[0], builtins[j].name) == 0)
 		{
-			child->return_status = builtins[j].funct(args);
+			child->exit_code = builtins[j].funct(args);
 			return (1);
 		}
 		j++;

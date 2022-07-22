@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:25:01 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/07/20 18:51:08 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/07/22 15:41:21 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	main()
 		free(tokens);
 		free(word_list);
 		// str = NULL;
-		printf("ïf no seg faults, say YEAYYY!\n");
+		// printf("ïf no seg faults, say YEAYYY!\n");
 	}
 }
 

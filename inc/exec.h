@@ -7,11 +7,14 @@
 typedef struct	s_child
 {
 	pid_t	pid;
-	int		return_status;
-	int		state;
+	int		exit_code;
+	int		status;
 }				t_child;
 
-void	executor(t_word_list *cmds);
+int     executor(t_word_list *cmds);
+int	    calc_num_args(t_word_list *list);
+char	**create_args_array(t_word_list *list);
 char    *search_path(char *cmd);
+void	ft_error(int errornumber, char *errormessage);
 
 # endif
