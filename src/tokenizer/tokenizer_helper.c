@@ -51,6 +51,8 @@ char	*parse_unquotedstring(char *str, t_token *new_token)
 	len = 0;
 	while (*str != '>' && *str != '<' && *str != '|' && *str != ' ' && *str != '\0')
 	{
+		if (*str == '\'')
+			break ;
 		len++;
 		str++;
 	}
