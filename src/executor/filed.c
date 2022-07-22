@@ -42,21 +42,21 @@ static int	is_final_cmd(t_word_list *list)
 int	set_fd(t_word_list *list, t_filed *fd, t_child *child)
 {
 	if (dup2(fd->in, STDIN_FILENO) == -1)
-        perror("set_fd(1) failed");
+		perror("set_fd(1) failed");
 	close(fd->in);
 	if (is_final_cmd(list))
-        fd->out = dup(fd->tmpout);
+		fd->out = dup(fd->tmpout);
 	else
-        create_pipe(fd);
+		create_pipe(fd);
 	if (check_redirections(list, fd) != 0)
-    {
-        child->exit_code = 1;
-        return (1);
-    }
+	{
+		child->exit_code = 1;
+		return (1);
+	}
 	if (dup2(fd->out, STDOUT_FILENO) == -1)
 		perror("set_fd(2) failed");
 	close(fd->out);
-    return (0);
+	return (0);
 }
 
 void    init_fd(t_filed *fd)
