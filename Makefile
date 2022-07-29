@@ -16,9 +16,11 @@ SRCS =	\
 	executor/filed.c \
 	executor/redirections.c \
 	executor/cmd_search.c \
-	executor/builtins.c 
+	executor/builtins.c \
+	environment/symtab.c \
+	environment/environment.c
 OBJS_DIR = obj/
-SUB_DIR = tokenizer,parser,executor,environment,signals
+SUB_DIR = tokenizer,parser,executor,environment,signals,environment
 OBJS = $(SRCS:%.c=$(OBJS_DIR)%.o)
 FLAGS = -Wall -Wextra -Werror
 HEADER = inc/minishell.h

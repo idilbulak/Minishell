@@ -16,7 +16,8 @@ int	set_here_document(t_filed *fd, char *delimiter)
 	while (read(STDIN_FILENO, buff, 1)) // replace 0 with fd->redirect_in for if input < ??
 	{
 		line[i] = buff[0];
-		if (line[i] == '\n') {
+		if (line[i] == '\n')
+        {
 			line[i] = '\0';
 			if (ft_strcmp(line, delimiter) == 0)
 				break ;
