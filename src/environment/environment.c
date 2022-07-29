@@ -79,6 +79,7 @@ char    **create_env_array(t_symtab **symtab)
 		}
 		i++;
 	}
+	env[j] = NULL;
 	return (env);
 }
 
