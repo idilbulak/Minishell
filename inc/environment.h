@@ -8,7 +8,7 @@
 # define TABLE_SIZE 25
 # define FLAG_EXPORT 1
 
-extern char   **environ;
+extern char	**environ;
 
 typedef struct	s_symtab
 {
@@ -18,15 +18,15 @@ typedef struct	s_symtab
 	struct s_symtab	*next;
 }				t_symtab;
 
-int	        hash(char *name);
-void	    init_symtab(t_symtab **symtab);
-void	    symtab_insert(t_symtab **symtab, t_symtab *entry);
+int			hash(char *name);
+void		init_symtab(t_symtab **symtab);
+void		symtab_insert(t_symtab **symtab, t_symtab *entry);
 t_symtab	*symtab_lookup(t_symtab **symtab, char *name);
 t_symtab	*symtab_delete(t_symtab **symtab, char *name);
 
-void        init_env(t_symtab **symtab);
-int         num_total_entry(t_symtab **symtab);
-char        **create_env_array(t_symtab **symtab);
-t_symtab    *new_entry(char *str);
+void		init_env(t_symtab **symtab);
+int			num_total_entry(t_symtab **symtab);
+char		**create_env_array(t_symtab **symtab);
+t_symtab	*new_entry(char *str);
 
 # endif
