@@ -29,7 +29,7 @@ void    init_env_symtab(t_symtab **symtab)
 	}
 }
 
-int     total_export_entries(t_symtab **symtab) // only export entries?
+int     total_export_entries(t_symtab **symtab)
 {
 	t_symtab    *tmp;
 	int         i;
@@ -43,7 +43,7 @@ int     total_export_entries(t_symtab **symtab) // only export entries?
 		while (tmp)
 		{
 			if (tmp->flag == FLAG_EXPORT)
-                num++;
+				num++;
 			tmp = tmp->next;
 		}
 		i++;

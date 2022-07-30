@@ -8,7 +8,7 @@ int    ft_pwd(char **argv, t_symtab **symtab)
     (void)argv;
     tmp = symtab_lookup(symtab, "PWD");
     if (!tmp)
-        return (1);
+        return (0);
     printf("%s\n", tmp->value);
     return (0);
 }
