@@ -16,9 +16,9 @@ void    init_builtins(t_builtins *builtins)
 	builtins[2].funct = ft_export;
 	builtins[3].name = "pwd";
 	builtins[3].funct = ft_pwd;
-	// builtins[6].name = "unset";
-	// builtins[6].funct = ft_unset;
-	builtins[4].name = NULL;
+	builtins[4].name = "unset";
+	builtins[4].funct = ft_unset;
+	builtins[5].name = NULL;
 }
 
 int		is_builtin(char **args, t_child *child, t_symtab **symtab)
