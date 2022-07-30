@@ -30,7 +30,7 @@ int			total_env_entries(t_symtab **symtab);
 char		**create_env_array(t_symtab **symtab);
 t_symtab	*new_entry(char *str);
 
-void	print_table(t_symtab **symtab);
+// void	    print_table(t_symtab **symtab);
 
 
 # endif

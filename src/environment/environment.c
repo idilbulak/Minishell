@@ -1,20 +1,5 @@
 #include "../../inc/environment.h"
 
-void    init_env_symtab(t_symtab **symtab)
-{
-	t_symtab    *entry;
-	int         i;
-
-	i = 0;
-	while (environ[i])
-	{
-		entry = new_entry(environ[i]);
-		entry->flag = FLAG_EXPORT;
-		symtab_insert(symtab, entry);
-		i++;        
-	}
-}
-
 t_symtab    *new_entry(char *str) //malloc protection
 {
 	t_symtab    *new_entry;
@@ -29,38 +14,19 @@ t_symtab    *new_entry(char *str) //malloc protection
 	return (new_entry);   
 }
 
-int total_env_entries(t_symtab **symtab)
+void    init_env_symtab(t_symtab **symtab)
 {
-	t_symtab    *tmp;
+	t_symtab    *entry;
 	int         i;
-	int         num;
 
 	i = 0;
-	num = 0;
-	while (i < TABLE_SIZE)
+	while (environ[i])
 	{
-		tmp = symtab[i];
-		while (tmp)
-		{
-			tmp = tmp->next;
-			num++;
-		}
-		i++;
+		entry = new_entry(environ[i]);
+		entry->flag = FLAG_EXPORT;
+		symtab_insert(symtab, entry);
+		i++;        
 	}
-	return (num);
-}
-
-void    delete_env_array(char **env)
-{
-	int	i;
-
-	i = 0;
-	while (env[i])
-	{
-		free(env[i]);
-		i++;
-	}
-	free(env);
 }
 
 char    **create_env_array(t_symtab **symtab)
@@ -96,54 +62,36 @@ char    **create_env_array(t_symtab **symtab)
 	return (env);
 }
 
-void	print_table(t_symtab **symtab)
+int total_env_entries(t_symtab **symtab)
 {
-	int	        i;
 	t_symtab    *tmp;
+	int         i;
+	int         num;
 
 	i = 0;
+	num = 0;
 	while (i < TABLE_SIZE)
 	{
-		if (symtab[i] == NULL)
-			printf("%d\t------\n", i);
-		else
+		tmp = symtab[i];
+		while (tmp)
 		{
-			tmp = symtab[i];
-			printf("%d\t", i);
-			while (tmp != NULL)
-			{
-				printf("%s:%s || ", tmp->name, tmp->value);
-				tmp = tmp->next;
-			}
-			printf("\n");
+			tmp = tmp->next;
+			num++;
 		}
 		i++;
 	}
+	return (num);
 }
 
-// int main(void)
-// {
-// 	t_symtab	**symtab;
-// 	char        **env;
+void    delete_env_array(char **env)
+{
+	int	i;
 
-// 	symtab = malloc(sizeof(t_symtab *) * TABLE_SIZE);
-// 	init_symtab(symtab);
-// 	init_env_symtab(symtab);
-// 	env = create_env_array(symtab);
-
-// 	int i = 0;
-// 	while (env[i])
-// 	{
-// 		printf("%s\n", env[i]);
-// 		i++;
-// 	}
-// 	// printf("%d\n", num_total_entry(sym_table));
-// 	// print_table(sym_table);
-
-// 	// t_symtab	*tmp;
-// 	// tmp = sym_table_lookup(sym_table, "USER");
-// 	// if (!tmp)
-// 	//     printf("no entry\n");
-// 	// else
-// 	//     printf("%s\n", tmp->value);
-// }
+	i = 0;
+	while (env[i])
+	{
+		free(env[i]);
+		i++;
+	}
+	free(env);
+}
