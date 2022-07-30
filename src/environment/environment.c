@@ -29,6 +29,27 @@ void    init_env_symtab(t_symtab **symtab)
 	}
 }
 
+int     total_env_entries(t_symtab **symtab)
+{
+	t_symtab    *tmp;
+	int         i;
+	int         num;
+
+	i = 0;
+	num = 0;
+	while (i < TABLE_SIZE)
+	{
+		tmp = symtab[i];
+		while (tmp)
+		{
+			tmp = tmp->next;
+			num++;
+		}
+		i++;
+	}
+	return (num);
+}
+
 char    **create_env_array(t_symtab **symtab)
 {
 	char        **env;
@@ -60,27 +81,6 @@ char    **create_env_array(t_symtab **symtab)
 	}
 	env[j] = NULL;
 	return (env);
-}
-
-int total_env_entries(t_symtab **symtab)
-{
-	t_symtab    *tmp;
-	int         i;
-	int         num;
-
-	i = 0;
-	num = 0;
-	while (i < TABLE_SIZE)
-	{
-		tmp = symtab[i];
-		while (tmp)
-		{
-			tmp = tmp->next;
-			num++;
-		}
-		i++;
-	}
-	return (num);
 }
 
 void    delete_env_array(char **env)
