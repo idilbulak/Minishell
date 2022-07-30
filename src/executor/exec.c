@@ -7,7 +7,7 @@
 
 #include <string.h>
 
-void	do_execute(char **args)
+static void	do_execute(char **args)
 {
 	char    *pathname;
 
@@ -23,9 +23,9 @@ void	do_execute(char **args)
 	// return (0); // exit(EXIT_FAILURE);
 }
 
-void    do_simple_command(char **args, t_child *child)
+static void    do_simple_command(char **args, t_child *child, t_symtab **symtab)
 {
-	if (is_builtin(args, child))
+	if (is_builtin(args, child, symtab) == 0)
 		return ;
 	else
 	child->pid = fork();
@@ -37,7 +37,6 @@ void    do_simple_command(char **args, t_child *child)
 	if (child->pid == 0)
 	{
 		do_execute(args);
-		printf("6\n");
 		if (errno == ENOENT)
 			ft_error(127, args[0]);
 		else if (errno == EACCES)
@@ -47,20 +46,20 @@ void    do_simple_command(char **args, t_child *child)
 	}
 }
 
-int	executor(t_word_list *list)
+int	executor(t_word_list *list, t_symtab **symtab)
 {
 	t_filed	fd;
 	t_child child;
 	char    **args;
 
-	init_fd(&fd);
+    init_fd(&fd);
 	while (list)
 	{
 		child.exit_code = 0;
 		if (set_fd(list, &fd, &child) == 0)
 		{
 			args = create_args_array(list);
-			do_simple_command(args, &child);
+			do_simple_command(args, &child, symtab);
 			free(args);
 		}
 		while (list->next && list->word->flags != TOKEN_PIPE)

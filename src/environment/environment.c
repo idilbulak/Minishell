@@ -1,6 +1,6 @@
 #include "../../inc/environment.h"
 
-void    init_env(t_symtab **symtab)
+void    init_env_symtab(t_symtab **symtab)
 {
 	t_symtab    *entry;
 	int         i;
@@ -29,7 +29,7 @@ t_symtab    *new_entry(char *str)
 	return (new_entry);   
 }
 
-int num_total_entry(t_symtab **symtab)
+int total_env_entries(t_symtab **symtab)
 {
 	t_symtab    *tmp;
 	int         i;
@@ -50,6 +50,19 @@ int num_total_entry(t_symtab **symtab)
 	return (num);
 }
 
+void    delete_env_array(char **env)
+{
+	int	i;
+
+	i = 0;
+	while (env[i])
+	{
+		free(env[i]);
+		i++;
+	}
+	free(env);
+}
+
 char    **create_env_array(t_symtab **symtab)
 {
 	char        **env;
@@ -58,7 +71,7 @@ char    **create_env_array(t_symtab **symtab)
 	int         i;
 	int         j;
 
-	env = malloc(sizeof(char *) * num_total_entry(symtab) + 1);
+	env = malloc(sizeof(char *) * total_env_entries(symtab) + 1);
 	i = 0;
 	j = 0;
 	while (i < TABLE_SIZE)
@@ -83,30 +96,30 @@ char    **create_env_array(t_symtab **symtab)
 	return (env);
 }
 
-// void	print_table(t_symtab **symtab)
-// {
-// 	int	        i;
-// 	t_symtab    *tmp;
+void	print_table(t_symtab **symtab)
+{
+	int	        i;
+	t_symtab    *tmp;
 
-// 	i = 0;
-// 	while (i < TABLE_SIZE)
-// 	{
-// 		if (symtab[i] == NULL)
-// 			printf("%d\t------\n", i);
-// 		else
-// 		{
-// 			tmp = symtab[i];
-// 			printf("%d\t", i);
-// 			while (tmp != NULL)
-// 			{
-// 				printf("%s:%s || ", tmp->name, tmp->value);
-// 				tmp = tmp->next;
-// 			}
-// 			printf("\n");
-// 		}
-// 		i++;
-// 	}
-// }
+	i = 0;
+	while (i < TABLE_SIZE)
+	{
+		if (symtab[i] == NULL)
+			printf("%d\t------\n", i);
+		else
+		{
+			tmp = symtab[i];
+			printf("%d\t", i);
+			while (tmp != NULL)
+			{
+				printf("%s:%s || ", tmp->name, tmp->value);
+				tmp = tmp->next;
+			}
+			printf("\n");
+		}
+		i++;
+	}
+}
 
 // int main(void)
 // {
@@ -115,7 +128,7 @@ char    **create_env_array(t_symtab **symtab)
 
 // 	symtab = malloc(sizeof(t_symtab *) * TABLE_SIZE);
 // 	init_symtab(symtab);
-// 	init_env(symtab);
+// 	init_env_symtab(symtab);
 // 	env = create_env_array(symtab);
 
 // 	int i = 0;

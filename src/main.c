@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:25:01 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/07/29 16:48:01 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/07/30 14:04:03 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,35 +19,34 @@
 #include "../inc/exec.h"
 #include "../inc/env.h"
 #include "../inc/signals.h"
+#include "../inc/environment.h"
 #include <unistd.h>
 
 t_env	global_env;
 
 int	main()
 {
-	char		*str;
+	int         exit_code;
+    char		*str;
 	t_token		*tokens;
 	t_word_list	*word_list;
+	t_symtab	**symtab;
 
-	// init_env(env);
+	symtab = malloc(sizeof(t_symtab *) * TABLE_SIZE);
+	init_symtab(symtab);
+	init_env_symtab(symtab);
 	init_signals();
 	while (1)
 	{
-        // printf("1: loop OK\n");
         str = readline("minishell$  ");
 		if (!str)
 			exit(EXIT_FAILURE);
-        // printf("2: readline OK\n");
 		add_history(str);
-        // printf("3: add_history OK\n");
 		tokens = tokenizer(str, tokens);
-        // printf("4: tokenizer OK\n");
 		// print_tokens(tokens);
 		word_list = parser(tokens);
-        // printf("5: parser OK\n");
 		// print_wordlist(word_list);
-		executor(word_list);
-        // printf("6: executor OK\n");
+		exit_code = executor(word_list, symtab);
 		free(str);
 		free(tokens);
 		free(word_list);
