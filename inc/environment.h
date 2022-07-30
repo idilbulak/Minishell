@@ -26,7 +26,7 @@ t_symtab	*symtab_delete(t_symtab **symtab, char *name);
 
 void		init_env_symtab(t_symtab **symtab);
 void		delete_env_array(char **env);
-int			total_env_entries(t_symtab **symtab);
+int			total_export_entries(t_symtab **symtab);
 char		**create_env_array(t_symtab **symtab);
 t_symtab	*new_entry(char *str);
 

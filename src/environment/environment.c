@@ -29,7 +29,7 @@ void    init_env_symtab(t_symtab **symtab)
 	}
 }
 
-int     total_env_entries(t_symtab **symtab)
+int     total_export_entries(t_symtab **symtab) // only export entries?
 {
 	t_symtab    *tmp;
 	int         i;
@@ -42,8 +42,9 @@ int     total_env_entries(t_symtab **symtab)
 		tmp = symtab[i];
 		while (tmp)
 		{
+			if (tmp->flag == FLAG_EXPORT)
+                num++;
 			tmp = tmp->next;
-			num++;
 		}
 		i++;
 	}
@@ -58,7 +59,7 @@ char    **create_env_array(t_symtab **symtab)
 	int         i;
 	int         j;
 
-	env = malloc(sizeof(char *) * total_env_entries(symtab) + 1);
+	env = malloc(sizeof(char *) * total_export_entries(symtab) + 1);
 	i = 0;
 	j = 0;
 	while (i < TABLE_SIZE)
