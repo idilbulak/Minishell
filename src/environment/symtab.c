@@ -41,8 +41,8 @@ void	symtab_insert(t_symtab **symtab, t_symtab *entry)
 
 t_symtab	*symtab_lookup(t_symtab **symtab, char *name)
 {
-	int	        index;
-	t_symtab    *tmp;
+	int			index;
+	t_symtab	*tmp;
 
 	index = hash(name);
 	tmp = symtab[index];
@@ -53,9 +53,9 @@ t_symtab	*symtab_lookup(t_symtab **symtab, char *name)
 
 t_symtab	*symtab_delete(t_symtab **symtab, char *name)
 {
-	int	        index;
-	t_symtab    *tmp;
-	t_symtab    *prev;
+	int			index;
+	t_symtab	*tmp;
+	t_symtab	*prev;
 
 	index = hash(name);
 	tmp = symtab[index];

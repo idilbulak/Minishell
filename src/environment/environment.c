@@ -29,11 +29,11 @@ void    init_env_symtab(t_symtab **symtab)
 	}
 }
 
-int     total_export_entries(t_symtab **symtab)
+int	total_export_entries(t_symtab **symtab)
 {
-	t_symtab    *tmp;
-	int         i;
-	int         num;
+	t_symtab	*tmp;
+	int			i;
+	int			num;
 
 	i = 0;
 	num = 0;
@@ -51,13 +51,13 @@ int     total_export_entries(t_symtab **symtab)
 	return (num);
 }
 
-char    **create_env_array(t_symtab **symtab)
+char	**create_env_array(t_symtab **symtab)
 {
-	char        **env;
-	char        *str;
-	t_symtab    *tmp;
-	int         i;
-	int         j;
+	char		**env;
+	char		*str;
+	t_symtab	*tmp;
+	int			i;
+	int			j;
 
 	env = malloc(sizeof(char *) * total_export_entries(symtab) + 1);
 	i = 0;
@@ -84,7 +84,7 @@ char    **create_env_array(t_symtab **symtab)
 	return (env);
 }
 
-void    delete_env_array(char **env)
+void	delete_env_array(char **env)
 {
 	int	i;
 

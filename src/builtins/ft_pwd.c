@@ -3,12 +3,17 @@
 
 int    ft_pwd(char **argv, t_symtab **symtab)
 {
-    t_symtab    *tmp;
-    
-    (void)argv;
-    tmp = symtab_lookup(symtab, "PWD");
-    if (!tmp)
-        return (0);
-    printf("%s\n", tmp->value);
-    return (0);
+	char	*cwd;
+	
+	(void)symtab;
+	(void)argv;
+	cwd = getcwd(NULL, 0);
+	if (!cwd)
+	{
+		perror("pwd");
+		return (1);
+	}
+	printf("%s\n", cwd);
+	free(cwd);
+	return (0);
 }
