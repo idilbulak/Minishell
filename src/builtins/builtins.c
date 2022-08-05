@@ -33,7 +33,7 @@ int		is_builtin(char **args, t_child *child, t_symtab **symtab)
 		if (ft_strcmp(args[0], builtins[j].name) == 0)
 		{
 			child->exit_code = builtins[j].funct(args, symtab);
-			return (0);
+            return (0);
 		}
 		j++;
 	}

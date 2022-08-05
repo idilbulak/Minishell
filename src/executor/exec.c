@@ -25,24 +25,24 @@ static void	do_execute(char **args)
 
 static void    do_simple_command(char **args, t_child *child, t_symtab **symtab)
 {
-	if (is_builtin(args, child, symtab) == 0)
-		return ;
-	else
-	    child->pid = fork();
-	if (child->pid == -1) 
+	if (is_builtin(args, child, symtab) != 0)
 	{
-		perror("fork()");
-		exit(EXIT_FAILURE);
-	}
-	if (child->pid == 0)
-	{
-		do_execute(args);
-		if (errno == ENOENT)
-			ft_error(127, args[0]);
-		else if (errno == EACCES)
-			ft_error(126, args[0]);
-		else
-			ft_error(EXIT_FAILURE, "execve() failed");
+		child->pid = fork();
+		if (child->pid == -1) 
+		{
+			perror("fork()");
+			exit(EXIT_FAILURE);
+		}
+		if (child->pid == 0)
+		{
+			do_execute(args);
+			if (errno == ENOENT)
+				ft_error(127, args[0]);
+			else if (errno == EACCES)
+				ft_error(126, args[0]);
+			else
+				ft_error(EXIT_FAILURE, "execve() failed");
+		}
 	}
 }
 
@@ -66,10 +66,9 @@ int	executor(t_word_list *list, t_symtab **symtab)
 			list = list->next;
 		list = list->next;
 	}
-	if (waitpid(child.pid, &child.status, 0) == -1 && errno != ECHILD) 
-		ft_error(EXIT_FAILURE, "waitpid() failed");
-	if (WIFEXITED(child.status))
-		child.exit_code = WEXITSTATUS(child.status);
+	if (waitpid(child.pid, &child.status, 0) > 0)//== -1 && errno != ECHILD) 
+		if (WIFEXITED(child.status))
+			child.exit_code = WEXITSTATUS(child.status);
 	reset_fd(&fd);
 	return(child.exit_code);
 }
