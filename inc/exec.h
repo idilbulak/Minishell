@@ -15,7 +15,7 @@ typedef struct	s_child
 int     executor(t_word_list *cmds, t_symtab **symtab);
 int	    calc_num_args(t_word_list *list);
 char	**create_args_array(t_word_list *list);
-char    *search_path(char *cmd);
+char    *search_path_var(char *cmd);
 void	ft_error(int errornumber, char *errormessage);
 
 # endif

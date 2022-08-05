@@ -10,15 +10,15 @@ void    init_builtins(t_builtins *builtins)
 	builtins[1].funct = ft_echo;
 	builtins[2].name = "env";
 	builtins[2].funct = ft_env;
-	// builtins[3].name = "exit";
-	// builtins[3].funct = ft_exit;
-	builtins[3].name = "export";
-	builtins[3].funct = ft_export;
-	builtins[4].name = "pwd";
-	builtins[4].funct = ft_pwd;
-	builtins[5].name = "unset";
-	builtins[5].funct = ft_unset;
-	builtins[6].name = NULL;
+	builtins[3].name = "exit";
+	builtins[3].funct = ft_exit;
+	builtins[4].name = "export";
+	builtins[4].funct = ft_export;
+	builtins[5].name = "pwd";
+	builtins[5].funct = ft_pwd;
+	builtins[6].name = "unset";
+	builtins[6].funct = ft_unset;
+	builtins[7].name = NULL;
 }
 
 int		is_builtin(char **args, t_child *child, t_symtab **symtab)

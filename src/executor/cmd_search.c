@@ -21,7 +21,7 @@ char    *get_next_path(char *path_env, char *cmd, int i, int j)
 		return (path);
 }
 
-char    *search_path(char *cmd)
+char    *search_path_var(char *cmd)
 {
 	struct stat sb;
 	char        *path_env;

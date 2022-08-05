@@ -14,7 +14,7 @@ static void	do_execute(char **args)
 	// close(fd->in); // necessary?
 	pathname = args[0];
 	if (!ft_strchr(pathname, '/'))
-		pathname = search_path(args[0]);
+		pathname = search_path_var(args[0]);
 	if (!pathname)
 		return ;//(0); //perror("command not found");
 	execve(pathname, args, NULL);
@@ -28,7 +28,7 @@ static void    do_simple_command(char **args, t_child *child, t_symtab **symtab)
 	if (is_builtin(args, child, symtab) == 0)
 		return ;
 	else
-	child->pid = fork();
+	    child->pid = fork();
 	if (child->pid == -1) 
 	{
 		perror("fork()");
