@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:24:53 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/07/06 15:01:49 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/08 16:35:22 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "../../inc/tokenizer.h"
 #include "../../inc/parser.h"
 #include "../../inc/env.h"
+#include "../../inc/signals.h"
 #include <stdio.h>
 
 char	*parse_string_helper(char *str, t_word_list *word_list)
@@ -84,7 +85,8 @@ t_word_list	*parser(t_token *tokens)
 	if (parser_checks(tokens) == -1)
 	{
 		perror("syntax");
-		exit(EXIT_FAILURE);
+		sig_handler(SIGINT);
+		return (NULL);
 	}
 	word_list = NULL;
 	word_list = init_word_list(word_list);

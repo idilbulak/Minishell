@@ -17,6 +17,7 @@ t_symtab    *new_entry(char *str) //malloc protection
 void    init_env_symtab(t_symtab **symtab)
 {
 	t_symtab    *entry;
+	extern char	**environ;
 	int         i;
 
 	i = 0;

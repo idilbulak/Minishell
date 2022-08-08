@@ -8,7 +8,7 @@
 # define TABLE_SIZE 25
 # define FLAG_EXPORT 1
 
-extern char	**environ;
+// extern char	**environ;
 
 typedef struct	s_symtab
 {
