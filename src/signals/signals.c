@@ -9,18 +9,22 @@
 void	sig_handler(int sig)
 {
 	// write (1, "\b \b\b \b", 6);
-	// rl_replace_line("", 1);
 // delete the previous buffer and give a prompt on new line
 	if (sig == SIGINT)
 	{
+		rl_replace_line("minishell$    ", 0);
+		rl_redisplay();
 		write(1, "\n", 1);
 		rl_on_new_line();
+		rl_replace_line("", 0);
 		rl_redisplay();
 	}
 // does nothing, give just a prompt
 	if (sig == SIGQUIT)
 	{
-		rl_on_new_line();
+		rl_replace_line("minishell$    ", 0);
+		rl_redisplay();
+		rl_replace_line("", 0);
 		rl_redisplay();
 	}
 }
