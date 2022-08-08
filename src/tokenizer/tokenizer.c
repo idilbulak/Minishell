@@ -41,6 +41,11 @@ t_token	*tokenizer(char *str, t_token *tokens)
 
 	state = true;
 	tokens = init_tokens(tokens);
+	if (!tokens)
+	{
+		perror("malloc()");
+		exit(EXIT_FAILURE);
+	}
 	while (if_endofdata(str, state))
 	{
 		str = find_startofdata(str);
@@ -55,3 +60,4 @@ t_token	*tokenizer(char *str, t_token *tokens)
 	}
 	return (tokens);
 }
+

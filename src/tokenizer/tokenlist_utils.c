@@ -16,11 +16,21 @@
 #include "../../inc/env.h"
 #include <stdio.h>
 
+#define GREEN "\033[38;5;2m"
+#define RESET "\033[38;5;255m"
+#define RED "\033[38;5;1m"
+#define BLUE "\033[38;5;4m"
+#define PURPLE "\033[0;35m"
+#define YELLOW "\033[0;33m"
+
 t_token	*init_tokens(t_token *tokens)
 {
 	tokens = malloc(sizeof(t_token));
 	if (!tokens)
+	{	
+		perror("malloc()");
 		exit(EXIT_FAILURE);
+	}
 	tokens->next = NULL;
 	tokens->data = NULL;
 	tokens->prev = NULL;
@@ -41,6 +51,11 @@ t_token	*addto_end(t_token *head, t_token *new)
 	t_token	*temp_next;
 
 	temp_next = malloc(sizeof(t_token));
+	if (!temp_next)
+	{
+		perror("malloc()");
+		exit(EXIT_FAILURE);
+	}
 	temp_next->prev = NULL;
 	temp_next->data = new->data;
 	temp_next->tokentype = new->tokentype;
@@ -62,10 +77,17 @@ void	print_tokens(t_token *head)
 	i = 0;
 	if (!head)
 		return ;
+	printf("\n");
+	printf("%s------------------- TOKENS -------------------%s\n\n", BLUE, RESET);
 	while (current != NULL )
 	{
-		printf("token[%d]:%s type:%u", i, current -> data, current->tokentype);
+		printf(YELLOW);
+		printf("token [%d]:  ", i);
+		printf("%s\n",  current -> data);
+		printf(GREEN);
+		printf("type: %u", current->tokentype);
 		printf("\n");
+		printf(RESET);
 		i++;
 		current = current->next;
 	}

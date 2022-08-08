@@ -5,9 +5,10 @@ SRCS =	\
 	tokenizer/tokenizer.c \
 	tokenizer/tokenlist_utils.c \
 	tokenizer/tokenizer_helper.c \
-	tokenizer/tokenizer_helper2.c \
+	tokenizer/tokenizer_checks.c \
 	parser/parser.c \
 	parser/parser_utils.c \
+	parser/parser_helper.c \
 	parser/parser_checks.c \
 	main.c \
 	signals/signals.c \

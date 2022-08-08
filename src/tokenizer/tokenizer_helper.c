@@ -16,46 +16,29 @@
 #include <stdio.h>
 #include "../../libft/libft.h"
 
-char	*parse_quotedstring( char *str, t_token *new_token)
+char	*typeoftoken(char *str, t_token *new_token)
 {
-	char	*temp_str;
-	int		len;
-
-	temp_str = str;
-	str++;
-	len = 0;
-	while (*str != '"' && *str != '\'')
-	{
-		len++;
-		str++;
-	}
-	if (*str == '"')
-	{
-		new_token->tokentype = TOKEN_STRING;
-		new_token->data = ft_substr(temp_str, 0, len + 2);
-	}
-	else if (*str == '\'')
-	{
-		new_token->tokentype = TOKEN_STRING;
-		new_token->data = ft_substr(temp_str, 1, len);
-	}
+	if (*str == '|' || *str == '>' || *str == '<')
+		str = find_delimiter(str, new_token);
+	else if (*str != '\0')
+			str = find_char(str, new_token);
 	return (str);
 }
 
-char	*parse_unquotedstring(char *str, t_token *new_token)
+char	*find_char(char *str, t_token *new_token)
 {
 	char	*temp_str;
 	int		len;
 
 	temp_str = str;
 	len = 0;
-	while (*str != '>' && *str != '<' && *str != '|' && *str != ' ' && *str != '\0')
+	while (*str != '>' && *str != '<' && *str != '|' && *str != '\0')
 	{
-		if (*str == '\'')
-			break ;
 		len++;
 		str++;
 	}
+	if (temp_str[len - 1] == ' ')
+		len = len - 1;
 	new_token->tokentype = TOKEN_STRING;
 	new_token->data = ft_substr(temp_str, 0, len);
 	str = ft_substr(temp_str, len - 1, ft_strlen(temp_str) - (len - 1));

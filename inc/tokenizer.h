@@ -28,7 +28,8 @@ typedef enum e_tokentype
 	// TOKEN_doubleQuotedString,
 	// TOKEN_singleQuotedString,
 	// TOKEN_unquotedString,
-	TOKEN_FILEPATH //7
+	TOKEN_FILEPATH, //7
+	TOKEN_ENV
 }	t_tokentype;
 
 typedef struct s_token
@@ -47,12 +48,10 @@ t_token		*tokenizer(char *line, t_token *tokens);
 
 // tokenizer helper
 char		*find_delimiter( char *str, t_token *new_token);
-char		*parse_quotedstring( char *str, t_token *new_token);
-char		*parse_unquotedstring(char *str, t_token *new_token);
-
-// tokenizer helper2
+char		*find_char(char *str, t_token *new_token);
 char		*typeoftoken(char *str, t_token *new_token);
-t_token		*find_path(t_token *tokens);
+
+// tokenizer checks
 int			check_ifpath(t_token *tokens);
 int			check_ifredirection(t_token *tokens);
 
@@ -61,12 +60,5 @@ t_token		*init_tokens(t_token *tokens);
 t_token		*addto_emptylist(t_token *head, t_token *new);
 t_token		*addto_end(t_token *head, t_token *new);
 void		print_tokens(t_token *head);
-
-// libft
-int			ft_isdigit(int c);
-size_t		ft_strlen(const char *s);
-char		*ft_substr(char const *s, unsigned int start, size_t len);
-int			ft_strncmp(const char *s1, const char *s2, size_t n);
-char	**ft_split(char const *s, char c);
 
 #endif
