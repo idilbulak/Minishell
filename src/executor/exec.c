@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   exec.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/08/09 13:13:21 by dsaat         #+#    #+#                 */
+/*   Updated: 2022/08/09 14:48:02 by dsaat         ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../libft/libft.h"
 #include "../../inc/exec.h"
 #include "../../inc/builtins.h"
@@ -9,26 +21,25 @@
 
 static void	do_execute(char **args)
 {
-	char    *pathname;
+	char	*pathname;
 
-	// close(fd->in); // necessary?
 	pathname = args[0];
 	if (!ft_strchr(pathname, '/'))
 		pathname = search_path_var(args[0]);
 	if (!pathname)
-		return ;//(0); //perror("command not found");
+		return ;
 	execve(pathname, args, NULL);
-	// perror("execve()");
 	free(pathname);
-	// return (0); // exit(EXIT_FAILURE);
 }
 
-static void    do_simple_command(char **args, t_child *child, t_symtab **symtab)
+static void	do_simple_command(char **args, t_child *child, t_symtab **symtab)
 {
+	if (!args[0])
+		return ;
 	if (is_builtin(args, child, symtab) != 0)
 	{
 		child->pid = fork();
-		if (child->pid == -1) 
+		if (child->pid == -1)
 		{
 			perror("fork()");
 			exit(EXIT_FAILURE);
@@ -49,10 +60,10 @@ static void    do_simple_command(char **args, t_child *child, t_symtab **symtab)
 int	executor(t_word_list *list, t_symtab **symtab)
 {
 	t_filed	fd;
-	t_child child;
-	char    **args;
+	t_child	child;
+	char	**args;
 
-    init_fd(&fd);
+	init_fd(&fd);
 	while (list)
 	{
 		child.exit_code = 0;
@@ -66,9 +77,9 @@ int	executor(t_word_list *list, t_symtab **symtab)
 			list = list->next;
 		list = list->next;
 	}
-	if (waitpid(child.pid, &child.status, 0) > 0)//== -1 && errno != ECHILD) 
+	if (waitpid(child.pid, &child.status, 0) > 0)
 		if (WIFEXITED(child.status))
 			child.exit_code = WEXITSTATUS(child.status);
 	reset_fd(&fd);
-	return(child.exit_code);
+	return (child.exit_code);
 }
