@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:55:38 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/07/06 11:05:46 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/09 17:04:42 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ typedef enum e_tokentype
 	// TOKEN_singleQuotedString,
 	// TOKEN_unquotedString,
 	TOKEN_FILEPATH, //7
-	TOKEN_ENV
+	TOKEN_ENV,
+	TOKEN_CENV
 }	t_tokentype;
 
 typedef struct s_token

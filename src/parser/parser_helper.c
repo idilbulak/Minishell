@@ -57,7 +57,7 @@ void	adjust_wordlist(t_word_list *word_list)
 		if (word_list->word->flags == TOKEN_ENV)
 		{
 			if (word_list->next->word->flags == TOKEN_STRING)
-				word_list->word->flags = TOKEN_STRING;
+				word_list->word->flags = TOKEN_CENV;
 		}
 		word_list = word_list->next;
 	}
@@ -67,8 +67,10 @@ void	adjust_wordlist(t_word_list *word_list)
 // {
 // 	char	*str;
 // 	char	*temp;
+// 	char	*value;
 // 	int		mode;
 // 	int		i;
+// 	int		j;
 
 // 	while (word_list)
 // 	{
@@ -81,11 +83,20 @@ void	adjust_wordlist(t_word_list *word_list)
 // 			while (*str != '\0')
 // 			{
 // 				mode = check_qmode(*str, mode);
-// 				if ((*str == '$' && mode = 2) || (*(str + 1) == '$' && mode == 2))
+// 				if (*str == '$' && (mode == 0 && mode == 2))
 // 				{
-// 					temp[i] = *str;
-// 					i++;
+// 					str++;
+// 					j = 0;
+// 					while (*str != '$' && *str != ' ')
+// 					{
+// 						value = "lookup";
+// 						temp[i] = value[j];
+// 						j++;
+// 						str++;
+// 					}
 // 				}
+// 				temp[i] = *str;
+// 				i++;
 // 				str++;
 // 			}
 // 			word_list->word->word = temp;
