@@ -14,10 +14,10 @@ t_symtab    *new_entry(char *str) //malloc protection
 	return (new_entry);   
 }
 
-void    init_env_symtab(t_symtab **symtab)
+void    init_env_symtab(t_symtab **symtab, char **environ)
 {
 	t_symtab    *entry;
-	extern char	**environ;
+	// extern char	**environ;
 	int         i;
 
 	i = 0;

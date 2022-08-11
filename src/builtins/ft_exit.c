@@ -24,8 +24,13 @@ static void    free_symtab(t_symtab **symtab)
 
 int	ft_exit(char **argv, t_symtab **symtab)
 {
+	int	status;
+	
 	(void)argv;
+	status = 0;
+	if (argv[1])
+		status = ft_atoi(argv[1]);
     free(argv);
     free_symtab(symtab);
-	exit(EXIT_SUCCESS);
+	exit(status);
 }

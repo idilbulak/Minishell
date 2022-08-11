@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:25:01 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/08 16:43:43 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/11 13:23:02 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #include "../inc/environment.h"
 #include <unistd.h>
 
-int	main()
+int	main(int argc, char **argv, char **environ)
 {
 	int         exit_code;
     char		*str;
@@ -30,9 +30,11 @@ int	main()
 	t_word_list	*word_list;
 	t_symtab	**symtab;
 
+	(void)argc;
+	(void)argv;
 	symtab = malloc(sizeof(t_symtab *) * TABLE_SIZE);
 	init_symtab(symtab);
-	init_env_symtab(symtab);
+	init_env_symtab(symtab, environ);
 	init_signals();
 	while (1)
 	{
@@ -45,7 +47,7 @@ int	main()
 		word_list = parser(tokens);
 		// print_wordlist(word_list);
 		exit_code = executor(word_list, symtab);
-        // printf("exit_code = %d\n", exit_code);
+        printf("exit_code = %d\n", exit_code);
 		free(str);
 		free(tokens);
 		free(word_list);
