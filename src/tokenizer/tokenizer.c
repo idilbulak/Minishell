@@ -40,23 +40,17 @@ t_token	*tokenizer(char *str, t_token *tokens)
 	bool		state;
 
 	state = true;
-	tokens = init_tokens(tokens);
-	if (!tokens)
-	{
-		perror("malloc()");
-		exit(EXIT_FAILURE);
-	}
+	tokens = NULL;
 	while (if_endofdata(str, state))
 	{
 		str = find_startofdata(str);
 		str = find_startoftoken(str);
-		new_token = init_tokens(new_token);
+		new_token = init_token(new_token);
 		str = typeoftoken(str, new_token);
-		if (tokens->data == NULL)
+		if (tokens == NULL)
 			tokens = addto_emptylist(tokens, new_token);
 		else
 			addto_end(tokens, new_token);
-		free(new_token);
 		str++;
 	}
 	return (tokens);

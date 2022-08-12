@@ -20,49 +20,50 @@
 #define PURPLE "\033[0;35m"
 #define YELLOW "\033[0;33m"
 
-t_token	*init_tokens(t_token *tokens)
+t_token	*init_token(t_token *token)
 {
-	tokens = malloc(sizeof(t_token));
-	if (!tokens)
+	token = malloc(sizeof(t_token));
+	if (!token)
 	{	
 		perror("malloc()");
 		exit(EXIT_FAILURE);
 	}
-	tokens->next = NULL;
-	tokens->data = NULL;
-	tokens->prev = NULL;
-	tokens->tokentype = TOKEN_null;
+	token->next = NULL;
+	token->data = NULL;
+	token->prev = NULL;
+	token->tokentype = TOKEN_null;
+	return (token);
+}
+
+t_token	*addto_emptylist(t_token *tokens, t_token *new)
+{
+	tokens = new;
 	return (tokens);
 }
 
-t_token	*addto_emptylist(t_token *head, t_token *new)
+t_token	*addto_end(t_token *tokens, t_token *new)
 {
-	head->data = new->data;
-	head->tokentype = new->tokentype;
-	return (head);
+	t_token	*prev;
+
+	prev = tokens;
+	while (prev->next != NULL)
+		prev = prev->next;
+	prev->next = new;
+	new->prev = prev;
+	return (tokens);
 }
 
-t_token	*addto_end(t_token *head, t_token *new)
+void	free_tokens(t_token *tokens)
 {
-	t_token	*temp_prev;
-	t_token	*temp_next;
+	t_token	*temp;
 
-	temp_next = malloc(sizeof(t_token));
-	if (!temp_next)
+	while (tokens)
 	{
-		perror("malloc()");
-		exit(EXIT_FAILURE);
+		temp = tokens->next;
+		free(tokens->data);
+		free(tokens);
+		tokens = temp;
 	}
-	temp_next->prev = NULL;
-	temp_next->data = new->data;
-	temp_next->tokentype = new->tokentype;
-	temp_next->next = NULL;
-	temp_prev = head;
-	while (temp_prev->next != NULL)
-		temp_prev = temp_prev->next;
-	temp_prev->next = temp_next;
-	temp_next->prev = temp_prev;
-	return (head);
 }
 
 void	print_tokens(t_token *head)

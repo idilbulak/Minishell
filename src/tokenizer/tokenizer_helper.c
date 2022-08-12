@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../inc/tokenizer.h"
-#include <stdio.h>
 #include "../../libft/libft.h"
 
 char	*typeoftoken(char *str, t_token *new_token)
@@ -27,9 +26,11 @@ char	*find_char(char *str, t_token *new_token)
 {
 	char	*temp_str;
 	int		len;
+	int		count;
 
 	temp_str = str;
 	len = 0;
+	count = 0;
 	while (*str != '>' && *str != '<' && *str != '|' && *str != '\0')
 	{
 		len++;
@@ -39,8 +40,12 @@ char	*find_char(char *str, t_token *new_token)
 		len = len - 1;
 	new_token->tokentype = TOKEN_STRING;
 	new_token->data = ft_substr(temp_str, 0, len);
-	str = ft_substr(temp_str, len - 1, ft_strlen(temp_str) - (len - 1));
-	return (str);
+	while(count < len -1)
+	{
+		temp_str++;
+		count++;
+	}
+	return (temp_str);
 }
 
 char	*lessthan_helper(char *str, t_token *new_token)

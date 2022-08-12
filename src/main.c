@@ -35,7 +35,7 @@ int	main(int argc, char **argv, char **environ)
 			word_list = parser(tokens, symtab);
 			exit_code = executor(word_list, symtab);
 			free(str);
-			free(tokens);
+			free_tokens(tokens);
 			free(word_list);
 		}
 	}

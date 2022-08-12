@@ -54,9 +54,10 @@ int			check_ifpath(t_token *tokens);
 int			check_ifredirection(t_token *tokens);
 
 // tokenlist_utils
-t_token		*init_tokens(t_token *tokens);
-t_token		*addto_emptylist(t_token *head, t_token *new);
-t_token		*addto_end(t_token *head, t_token *new);
+t_token		*init_token(t_token *token);
+t_token		*addto_emptylist(t_token *tokens, t_token *new);
+t_token		*addto_end(t_token *tokens, t_token *new);
+void		free_tokens(t_token *tokens);
 void		print_tokens(t_token *head);
 
 #endif
