@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 17:15:17 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/12 17:15:18 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/12 17:55:25 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include "../inc/tokenizer.h"
 # include "../inc/parser.h"
 # include "../inc/exec.h"
-# include "../inc/env.h"
 # include "../inc/signals.h"
 # include "../inc/environment.h"
 # include "../libft/libft.h"
