@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:55:38 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/09 17:04:42 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/12 17:11:55 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,24 @@
 
 typedef enum e_tokentype
 {
-	TOKEN_null, //0
-	TOKEN_PIPE, //1
-	TOKEN_GREATER, //2
-	TOKEN_LESS, //3
-	TOKEN_DOUBLEGREATER, //4
-	TOKEN_DOUBLELESS, //5
-	TOKEN_STRING,  //6
-	// TOKEN_doubleQuotedString,
-	// TOKEN_singleQuotedString,
-	// TOKEN_unquotedString,
-	TOKEN_FILEPATH, //7
+	TOKEN_null,
+	TOKEN_PIPE,
+	TOKEN_GREATER,
+	TOKEN_LESS,
+	TOKEN_DOUBLEGREATER,
+	TOKEN_DOUBLELESS,
+	TOKEN_STRING,
+	TOKEN_FILEPATH,
 	TOKEN_ENV,
 	TOKEN_CENV
 }	t_tokentype;
 
 typedef struct s_token
 {
-	char				*data;
-	t_tokentype			tokentype;
-	struct s_token		*next;
-	struct s_token		*prev;
+	char			*data;
+	t_tokentype		tokentype;
+	struct s_token	*next;
+	struct s_token	*prev;
 }	t_token;
 
 // tokenizer

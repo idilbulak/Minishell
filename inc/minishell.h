@@ -1,20 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   minishell.h                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/08/12 17:15:17 by ibulak        #+#    #+#                 */
+/*   Updated: 2022/08/12 17:15:18 by ibulak        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
 # include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include "tokenizer.h"
-# include "parser.h"
-# include "signals.h"
-# include "signal.h"
-# include "exec.h"
-# include "filed.h"
-# include "builtins.h"
+# include <readline/readline.h>
+# include <readline/history.h>
+# include "../inc/tokenizer.h"
+# include "../inc/parser.h"
+# include "../inc/exec.h"
+# include "../inc/env.h"
+# include "../inc/signals.h"
+# include "../inc/environment.h"
 # include "../libft/libft.h"
-
-void	rl_replace_line (const char *text, int clear_undo);
 
 #endif

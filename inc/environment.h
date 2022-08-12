@@ -9,6 +9,7 @@
 # define FLAG_EXPORT 1
 
 // extern char	**environ;
+int     exit_code;
 
 typedef struct	s_symtab
 {
@@ -31,6 +32,5 @@ char		**create_env_array(t_symtab **symtab);
 t_symtab	*new_entry(char *str);
 
 // void	    print_table(t_symtab **symtab);
-
 
 # endif
