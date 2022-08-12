@@ -4,6 +4,12 @@
 #include "../../inc/env.h"
 #include <stdio.h>
 
+#include "../../inc/exec.h"
+#include "../../inc/tokenizer.h"
+#include "../../inc/parser.h"
+#include "../../inc/environment.h"
+#include <stdio.h>
+
 int	check_qmode(char str, int mode)
 {
 	if (str == '\'' && mode == 0)
@@ -45,7 +51,18 @@ void	check_env(t_word_list *word_list)
 	}
 }
 
-void	adjust_wordlist(t_word_list *word_list)
+int	check_cenv(t_word_list *word_list)
+{
+	while(word_list->next)
+	{
+		if(word_list->word->flags == TOKEN_CENV)
+			return(1);
+		word_list = word_list->next;
+	}
+	return(0);
+}
+
+void	check_envorder(t_word_list *word_list)
 {
 	while (word_list->next)
 	{
@@ -56,7 +73,21 @@ void	adjust_wordlist(t_word_list *word_list)
 		}
 		if (word_list->word->flags == TOKEN_ENV)
 		{
-			if (word_list->next->word->flags == TOKEN_STRING)
+			if (word_list->next->word->flags != TOKEN_ENV && word_list->next->word->flags != TOKEN_null)
+				word_list->word->flags = TOKEN_CENV;
+		}
+		word_list = word_list->next;
+	}
+}
+
+void	adjust_wordlist(t_word_list *word_list)
+{
+	check_envorder(word_list);
+	while (word_list->next)
+	{
+		if (word_list->word->flags == TOKEN_ENV)
+		{
+			if (word_list->next->word->flags == TOKEN_CENV)
 				word_list->word->flags = TOKEN_CENV;
 		}
 		word_list = word_list->next;

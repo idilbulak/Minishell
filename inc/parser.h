@@ -2,6 +2,7 @@
 # define PARSER_H
 
 #include "tokenizer.h"
+#include "environment.h"
 
 typedef struct s_word_desc
 {
@@ -16,7 +17,7 @@ typedef struct s_word_list
 }	t_word_list;
 
 // parser
-t_word_list	*parser(t_token *tokens);
+t_word_list	*parser(t_token *tokens, t_symtab **symtab);
 t_word_list	*parse_string(t_token *tokens, t_word_list *word_list);
 char	*parse_string_helper(char *str, t_word_list *word_list);
 
@@ -25,6 +26,7 @@ void	ft_split_quotes(t_word_list *word_list);
 void	adjust_wordlist(t_word_list *word_list);
 void	check_env(t_word_list *word_list);
 int	check_qmode(char str, int mode);
+void	ft_expander(t_word_list *word_list, t_symtab **symtab);
 
 // word_list utils
 t_word_list	*init_word_list(t_word_list *word_list);
