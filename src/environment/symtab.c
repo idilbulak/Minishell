@@ -44,6 +44,8 @@ t_symtab	*symtab_lookup(t_symtab **symtab, char *name)
 	int			index;
 	t_symtab	*tmp;
 
+	if (!name)
+		return (NULL);
 	index = hash(name);
 	tmp = symtab[index];
 	while (tmp != NULL && ft_strncmp(tmp->name, name, ft_strlen(name)) != 0)

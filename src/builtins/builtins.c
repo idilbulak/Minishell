@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   builtins.c                                         :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/08/12 14:48:21 by dsaat         #+#    #+#                 */
+/*   Updated: 2022/08/12 14:49:09 by dsaat         ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../libft/libft.h"
 #include "../../inc/exec.h"
 #include "../../inc/builtins.h"
 
-void    init_builtins(t_builtins *builtins)
+void	init_builtins(t_builtins *builtins)
 {
 	builtins[0].name = "cd";
 	builtins[0].funct = ft_cd;
@@ -21,10 +33,10 @@ void    init_builtins(t_builtins *builtins)
 	builtins[7].name = NULL;
 }
 
-int		is_builtin(char **args, t_child *child, t_symtab **symtab)
+int	is_builtin(char **args, t_child *child, t_symtab **symtab)
 {
-	t_builtins  builtins[7];
-	int         j;
+	t_builtins	builtins[7];
+	int			j;
 
 	j = 0;
 	init_builtins(builtins);
@@ -33,7 +45,7 @@ int		is_builtin(char **args, t_child *child, t_symtab **symtab)
 		if (ft_strcmp(args[0], builtins[j].name) == 0)
 		{
 			child->exit_code = builtins[j].funct(args, symtab);
-            return (0);
+			return (0);
 		}
 		j++;
 	}

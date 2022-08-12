@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   environment.c                                      :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/08/12 15:06:53 by dsaat         #+#    #+#                 */
+/*   Updated: 2022/08/12 15:06:54 by dsaat         ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/environment.h"
 
-t_symtab    *new_entry(char *str) //malloc protection
+t_symtab	*new_entry(char *str) //malloc protection
 {
-	t_symtab    *new_entry;
-	int         i;
+	t_symtab	*new_entry;
+	int			i;
 
 	i = 0;
 	new_entry = malloc(sizeof(t_symtab));
@@ -11,14 +23,13 @@ t_symtab    *new_entry(char *str) //malloc protection
 		i++;
 	new_entry->name = ft_substr(str, 0, i);
 	new_entry->value = ft_substr(str, i + 1, ft_strlen(str) - i);
-	return (new_entry);   
+	return (new_entry);
 }
 
-void    init_env_symtab(t_symtab **symtab, char **environ)
+void	init_env_symtab(t_symtab **symtab, char **environ)
 {
-	t_symtab    *entry;
-	// extern char	**environ;
-	int         i;
+	t_symtab	*entry;
+	int			i;
 
 	i = 0;
 	while (environ[i])
@@ -26,7 +37,7 @@ void    init_env_symtab(t_symtab **symtab, char **environ)
 		entry = new_entry(environ[i]);
 		entry->flag = FLAG_EXPORT;
 		symtab_insert(symtab, entry);
-		i++;        
+		i++;
 	}
 }
 
@@ -52,10 +63,24 @@ int	total_export_entries(t_symtab **symtab)
 	return (num);
 }
 
+static char	*make_str_from_struct(t_symtab *tmp)
+{
+	char	*str;
+	int		name;
+	int		value;
+
+	name = ft_strlen(tmp->name);
+	value = ft_strlen(tmp->value);
+	str = malloc(sizeof(char) * (name + value + 2));
+	ft_strlcpy(str, tmp->name, name + 1);
+	ft_strlcpy(&str[name], "=", 2);
+	ft_strlcpy(&str[name + 1], tmp->value, value + 1);
+	return (str);
+}
+
 char	**create_env_array(t_symtab **symtab)
 {
 	char		**env;
-	char		*str;
 	t_symtab	*tmp;
 	int			i;
 	int			j;
@@ -70,11 +95,7 @@ char	**create_env_array(t_symtab **symtab)
 		{
 			if (tmp->flag == FLAG_EXPORT)
 			{
-				str = malloc(sizeof(char) * ft_strlen(tmp->name) + ft_strlen(tmp->value) + 2);
-				ft_strlcpy(str, tmp->name, ft_strlen(tmp->name) + 1);
-				ft_strlcpy(&str[ft_strlen(tmp->name)], "=", 2);
-				ft_strlcpy(&str[ft_strlen(tmp->name) + 1], tmp->value, ft_strlen(tmp->value) + 1);
-				env[j] = str;
+				env[j] = make_str_from_struct(tmp);
 				j++;
 			}
 			tmp = tmp->next;

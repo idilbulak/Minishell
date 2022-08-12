@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   ft_exit.c                                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/08/12 14:51:58 by dsaat         #+#    #+#                 */
+/*   Updated: 2022/08/12 14:52:30 by dsaat         ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/environment.h"
 #include <stdlib.h>
 
-static void    free_symtab(t_symtab **symtab)
+static void	free_symtab(t_symtab **symtab)
 {
 	t_symtab	*tmp;
 	int			i;
@@ -9,7 +21,7 @@ static void    free_symtab(t_symtab **symtab)
 	i = 0;
 	while (i < TABLE_SIZE)
 	{
-		while(symtab[i])
+		while (symtab[i])
 		{
 			tmp = symtab[i]->next;
 			free(symtab[i]->name);
@@ -25,12 +37,12 @@ static void    free_symtab(t_symtab **symtab)
 int	ft_exit(char **argv, t_symtab **symtab)
 {
 	int	status;
-	
+
 	(void)argv;
 	status = 0;
 	if (argv[1])
 		status = ft_atoi(argv[1]);
-    free(argv);
-    free_symtab(symtab);
+	free(argv);
+	free_symtab(symtab);
 	exit(status);
 }
