@@ -10,6 +10,7 @@ SRCS =	\
 	parser/parser_utils.c \
 	parser/parser_helper.c \
 	parser/parser_checks.c \
+	parser/expander.c \
 	main.c \
 	signals/signals.c \
 	executor/exec.c \
@@ -19,6 +20,7 @@ SRCS =	\
 	executor/cmd_search.c \
 	environment/symtab.c \
 	environment/environment.c \
+	environment/env_array.c \
 	builtins/builtins.c \
 	builtins/ft_cd.c \
 	builtins/ft_echo.c \
@@ -37,8 +39,8 @@ all:	$(NAME)
 
 $(NAME): $(OBJS) libft/libft.a
 # $(GCC) $(FLAGS) -L libft -l ft -L/Users/dsaat/.brew/opt/readline/lib -I/Users/dsaat/.brew/opt/readline/lib -lreadline -o $(NAME) $(OBJS)
-# $(GCC) $(FLAGS) -L libft -l ft -L/Users/ibulak/.brew/opt/readline/lib -I/Users/ibulak/.brew/opt/readline/lib -lreadline -o $(NAME) $(OBJS)
-	$(GCC) $(FLAGS) -L libft -l ft -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/lib -lreadline -o $(NAME) $(OBJS)
+	$(GCC) $(FLAGS) -L libft -l ft -L/Users/ibulak/.brew/opt/readline/lib -I/Users/ibulak/.brew/opt/readline/lib -lreadline -o $(NAME) $(OBJS)
+# $(GCC) $(FLAGS) -L libft -l ft -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/lib -lreadline -o $(NAME) $(OBJS)
 # $(GCC) $(FLAGS) -L libft -l ft -L/opt/homebrew/opt/readline/lib -I/opt/homebrew/opt/readline/include -lreadline -o $(NAME) $(OBJS)
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(HEADER)

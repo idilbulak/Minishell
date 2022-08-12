@@ -1,13 +1,4 @@
-#include "../../inc/exec.h"
-#include "../../inc/tokenizer.h"
 #include "../../inc/parser.h"
-#include "../../inc/env.h"
-#include <stdio.h>
-
-#include "../../inc/exec.h"
-#include "../../inc/tokenizer.h"
-#include "../../inc/parser.h"
-#include "../../inc/environment.h"
 #include <stdio.h>
 
 int	check_qmode(char str, int mode)

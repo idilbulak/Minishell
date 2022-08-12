@@ -6,17 +6,29 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:24:53 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/09 14:51:58 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/12 16:26:49 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/exec.h"
-#include "../../inc/tokenizer.h"
 #include "../../inc/parser.h"
-#include "../../inc/env.h"
-#include "../../inc/environment.h"
-#include "../../inc/signals.h"
 #include <stdio.h>
+
+void	var_assignment(t_word_list *word_list, t_symtab **symtab)
+{
+	t_symtab	*entry;
+
+	while(word_list)
+	{
+		if (word_list->word->flags == TOKEN_ENV)
+		{
+			entry = new_entry(word_list->word->word);
+			if(symtab_lookup(symtab, entry->name))
+				symtab_delete(symtab, entry->name);
+			symtab_insert(symtab, entry);
+		}
+		word_list = word_list->next;
+	}
+}
 
 char	*parse_string_helper(char *str, t_word_list *word_list)
 {

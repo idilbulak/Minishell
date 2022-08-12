@@ -6,13 +6,11 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:39:46 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/07/20 13:51:07 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/08/12 16:24:42 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/tokenizer.h"
-#include "../../inc/parser.h"
-#include "../../inc/env.h"
 #include <stdio.h>
 #include "../../libft/libft.h"
 

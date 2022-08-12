@@ -1,19 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ast_utils.c                                        :+:    :+:            */
+/*   parser_utils.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 12:29:45 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/07/06 12:32:52 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/12 16:27:07 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/exec.h"
-#include "../../inc/tokenizer.h"
 #include "../../inc/parser.h"
-#include "../../inc/env.h"
 #include <stdio.h>
 
 #define GREEN "\033[38;5;2m"

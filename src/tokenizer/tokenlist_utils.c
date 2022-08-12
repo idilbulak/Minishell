@@ -6,14 +6,11 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:51:34 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/07/06 10:58:06 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/12 16:25:12 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/exec.h"
 #include "../../inc/tokenizer.h"
-#include "../../inc/parser.h"
-#include "../../inc/env.h"
 #include <stdio.h>
 
 #define GREEN "\033[38;5;2m"

@@ -1,19 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   tokenizer_helper2.c                                :+:    :+:            */
+/*   tokenizer_checks.c                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:38:38 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/07/06 10:53:07 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/12 16:24:58 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/exec.h"
 #include "../../inc/tokenizer.h"
-#include "../../inc/parser.h"
-#include "../../inc/env.h"
 
 int	check_ifpath(t_token *tokens)
 {

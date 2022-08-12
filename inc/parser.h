@@ -39,4 +39,7 @@ void	print_wordlist(t_word_list *word_list);
 //checks
 int	parser_checks(t_token *tokens);
 
+void	var_assignment(t_word_list *word_list, t_symtab **symtab);
+void	ft_expander(t_word_list *word_list, t_symtab **symtab);
+
 #endif
