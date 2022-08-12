@@ -7,6 +7,11 @@ char	*find_value(char *str)
 
 	i = 0;
 	value = malloc(sizeof(char));
+    if (*str == '$' && *(str + 1) == '?')
+    {
+        value = "?";
+        return (value);
+    }
 	str++;
 	while(*str != '$' && *str != '\0')
 	{
@@ -41,15 +46,18 @@ void	ft_expander(t_word_list *word_list, t_symtab **symtab)
 				if (*str == '$' && (mode == 0 || mode == 2))
 				{
 					value = find_value(str);
-					printf("valueeee: %s\n", value);
-					value = symtab_lookup(symtab, value)->value;
-					printf("valueeee: %s\n", value);
-					while (value[j] != '\0')
-					{
-						temp[i] = value[j];
-						i++;
-						j++;
-					}
+                    if (*value == '?')
+                        printf("%d\n", exit_code);
+					else if (symtab_lookup(symtab, value))
+                    {
+                        value = symtab_lookup(symtab, value)->value;
+                        while (value[j] != '\0')
+                        {
+                            temp[i] = value[j];
+                            i++;
+                            j++;
+                        }
+                    }
 					str++;
 					while(*str != '$' && *str != ' ' && *str != '\0')
 						str++;

@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:24:53 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/12 16:26:49 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/12 18:48:04 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ void	var_assignment(t_word_list *word_list, t_symtab **symtab)
 {
 	t_symtab	*entry;
 
-	while(word_list)
+	while (word_list)
 	{
 		if (word_list->word->flags == TOKEN_ENV)
 		{
 			entry = new_entry(word_list->word->word);
-			if(symtab_lookup(symtab, entry->name))
+			if (symtab_lookup(symtab, entry->name))
 				symtab_delete(symtab, entry->name);
 			symtab_insert(symtab, entry);
 		}
@@ -32,10 +32,10 @@ void	var_assignment(t_word_list *word_list, t_symtab **symtab)
 
 char	*parse_string_helper(char *str, t_word_list *word_list)
 {
-	char	*temp_str;
-	char	*new_str;
+	char		*temp_str;
+	char		*new_str;
 	t_word_list	*new_word;
-	int		len;
+	int			len;
 
 	temp_str = str;
 	len = 0;
@@ -82,7 +82,7 @@ t_word_list	*parse_string(t_token *tokens, t_word_list *word_list)
 	str = tokens->data;
 	while (*str != '\0')
 	{
-		while(*str == ' ')
+		while (*str == ' ')
 			str++;
 		str = parse_string_helper(str, word_list);
 		str++;
@@ -129,5 +129,6 @@ t_word_list	*parser(t_token *tokens, t_symtab **symtab)
 	adjust_wordlist(word_list);
 	ft_expander(word_list, symtab);
 	ft_split_quotes(word_list);
+	var_assignment(word_list, symtab);
 	return (word_list);
 }

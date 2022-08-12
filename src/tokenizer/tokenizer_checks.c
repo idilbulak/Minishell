@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:38:38 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/12 16:24:58 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/12 17:33:43 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	check_ifpath(t_token *tokens)
 {
-	while(tokens)
+	while (tokens)
 	{
 		if (check_ifredirection(tokens) == 1)
 		{
-			while(check_ifredirection(tokens) == 1)
+			while (check_ifredirection(tokens) == 1)
 				tokens = tokens->next;
 			return (1);
 		}

@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 12:29:45 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/12 16:27:07 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/12 18:48:22 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,10 @@ t_word_list	*init_new_str(t_word_list *new_word, char *new_str)
 void	print_wordlist(t_word_list *word_list)
 {
 	int	i;
+
 	i = 0;
 	printf("%s------------------ WORD_LIST -----------------%s\n\n", BLUE, RESET);
-	while(word_list != NULL)
+	while (word_list != NULL)
 	{
 		printf(YELLOW);
 		printf("word_list [%d]: \n", i);

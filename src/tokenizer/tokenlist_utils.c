@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:51:34 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/12 16:25:12 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/12 17:33:59 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	print_tokens(t_token *head)
 	{
 		printf(YELLOW);
 		printf("token [%d]:  ", i);
-		printf("%s\n",  current -> data);
+		printf("%s\n", current -> data);
 		printf(GREEN);
 		printf("type: %u", current->tokentype);
 		printf("\n");
@@ -91,4 +91,3 @@ void	print_tokens(t_token *head)
 	printf("\n");
 	free(current);
 }
-
