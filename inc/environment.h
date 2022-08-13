@@ -28,6 +28,8 @@ t_symtab	**init_env_symtab(char **environ);//t_symtab **symtab, char **environ);
 char		**create_env_array(t_symtab **symtab);
 void		delete_env_array(char **env);
 
+void		ft_error(int errornumber, char *errormessage);
+
 // void		init_symtab(t_symtab **symtab);
 // void	    print_table(t_symtab **symtab);
 

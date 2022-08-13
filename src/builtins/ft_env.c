@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 14:51:46 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/12 14:51:47 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/13 16:12:42 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ int	ft_env(char **argv, t_symtab **symtab)
 	(void)argv;
 	i = 0;
 	env = create_env_array(symtab);
-	if (!env)
-		return (1);
 	while (env[i])
 	{
 		printf("%s\n", env[i]);
