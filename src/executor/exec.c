@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/09 13:13:21 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/13 13:35:48 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/13 14:05:30 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,31 +36,26 @@ static void	do_execute(char **args)
 	if (!pathname)
 		return ;
 	execve(pathname, args, NULL);
-	free(pathname);
 }
 
 static void	do_simple_command(char **args, t_child *child, t_symtab **symtab)
 {
 	if (!args[0])
 		return ;
-	if (is_builtin(args, symtab) != 0)
+	if (is_builtin(args, symtab) == 0)
+		return ;
+	child->pid = fork();
+	if (child->pid == -1)
+		ft_error(EXIT_FAILURE, "fork failed");
+	if (child->pid == 0)
 	{
-		child->pid = fork();
-		if (child->pid == -1)
-		{
-			perror("fork()");
-			exit(EXIT_FAILURE);
-		}
-		if (child->pid == 0)
-		{
-			do_execute(args);
-			if (errno == ENOENT)
-				ft_error(127, args[0]);
-			else if (errno == EACCES)
-				ft_error(126, args[0]);
-			else
-				ft_error(EXIT_FAILURE, "execve() failed");
-		}
+		do_execute(args);
+		if (errno == ENOENT)
+			ft_error(127, args[0]);
+		if (errno == EACCES)
+			ft_error(126, args[0]);
+		else
+			ft_error(EXIT_FAILURE, "execve failed");
 	}
 }
 
@@ -73,7 +68,6 @@ void	executor(t_word_list *list, t_symtab **symtab)
 	init_fd(&fd);
 	while (list)
 	{
-		// child.g_exit_code = 0;
 		if (set_fd(list, &fd) == 0)
 		{
 			args = create_args_array(list);
