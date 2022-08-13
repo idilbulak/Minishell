@@ -22,6 +22,7 @@ void	sig_handler(int sig)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
+		exit_code = 1;
 	}
 	if (sig == SIGQUIT)
 	{
@@ -29,6 +30,7 @@ void	sig_handler(int sig)
 		rl_redisplay();
 		rl_replace_line("", 0);
 		rl_redisplay();
+		exit_code = 0;
 	}
 }
 

@@ -17,6 +17,7 @@
 # include <readline/history.h>
 # include <signal.h>
 # include <unistd.h>
+# include "environment.h"
 
 void	sig_handler(int sig);
 void	init_signals(void);
