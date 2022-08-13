@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 11:54:25 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/13 15:52:34 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/13 16:05:53 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	hash(char *name)
 {
+	int	hash_value;
 	int	i;
 	int	len;
-	unsigned int	hash_value;
 
 	i = 0;
 	hash_value = 0;
@@ -27,7 +27,7 @@ int	hash(char *name)
 		hash_value *= name[i];
 		i++;
 	}
-	return (hash_value % TABLE_SIZE);
+	return ((unsigned int)hash_value % TABLE_SIZE);
 }
 
 t_symtab	*new_entry(char *str)
