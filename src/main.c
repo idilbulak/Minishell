@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:25:01 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/12 17:29:23 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/13 12:02:07 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ int	main(int argc, char **argv, char **environ)
 
 	if (argc == 1 && ft_strncmp("minishell", argv[0], 8))
 	{
-		symtab = malloc(sizeof(t_symtab *) * TABLE_SIZE);
-		init_symtab(symtab);
-		init_env_symtab(symtab, environ);
+		symtab = init_env_symtab(environ);
 		init_signals();
 		while (1)
 		{

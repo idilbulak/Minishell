@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   environment.c                                      :+:    :+:            */
+/*   env_symtab.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 15:06:53 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/12 16:31:27 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/13 11:54:05 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/environment.h"
 
-t_symtab	*new_entry(char *str) //malloc protection
+t_symtab	**init_env_symtab(char **environ)
 {
-	t_symtab	*new_entry;
-	int			i;
-
-	i = 0;
-	new_entry = malloc(sizeof(t_symtab));
-	while (str[i] != '=')
-		i++;
-	new_entry->name = ft_substr(str, 0, i);
-	new_entry->value = ft_substr(str, i + 1, ft_strlen(str) - i);
-	return (new_entry);
-}
-
-void	init_env_symtab(t_symtab **symtab, char **environ)
-{
+	t_symtab	**symtab;
 	t_symtab	*entry;
 	int			i;
 
+	symtab = malloc(sizeof(t_symtab *) * TABLE_SIZE);
+	if (!symtab)
+		perror("malloc failed");
+	i = 0;
+	while (i < TABLE_SIZE)
+	{
+		symtab[i] = NULL;
+		i++;
+	}
 	i = 0;
 	while (environ[i])
 	{
@@ -39,4 +35,5 @@ void	init_env_symtab(t_symtab **symtab, char **environ)
 		symtab_insert(symtab, entry);
 		i++;
 	}
+	return (symtab);
 }

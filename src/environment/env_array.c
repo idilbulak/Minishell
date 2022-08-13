@@ -6,13 +6,13 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 15:27:18 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/12 15:27:43 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/13 11:09:59 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/environment.h"
 
-int	total_export_entries(t_symtab **symtab)
+static int	total_export_entries(t_symtab **symtab)
 {
 	t_symtab	*tmp;
 	int			i;
