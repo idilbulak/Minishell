@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 14:48:21 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/13 12:50:21 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/13 13:29:45 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	init_builtins(t_builtins *builtins)
 	builtins[7].name = NULL;
 }
 
-int	is_builtin(char **args, t_child *child, t_symtab **symtab)
+int	is_builtin(char **args, t_symtab **symtab)
 {
 	t_builtins	builtins[7];
 	int			j;
@@ -44,7 +44,7 @@ int	is_builtin(char **args, t_child *child, t_symtab **symtab)
 	{
 		if (ft_strcmp(args[0], builtins[j].name) == 0)
 		{
-			child->g_exit_code = builtins[j].funct(args, symtab);
+			g_exit_code = builtins[j].funct(args, symtab);
 			return (0);
 		}
 		j++;

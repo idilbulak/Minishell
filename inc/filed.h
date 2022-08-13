@@ -12,7 +12,7 @@ typedef struct	s_filed
 }				t_filed;
 
 void    init_fd(t_filed *fd);
-int		set_fd(t_word_list *list, t_filed *fd, t_child *child);
+int		set_fd(t_word_list *list, t_filed *fd);//, t_child *child);
 void	create_pipe(t_filed *fd);
 void    reset_fd(t_filed *fd);
 
@@ -21,9 +21,5 @@ int		set_input(t_word_list *list, t_filed *fd);
 int		set_output(t_word_list *list, t_filed *fd);
 int		set_append_output(t_word_list *list, t_filed *fd);
 int		set_here_document(t_filed *fd, char *delimiter);
-
-// void    read_till_delimiter(t_filed *fd, char *delimiter);
-// int		check_redirections_in(t_word_list *list, t_filed *fd, t_child *child);
-// int    	check_redirections_out(t_word_list *list, t_filed *fd, t_child *child);
 
 # endif

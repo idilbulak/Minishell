@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:25:01 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/13 12:50:21 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/13 13:24:44 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int argc, char **argv, char **environ)
 			add_history(str);
 			tokens = tokenizer(str, tokens);
 			word_list = parser(tokens, symtab);
-			g_exit_code = executor(word_list, symtab);
+			executor(word_list, symtab);
 			free(str);
 			free_tokens(tokens);
 			free_word_list(word_list);

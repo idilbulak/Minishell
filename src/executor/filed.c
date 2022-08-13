@@ -39,7 +39,7 @@ static int	is_final_cmd(t_word_list *list)
 	return (1);
 }
 
-int	set_fd(t_word_list *list, t_filed *fd, t_child *child)
+int	set_fd(t_word_list *list, t_filed *fd)
 {
 	if (dup2(fd->in, STDIN_FILENO) == -1)
 		perror("set_fd(1) failed");
@@ -50,7 +50,7 @@ int	set_fd(t_word_list *list, t_filed *fd, t_child *child)
 		create_pipe(fd);
 	if (check_redirections(list, fd) != 0)
 	{
-		child->g_exit_code = 1;
+		g_exit_code = 1;
 		return (1);
 	}
 	if (dup2(fd->out, STDOUT_FILENO) == -1)

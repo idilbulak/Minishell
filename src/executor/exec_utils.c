@@ -1,12 +1,13 @@
 #include "../../inc/exec.h"
 
-void	ft_error(int g_exit_code, char *error_message)
+void	ft_error(int exit_code, char *error_message)
 {
+	g_exit_code = exit_code;
 	perror(error_message);
 	exit(g_exit_code);
 }
 
-int	calc_num_args(t_word_list *list)
+static int	calc_num_args(t_word_list *list)
 {
 	int	i;
 
