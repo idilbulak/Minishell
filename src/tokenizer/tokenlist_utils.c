@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:51:34 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/12 17:33:59 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/13 16:24:20 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,7 @@ t_token	*init_token(t_token *token)
 {
 	token = malloc(sizeof(t_token));
 	if (!token)
-	{	
-		perror("malloc()");
-		exit(EXIT_FAILURE);
-	}
+		ft_error(EXIT_FAILURE, "malloc failed");
 	token->next = NULL;
 	token->data = NULL;
 	token->prev = NULL;

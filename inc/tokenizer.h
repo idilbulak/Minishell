@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:55:38 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/12 17:11:55 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/13 16:24:05 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <stdbool.h>
+# include "environment.h"
 
 typedef enum e_tokentype
 {

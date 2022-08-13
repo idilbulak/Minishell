@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 12:29:45 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/13 13:43:51 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/13 16:27:16 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,11 @@ t_word_list	*init_new_word(t_word_list *new_word)
 {
 	new_word = malloc(sizeof(t_word_list));
 	if (!new_word)
-	{
-		perror("malloc()");
-		exit(EXIT_FAILURE);
-	}
+		ft_error(EXIT_FAILURE, "malloc failed");
 	new_word->next = NULL;
 	new_word->word = malloc(sizeof(t_word_desc));
 	if (!new_word->word)
-	{
-		perror("malloc()");
-		exit(EXIT_FAILURE);
-	}
+		ft_error(EXIT_FAILURE, "malloc failed");
 	new_word->word->flags = 0;
 	new_word->word->word = NULL;
 	return (new_word);

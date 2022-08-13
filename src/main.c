@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:25:01 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/13 16:01:06 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/13 17:42:39 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	main(int argc, char **argv, char **environ)
 	t_word_list	*word_list;
 	t_symtab	**symtab;
 
-	if (argc == 1 && ft_strncmp("minishell", argv[0], 8))
+	(void)argv;
+	if (argc == 1)
 	{
 		symtab = init_env_symtab(environ);
 		init_signals();
@@ -37,4 +38,5 @@ int	main(int argc, char **argv, char **environ)
 			free_word_list(word_list);
 		}
 	}
+	return (0);
 }

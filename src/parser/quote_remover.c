@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 13:48:07 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/13 14:03:08 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/13 17:38:41 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,38 +26,41 @@ int	check_qmode(char str, int mode)
 	return (mode);
 }
 
+char	*qremover(char *str, int mode, char *temp)
+{
+	int	i;
+
+	i = 0;
+	while (*str != '\0')
+	{
+		mode = check_qmode(*str, mode);
+		if ((*str != '\'' || mode != 1) && (*str != '\'' || mode != 0)
+			&& (*str != '"' || mode != 2) && (*str != '"' || mode != 0))
+		{
+			temp[i] = *str;
+			i++;
+		}
+		str++;
+	}
+	while (temp[i] != '\0')
+		temp[i] = '\0';
+	return (temp);
+}
+
 void	ft_split_quotes(t_word_list *word_list)
 {
-	char	*str;
 	char	*temp;
 	int		mode;
-	int		i;
 
 	while (word_list)
 	{
 		mode = 0;
-		temp = malloc(sizeof(char ));
+		temp = word_list->word->word;
 		if (!temp)
-		{
-			perror ("malloc()");
-			exit (EXIT_FAILURE);
-		}
+			ft_error(EXIT_FAILURE, "malloc failure");
 		if (word_list->word->flags == TOKEN_STRING)
 		{
-			str = word_list->word->word;
-			i = 0;
-			while (*str != '\0')
-			{
-				mode = check_qmode(*str, mode);
-				if ((*str != '\'' || mode != 1) && (*str != '\'' || mode != 0)
-					&& (*str != '"' || mode != 2) && (*str != '"' || mode != 0))
-				{
-					temp[i] = *str;
-					i++;
-				}
-				str++;
-			}
-			free (word_list->word->word);
+			temp = qremover(word_list->word->word, mode, temp);
 			word_list->word->word = temp;
 		}
 		word_list = word_list->next;
