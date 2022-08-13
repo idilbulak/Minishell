@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 11:54:25 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/13 11:59:58 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/13 15:52:34 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	hash(char *name)
 {
 	int	i;
 	int	len;
-	int	hash_value;
+	unsigned int	hash_value;
 
 	i = 0;
 	hash_value = 0;
@@ -42,11 +42,7 @@ t_symtab	*new_entry(char *str)
 	while (str[i] != '=')
 		i++;
 	new_entry->name = ft_substr(str, 0, i);
-	if (!new_entry->name)
-		return (NULL);
 	new_entry->value = ft_substr(str, i + 1, ft_strlen(str) - i);
-	if (!new_entry->value)
-		return (NULL);
 	return (new_entry);
 }
 
