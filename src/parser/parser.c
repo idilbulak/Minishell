@@ -126,7 +126,7 @@ t_word_list	*parser(t_token *tokens, t_symtab **symtab)
 	word_list = create_word_list(tokens, word_list);
 	check_env(word_list);
 	adjust_wordlist(word_list);
-	// ft_expander(word_list, symtab);
+	ft_expander(word_list, symtab);
 	ft_split_quotes(word_list);
 	var_assignment(word_list, symtab);
 	return (word_list);

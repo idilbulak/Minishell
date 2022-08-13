@@ -1,24 +1,45 @@
 #include "../../inc/parser.h"
 
-char	*find_value(char *str)
+int	name_len(char *str)
 {
-	int	i;
-	char	*value;
+	int	count;
 
-	i = 0;
-	value = malloc(sizeof(char));
-    if (*str == '$' && *(str + 1) == '?')
-    {
-        value = "?";
-        return (value);
-    }
-	str++;
-	while(*str != '$' && *str != '\0')
+	count = 0;
+	while (*str != '$' && *str != '\0')
 	{
-		value[i] = *str;
-		i++;
+		if (*str == '?')
+			return (1);
+		count++;
 		str++;
 	}
+	return (count);
+}
+
+char	*find_name(char *str)
+{
+	int	len;
+	int	i;
+	char	*name;
+
+	str++;
+	i = 0;
+	len = name_len(str);
+	name = malloc(sizeof(char *) * len);
+	while (len > 0)
+	{
+		name[i] = *str;
+		i++;
+		str++;
+		len--;
+	}
+	return (name);
+}
+
+char	*find_value(char *name, t_symtab **symtab)
+{
+	char	*value;
+
+	value = symtab_lookup(symtab, name)->value;
 	return (value);
 }
 
@@ -26,15 +47,17 @@ void	ft_expander(t_word_list *word_list, t_symtab **symtab)
 {
 	char	*str;
 	char	*temp;
+	char	*name;
 	char	*value;
 	int		mode;
 	int		i;
 	int		j;
+	int		len;
 
 	while (word_list)
 	{
 		mode = 0;
-		temp = malloc(sizeof(char ));
+		temp = malloc(sizeof(char *));
 		if (word_list->word->flags == TOKEN_STRING)
 		{
 			str = word_list->word->word;
@@ -45,31 +68,47 @@ void	ft_expander(t_word_list *word_list, t_symtab **symtab)
 				j = 0;
 				if (*str == '$' && (mode == 0 || mode == 2))
 				{
-					value = find_value(str);
-                    if (*value == '?')
-                        printf("%d\n", g_exit_code);
-					else if (symtab_lookup(symtab, value))
-                    {
-                        value = symtab_lookup(symtab, value)->value;
-                        while (value[j] != '\0')
+					name= find_name(str);
+                    if (*name == '?')
+					{
+						value = ft_itoa(g_exit_code);
+						while (value[j] != '\0')
                         {
                             temp[i] = value[j];
                             i++;
                             j++;
                         }
-                    }
-					str++;
-					while(*str != '$' && *str != ' ' && *str != '\0')
+					}
+					else if (symtab_lookup(symtab, name))
+					{
+						value = find_value(name, symtab);
+						while (value[j] != '\0')
+                        {
+                            temp[i] = value[j];
+                            i++;
+                            j++;
+                        }
+					}
+					len = ft_strlen(name);
+					while(len > 0)
+					{
 						str++;
+						len--;
+					}
+					if (value != NULL)
+						free (value);
+					free (name);
 				}
-				if (*str != '$')
+				else if (*str != '$')
 				{
 					temp[i] = *str;
 					i++;
 				}
 				str++;
 			}
+			free(word_list->word->word);
 			word_list->word->word = temp;
+			// free(str);
 		}
 		word_list = word_list->next;
 	}
