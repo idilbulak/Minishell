@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:24:53 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/13 11:46:33 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/13 14:27:31 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,15 @@ int	parse_string_helper(char *str, int len)
 		{
 			str = str + 1;
 			len++;
-			while (*str != '"')
-			{
+			while (*str++ != '"')
 				len++;
-				str++;
-			}
 		}
 		if (*str == '\'')
 		{
 			str = str + 1;
 			len++;
-			while (*str != '\'')
-			{
+			while (*str++ != '\'')
 				len++;
-				str++;
-			}
 		}
 		len++;
 		str++;
@@ -81,11 +75,8 @@ t_word_list	*parse_string(char *str, t_word_list *word_list)
 			word_list = addto_empty_wlist(word_list, new_word);
 		else
 			word_list = addto_wend(word_list, new_word);
-		while(len > 0)
-		{
+		while (len-- > 0)
 			temp_str++;
-			len--;
-		}
 		str = temp_str;
 		str++;
 	}
@@ -129,7 +120,7 @@ t_word_list	*parser(t_token *tokens, t_symtab **symtab)
 	word_list = create_word_list(tokens, word_list);
 	check_env(word_list);
 	adjust_wordlist(word_list);
-	ft_expander(word_list, symtab);
+	// ft_expander(word_list, symtab);
 	// ft_split_quotes(word_list);
 	var_assignment(word_list, symtab);
 	return (word_list);

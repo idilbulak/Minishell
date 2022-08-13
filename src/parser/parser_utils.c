@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 12:29:45 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/12 18:48:22 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/13 13:43:51 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_word_list	*addto_wend(t_word_list *word_list, t_word_list *new)
 	t_word_list	*temp;
 
 	temp = word_list;
-	while(temp->next != NULL)
+	while (temp->next != NULL)
 		temp = temp->next;
 	temp->next = new;
 	return (word_list);
@@ -68,7 +68,7 @@ void	free_word_list(t_word_list *word_list)
 			free(word_list->word->word);
 		free(word_list->word);
 		free(word_list);
-		word_list= temp;
+		word_list = temp;
 	}
 }
 

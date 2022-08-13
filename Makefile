@@ -11,13 +11,13 @@ SRCS =	\
 	parser/parser_helper.c \
 	parser/parser_checks.c \
 	parser/expander.c \
+	parser/quote_remover.c \
 	main.c \
 	signals/signals.c \
 	executor/exec.c \
 	executor/exec_utils.c \
 	executor/filed.c \
 	executor/redirections.c \
-	executor/cmd_search.c \
 	environment/env_symtab_utils.c \
 	environment/env_symtab.c \
 	environment/env_array.c \
@@ -38,8 +38,8 @@ HEADER = inc/minishell.h
 all:	$(NAME)
 
 $(NAME): $(OBJS) libft/libft.a
-	$(GCC) $(FLAGS) -L libft -l ft -L/Users/dsaat/.brew/opt/readline/lib -I/Users/dsaat/.brew/opt/readline/lib -lreadline -o $(NAME) $(OBJS)
-# $(GCC) $(FLAGS) -L libft -l ft -L/Users/ibulak/.brew/opt/readline/lib -I/Users/ibulak/.brew/opt/readline/lib -lreadline -o $(NAME) $(OBJS)
+# $(GCC) $(FLAGS) -L libft -l ft -L/Users/dsaat/.brew/opt/readline/lib -I/Users/dsaat/.brew/opt/readline/lib -lreadline -o $(NAME) $(OBJS)
+	$(GCC) $(FLAGS) -L libft -l ft -L/Users/ibulak/.brew/opt/readline/lib -I/Users/ibulak/.brew/opt/readline/lib -lreadline -o $(NAME) $(OBJS)
 # $(GCC) $(FLAGS) -L libft -l ft -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/lib -lreadline -o $(NAME) $(OBJS)
 # $(GCC) $(FLAGS) -L libft -l ft -L/opt/homebrew/opt/readline/lib -I/opt/homebrew/opt/readline/include -lreadline -o $(NAME) $(OBJS)
 
