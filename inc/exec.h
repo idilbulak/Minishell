@@ -8,7 +8,7 @@
 typedef struct	s_child
 {
 	pid_t	pid;
-	int		exit_code;
+	int		g_exit_code;
 	int		status;
 }				t_child;
 

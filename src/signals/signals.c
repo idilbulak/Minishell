@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 17:32:59 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/12 17:33:00 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/13 12:50:21 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	sig_handler(int sig)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
-		exit_code = 1;
+		g_exit_code = 1;
 	}
 	if (sig == SIGQUIT)
 	{
@@ -30,7 +30,7 @@ void	sig_handler(int sig)
 		rl_redisplay();
 		rl_replace_line("", 0);
 		rl_redisplay();
-		exit_code = 0;
+		g_exit_code = 0;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/09 13:13:21 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/09 14:48:02 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/13 12:50:21 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	executor(t_word_list *list, t_symtab **symtab)
 	init_fd(&fd);
 	while (list)
 	{
-		child.exit_code = 0;
+		child.g_exit_code = 0;
 		if (set_fd(list, &fd, &child) == 0)
 		{
 			args = create_args_array(list);
@@ -79,7 +79,7 @@ int	executor(t_word_list *list, t_symtab **symtab)
 	}
 	if (waitpid(child.pid, &child.status, 0) > 0)
 		if (WIFEXITED(child.status))
-			child.exit_code = WEXITSTATUS(child.status);
+			child.g_exit_code = WEXITSTATUS(child.status);
 	reset_fd(&fd);
-	return (child.exit_code);
+	return (child.g_exit_code);
 }

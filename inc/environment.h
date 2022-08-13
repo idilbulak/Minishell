@@ -8,7 +8,7 @@
 # define TABLE_SIZE 25
 # define FLAG_EXPORT 1
 
-int	exit_code;
+int	g_exit_code;
 
 typedef struct	s_symtab
 {

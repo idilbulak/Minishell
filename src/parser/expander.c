@@ -47,7 +47,7 @@ void	ft_expander(t_word_list *word_list, t_symtab **symtab)
 				{
 					value = find_value(str);
                     if (*value == '?')
-                        printf("%d\n", exit_code);
+                        printf("%d\n", g_exit_code);
 					else if (symtab_lookup(symtab, value))
                     {
                         value = symtab_lookup(symtab, value)->value;

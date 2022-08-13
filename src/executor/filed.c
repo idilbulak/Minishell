@@ -50,7 +50,7 @@ int	set_fd(t_word_list *list, t_filed *fd, t_child *child)
 		create_pipe(fd);
 	if (check_redirections(list, fd) != 0)
 	{
-		child->exit_code = 1;
+		child->g_exit_code = 1;
 		return (1);
 	}
 	if (dup2(fd->out, STDOUT_FILENO) == -1)

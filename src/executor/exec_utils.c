@@ -1,9 +1,9 @@
 #include "../../inc/exec.h"
 
-void	ft_error(int exit_code, char *error_message)
+void	ft_error(int g_exit_code, char *error_message)
 {
 	perror(error_message);
-	exit(exit_code);
+	exit(g_exit_code);
 }
 
 int	calc_num_args(t_word_list *list)
