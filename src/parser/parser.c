@@ -6,11 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:24:53 by ibulak        #+#    #+#                 */
-<<<<<<< HEAD
-/*   Updated: 2022/08/13 14:27:31 by ibulak        ########   odam.nl         */
-=======
-/*   Updated: 2022/08/13 14:32:54 by dsaat         ########   odam.nl         */
->>>>>>> da5f4a4aa2d6d3a2dabb61ae5e97968be621119a
+/*   Updated: 2022/08/13 16:06:29 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
