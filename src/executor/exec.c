@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/09 13:13:21 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/13 13:10:05 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/13 13:35:48 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@
 #include <stdlib.h>
 
 #include <string.h>
+
+void	ft_error(int exit_code, char *error_message)
+{
+	g_exit_code = exit_code;
+	perror(error_message);
+	exit(g_exit_code);
+}
 
 static void	do_execute(char **args)
 {
@@ -36,7 +43,7 @@ static void	do_simple_command(char **args, t_child *child, t_symtab **symtab)
 {
 	if (!args[0])
 		return ;
-	if (is_builtin(args, child, symtab) != 0)
+	if (is_builtin(args, symtab) != 0)
 	{
 		child->pid = fork();
 		if (child->pid == -1)
@@ -67,7 +74,7 @@ void	executor(t_word_list *list, t_symtab **symtab)
 	while (list)
 	{
 		// child.g_exit_code = 0;
-		if (set_fd(list, &fd, &child) == 0)
+		if (set_fd(list, &fd) == 0)
 		{
 			args = create_args_array(list);
 			do_simple_command(args, &child, symtab);
@@ -81,5 +88,4 @@ void	executor(t_word_list *list, t_symtab **symtab)
 		if (WIFEXITED(child.status))
 			g_exit_code = WEXITSTATUS(child.status);
 	reset_fd(&fd);
-	// return (child.g_exit_code);
 }
