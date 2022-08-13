@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 15:27:18 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/13 16:13:01 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/13 16:24:27 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ static char	*make_str_from_struct(t_symtab *tmp)
 	name = ft_strlen(tmp->name);
 	value = ft_strlen(tmp->value);
 	str = malloc(sizeof(char) * (name + value + 2));
+	if (!str)
+		ft_error(EXIT_FAILURE, "malloc failed");
 	ft_strlcpy(str, tmp->name, name + 1);
 	ft_strlcpy(&str[name], "=", 2);
 	ft_strlcpy(&str[name + 1], tmp->value, value + 1);
@@ -67,10 +69,7 @@ char	**create_env_array(t_symtab **symtab)
 		while (tmp)
 		{
 			if (tmp->flag == FLAG_EXPORT)
-			{
-				env[j] = make_str_from_struct(tmp);
-				j++;
-			}
+				env[j++] = make_str_from_struct(tmp);
 			tmp = tmp->next;
 		}
 		i++;

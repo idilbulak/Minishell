@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   environment.h                                      :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/08/13 18:16:23 by dsaat         #+#    #+#                 */
+/*   Updated: 2022/08/13 18:16:24 by dsaat         ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef ENVIRONMENT_H
 # define ENVIRONMENT_H
 
@@ -10,27 +22,24 @@
 
 int	g_exit_code;
 
-typedef struct	s_symtab
+typedef struct s_symtab
 {
 	char			*name;
 	char			*value;
 	int				flag;
 	struct s_symtab	*next;
-}				t_symtab;
+}					t_symtab;
 
 int			hash(char *name);
 void		symtab_insert(t_symtab **symtab, t_symtab *entry);
 void		symtab_delete(t_symtab **symtab, char *name);
 t_symtab	*symtab_lookup(t_symtab **symtab, char *name);
 t_symtab	*new_entry(char *str);
-t_symtab	**init_env_symtab(char **environ);//t_symtab **symtab, char **environ);
+t_symtab	**init_env_symtab(char **environ);
 
 char		**create_env_array(t_symtab **symtab);
 void		delete_env_array(char **env);
 
 void		ft_error(int errornumber, char *errormessage);
 
-// void		init_symtab(t_symtab **symtab);
-// void	    print_table(t_symtab **symtab);
-
-# endif
+#endif

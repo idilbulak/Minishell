@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 15:06:53 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/13 15:54:04 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/13 16:40:12 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	print_table(t_symtab **symtab)
 {
-	int	        i;
-	t_symtab    *tmp;
+	t_symtab	*tmp;
+	int			i;
 
 	i = 0;
 	while (i < TABLE_SIZE)
@@ -55,12 +55,9 @@ t_symtab	**init_env_symtab(char **environ)
 	i = 0;
 	while (environ[i])
 	{
-		// printf("%s\n", environ[i]);
 		entry = new_entry(environ[i]);
-		// printf("%d %s=%s\n", hash(entry->name), entry->name, entry->value);
 		entry->flag = FLAG_EXPORT;
 		symtab_insert(symtab, entry);
-		// print_table(symtab);
 		i++;
 	}
 	return (symtab);

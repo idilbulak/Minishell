@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/09 13:13:21 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/13 14:05:30 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/13 17:09:02 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_error(int exit_code, char *error_message)
 	exit(g_exit_code);
 }
 
-static void	do_execute(char **args)
+static void	do_execute(char **args, char **envp)
 {
 	char	*pathname;
 
@@ -35,11 +35,13 @@ static void	do_execute(char **args)
 		pathname = search_path_var(args[0]);
 	if (!pathname)
 		return ;
-	execve(pathname, args, NULL);
+	execve(pathname, args, envp);
 }
 
 static void	do_simple_command(char **args, t_child *child, t_symtab **symtab)
 {
+	char	**envp;
+
 	if (!args[0])
 		return ;
 	if (is_builtin(args, symtab) == 0)
@@ -49,7 +51,8 @@ static void	do_simple_command(char **args, t_child *child, t_symtab **symtab)
 		ft_error(EXIT_FAILURE, "fork failed");
 	if (child->pid == 0)
 	{
-		do_execute(args);
+		envp = create_env_array(symtab);
+		do_execute(args, envp);
 		if (errno == ENOENT)
 			ft_error(127, args[0]);
 		if (errno == EACCES)
