@@ -6,11 +6,36 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 15:06:53 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/13 11:54:05 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/13 15:54:04 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/environment.h"
+
+void	print_table(t_symtab **symtab)
+{
+	int	        i;
+	t_symtab    *tmp;
+
+	i = 0;
+	while (i < TABLE_SIZE)
+	{
+		if (symtab[i] == NULL)
+			printf("%d\t------\n", i);
+		else
+		{
+			tmp = symtab[i];
+			printf("%d\t", i);
+			while (tmp != NULL)
+			{
+				printf("%s:%s || ", tmp->name, tmp->value);
+				tmp = tmp->next;
+			}
+			printf("\n");
+		}
+		i++;
+	}
+}
 
 t_symtab	**init_env_symtab(char **environ)
 {
@@ -30,9 +55,12 @@ t_symtab	**init_env_symtab(char **environ)
 	i = 0;
 	while (environ[i])
 	{
+		// printf("%s\n", environ[i]);
 		entry = new_entry(environ[i]);
+		// printf("%d %s=%s\n", hash(entry->name), entry->name, entry->value);
 		entry->flag = FLAG_EXPORT;
 		symtab_insert(symtab, entry);
+		// print_table(symtab);
 		i++;
 	}
 	return (symtab);

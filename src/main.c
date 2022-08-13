@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:25:01 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/13 13:24:44 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/13 15:40:40 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,13 @@ int	main(int argc, char **argv, char **environ)
 	t_word_list	*word_list;
 	t_symtab	**symtab;
 
+	// int i = 0;
+	// while (environ[i])
+	// 	printf("%s\n", environ[i++]);
 	if (argc == 1 && ft_strncmp("minishell", argv[0], 8))
 	{
 		symtab = init_env_symtab(environ);
+		// system("leaks minishell");
 		init_signals();
 		while (1)
 		{

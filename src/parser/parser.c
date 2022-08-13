@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:24:53 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/13 11:46:33 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/13 14:32:54 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ t_word_list	*parser(t_token *tokens, t_symtab **symtab)
 	word_list = create_word_list(tokens, word_list);
 	check_env(word_list);
 	adjust_wordlist(word_list);
-	ft_expander(word_list, symtab);
+	// ft_expander(word_list, symtab);
 	// ft_split_quotes(word_list);
 	var_assignment(word_list, symtab);
 	return (word_list);

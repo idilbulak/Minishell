@@ -17,7 +17,6 @@ SRCS =	\
 	executor/exec_utils.c \
 	executor/filed.c \
 	executor/redirections.c \
-	executor/cmd_search.c \
 	environment/env_symtab_utils.c \
 	environment/env_symtab.c \
 	environment/env_array.c \
