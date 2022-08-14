@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 12:29:45 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/13 16:27:16 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/14 13:25:18 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ t_word_list	*addto_wend(t_word_list *word_list, t_word_list *new)
 	while (temp->next != NULL)
 		temp = temp->next;
 	temp->next = new;
+	new->next = NULL;
 	return (word_list);
 }
 

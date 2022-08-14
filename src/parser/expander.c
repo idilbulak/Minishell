@@ -81,7 +81,7 @@ void	ft_expander(t_word_list *word_list, t_symtab **symtab)
 					}
 					else if (symtab_lookup(symtab, name))
 					{
-						value = find_value(name, symtab);
+						value = symtab_lookup(symtab, name)->value;
 						while (value[j] != '\0')
                         {
                             temp[i] = value[j];
@@ -90,6 +90,9 @@ void	ft_expander(t_word_list *word_list, t_symtab **symtab)
                         }
 					}
 					len = ft_strlen(name);
+					// printf("nerde kaldi%s\n%d\n", str, len);
+					// printf("temp len:%zu\n", ft_strlen(temp));
+					// if (ft_strlen)
 					while(len > 0)
 					{
 						str++;
@@ -106,9 +109,10 @@ void	ft_expander(t_word_list *word_list, t_symtab **symtab)
 				}
 				str++;
 			}
+			printf("word_list->word->word:%s\n", word_list->word->word);
 			free(word_list->word->word);
 			word_list->word->word = temp;
-			// free(str);
+			printf("temp:%s\n", temp);
 		}
 		word_list = word_list->next;
 	}

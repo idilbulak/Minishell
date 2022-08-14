@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:24:53 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/13 16:54:36 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/14 15:37:03 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ t_word_list	*parse_string(char *str, t_word_list *word_list)
 		while (len-- > 0)
 			temp_str++;
 		str = temp_str;
-		str++;
+		if(*str != '\0')
+			str++;
 	}
 	return (word_list);
 }
@@ -113,6 +114,17 @@ t_word_list	*create_word_list(t_token *tokens, t_word_list *word_list)
 	return (word_list);
 }
 
+int	check_ifexpand(t_word_list *word_list)
+{
+	while (word_list)
+	{
+		if (ft_strrchr(word_list->word->word, '?'))
+			return (1);
+		word_list = word_list->next;
+	}
+	return (0);
+}
+
 t_word_list	*parser(t_token *tokens, t_symtab **symtab)
 {
 	t_word_list	*word_list;
@@ -126,7 +138,8 @@ t_word_list	*parser(t_token *tokens, t_symtab **symtab)
 	word_list = create_word_list(tokens, word_list);
 	check_env(word_list);
 	adjust_wordlist(word_list);
-	ft_expander(word_list, symtab);
+	if (check_ifexpand(word_list) == 1)
+		ft_expander(word_list, symtab);
 	ft_split_quotes(word_list);
 	var_assignment(word_list, symtab);
 	return (word_list);
