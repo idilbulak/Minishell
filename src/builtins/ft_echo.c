@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 14:49:35 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/12 14:51:32 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/14 12:04:23 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_echo(char **argv, t_symtab **symtab)
 	i = 1;
 	while (argv[i])
 	{
-		if (i == 1 && argv[i] && ft_strcmp(argv[i], "-n") == 0)
+		if (i == 1 && ft_strcmp(argv[1], "-n") == 0)
 			i++;
 		if (argv[i])
 			printf("%s ", argv[i]);
