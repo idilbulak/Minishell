@@ -6,16 +6,14 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 17:11:52 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/14 10:16:36 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/08/14 18:29:40 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../libft/libft.h"
 #include "../../inc/filed.h"
 #include "../../inc/parser.h"
-#include "../../libft/libft.h"
 #include <fcntl.h>
-#include <unistd.h>
-#include <stdio.h>
 
 int	set_here_document(t_filed *fd, char *delimiter)
 {

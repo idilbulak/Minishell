@@ -6,12 +6,13 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 14:53:04 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/12 14:53:05 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/14 18:11:26 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/environment.h"
 #include <stdio.h>
+#include <unistd.h>
 
 int	ft_pwd(char **argv, t_symtab **symtab)
 {

@@ -6,11 +6,12 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 14:51:58 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/12 14:52:30 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/14 18:11:01 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/environment.h"
+#include "../../libft/libft.h"
 #include <stdlib.h>
 
 static void	free_symtab(t_symtab **symtab)

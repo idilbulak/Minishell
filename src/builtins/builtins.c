@@ -6,12 +6,11 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 14:48:21 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/14 11:59:47 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/08/14 18:12:51 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../libft/libft.h"
-// #include "../../inc/exec.h"
 #include "../../inc/builtins.h"
 
 void	init_builtins(t_builtins *builtins)

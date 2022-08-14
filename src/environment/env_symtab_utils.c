@@ -6,13 +6,12 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 11:54:25 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/14 16:34:09 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/14 18:14:08 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/environment.h"
-// #include <stdio.h>
-#include "../libft/libft.h"
+#include "../../libft/libft.h"
 
 int	hash(char *name)
 {

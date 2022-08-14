@@ -6,14 +6,12 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 17:09:38 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/14 11:51:01 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/08/14 18:29:45 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/filed.h"
 #include "../../inc/environment.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 void	reset_fd(t_filed *fd)
 {
