@@ -6,36 +6,13 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 15:06:53 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/13 16:40:12 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/14 16:52:47 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/environment.h"
-
-void	print_table(t_symtab **symtab)
-{
-	t_symtab	*tmp;
-	int			i;
-
-	i = 0;
-	while (i < TABLE_SIZE)
-	{
-		if (symtab[i] == NULL)
-			printf("%d\t------\n", i);
-		else
-		{
-			tmp = symtab[i];
-			printf("%d\t", i);
-			while (tmp != NULL)
-			{
-				printf("%s:%s || ", tmp->name, tmp->value);
-				tmp = tmp->next;
-			}
-			printf("\n");
-		}
-		i++;
-	}
-}
+// #include <stdio.h>
+// # include <stdlib.h>
 
 t_symtab	**init_env_symtab(char **environ)
 {

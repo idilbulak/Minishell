@@ -6,16 +6,16 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 18:16:23 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/13 18:16:24 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/14 16:52:42 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENVIRONMENT_H
 # define ENVIRONMENT_H
 
-# include "../libft/libft.h"
+// # include "../libft/libft.h"
 # include <stdlib.h>
-# include <stdio.h>
+// # include <stdio.h>
 
 # define TABLE_SIZE 25
 # define FLAG_EXPORT 1

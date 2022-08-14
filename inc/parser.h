@@ -6,13 +6,14 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 17:12:49 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/13 16:15:37 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/14 16:57:24 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
+# include "../libft/libft.h"
 # include "tokenizer.h"
 # include "environment.h"
 
