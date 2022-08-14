@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 17:09:38 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/13 17:10:09 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/14 11:51:01 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	set_fd(t_word_list *list, t_filed *fd)
 		create_pipe(fd);
 	if (check_redirections(list, fd) != 0)
 	{
+		close(fd->out);
 		g_exit_code = 1;
 		return (1);
 	}
