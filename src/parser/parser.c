@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:24:53 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/14 15:37:03 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/14 20:58:31 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	var_assignment(t_word_list *word_list, t_symtab **symtab)
 	{
 		if (word_list->word->flags == TOKEN_ENV)
 		{
+			ft_split_quotes(word_list);
 			entry = new_entry(word_list->word->word);
 			if (symtab_lookup(symtab, entry->name))
 				symtab_delete(symtab, entry->name);
@@ -84,7 +85,7 @@ t_word_list	*parse_string(char *str, t_word_list *word_list)
 		while (len-- > 0)
 			temp_str++;
 		str = temp_str;
-		if(*str != '\0')
+		if (*str != '\0')
 			str++;
 	}
 	return (word_list);
@@ -118,7 +119,7 @@ int	check_ifexpand(t_word_list *word_list)
 {
 	while (word_list)
 	{
-		if (ft_strrchr(word_list->word->word, '?'))
+		if (ft_strrchr(word_list->word->word, '$'))
 			return (1);
 		word_list = word_list->next;
 	}

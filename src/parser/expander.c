@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   expander.c                                         :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/08/14 20:57:02 by ibulak        #+#    #+#                 */
+/*   Updated: 2022/08/14 21:00:27 by ibulak        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/parser.h"
 
 int	name_len(char *str)
@@ -5,7 +17,7 @@ int	name_len(char *str)
 	int	count;
 
 	count = 0;
-	while (*str != '$' && *str != '\0')
+	while (*str != '$' && *str != '\0' && *str != '"')
 	{
 		if (*str == '?')
 			return (1);
@@ -17,8 +29,8 @@ int	name_len(char *str)
 
 char	*find_name(char *str)
 {
-	int	len;
-	int	i;
+	int		len;
+	int		i;
 	char	*name;
 
 	str++;
@@ -69,6 +81,8 @@ void	ft_expander(t_word_list *word_list, t_symtab **symtab)
 				if (*str == '$' && (mode == 0 || mode == 2))
 				{
 					name= find_name(str);
+					// printf("name:%s\n",name);
+					// printf("str:%s\n",str);
                     if (*name == '?')
 					{
 						value = ft_itoa(g_exit_code);
@@ -78,6 +92,8 @@ void	ft_expander(t_word_list *word_list, t_symtab **symtab)
                             i++;
                             j++;
                         }
+						free (value);
+						free (name);
 					}
 					else if (symtab_lookup(symtab, name))
 					{
@@ -88,31 +104,32 @@ void	ft_expander(t_word_list *word_list, t_symtab **symtab)
                             i++;
                             j++;
                         }
+						free (name);
+					}
+					else
+					{
+						while(*str != '$')
+							str++;
+						free(name);
 					}
 					len = ft_strlen(name);
-					// printf("nerde kaldi%s\n%d\n", str, len);
-					// printf("temp len:%zu\n", ft_strlen(temp));
-					// if (ft_strlen)
-					while(len > 0)
+					while (i < (int)ft_strlen(temp))
+						temp[i] = '\0';
+					while (len > 0)
 					{
 						str++;
 						len--;
 					}
-					if (value != NULL)
-						free (value);
-					free (name);
 				}
-				else if (*str != '$')
+				else if ((*str != '$' && (mode == 0 || mode == 2)) || mode == 1)
 				{
 					temp[i] = *str;
 					i++;
 				}
 				str++;
 			}
-			printf("word_list->word->word:%s\n", word_list->word->word);
 			free(word_list->word->word);
 			word_list->word->word = temp;
-			printf("temp:%s\n", temp);
 		}
 		word_list = word_list->next;
 	}
