@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:24:53 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/14 20:58:31 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/15 12:48:16 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,25 @@ int	check_ifexpand(t_word_list *word_list)
 	return (0);
 }
 
+int	check_null(t_token *tokens)
+{
+	while (tokens)
+	{
+		if (tokens->tokentype != TOKEN_null)
+			return (0);
+		tokens = tokens->next;
+	}
+	return (1);
+}
+
+t_word_list	*create_null_list(t_word_list *word_list)
+{
+	word_list = init_new_word(word_list);
+	word_list->word->word = NULL;
+	word_list->word->flags = TOKEN_null;
+	return (word_list);
+}
+
 t_word_list	*parser(t_token *tokens, t_symtab **symtab)
 {
 	t_word_list	*word_list;
@@ -136,12 +155,17 @@ t_word_list	*parser(t_token *tokens, t_symtab **symtab)
 		perror("syntax");
 		return (NULL);
 	}
-	word_list = create_word_list(tokens, word_list);
-	check_env(word_list);
-	adjust_wordlist(word_list);
-	if (check_ifexpand(word_list) == 1)
-		ft_expander(word_list, symtab);
-	ft_split_quotes(word_list);
-	var_assignment(word_list, symtab);
+	if (check_null(tokens))
+		create_null_list(word_list);
+	else
+	{
+		word_list = create_word_list(tokens, word_list);
+		check_env(word_list);
+		adjust_wordlist(word_list);
+		if (check_ifexpand(word_list) == 1)
+			ft_expander(word_list, symtab);
+		ft_split_quotes(word_list);
+		var_assignment(word_list, symtab);
+	}
 	return (word_list);
 }

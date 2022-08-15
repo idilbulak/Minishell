@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/14 20:57:02 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/14 21:00:27 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/15 15:19:46 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,6 @@ char	*find_name(char *str)
 	return (name);
 }
 
-// char	*find_value(char *name, t_symtab **symtab)
-// {
-// 	char	*value;
-
-// 	value = symtab_lookup(symtab, name)->value;
-// 	return (value);
-// }
-
 int	expand_value(char *name, int i, char *temp, t_symtab **symtab)
 {
 	int		j;
@@ -66,11 +58,11 @@ int	expand_value(char *name, int i, char *temp, t_symtab **symtab)
 	else
 		value = symtab_lookup(symtab, name)->value;
 	while (value[j] != '\0')
-    {
-        temp[i] = value[j];
-        i++;
-        j++;
-    }
+	{
+		temp[i] = value[j];
+		i++;
+		j++;
+	}
 	if (*name == '?')
 		free (value);
 	free (name);
@@ -80,9 +72,14 @@ int	expand_value(char *name, int i, char *temp, t_symtab **symtab)
 char	*fill_rest(char *temp, int i, char *str, char *name)
 {
 	int	len;
+	// int	check;
 
-	if (*str == '"')
-		str++;
+	// check = 0;
+	// if (*str == '"')
+	// {
+	// 	str++;
+	// 	check = 1;
+	// }
 	len = ft_strlen(name);
 	while (i < (int)ft_strlen(temp))
 		temp[i] = '\0';
@@ -106,12 +103,12 @@ char	*ft_expand(char *str, char *temp, t_symtab **symtab)
 		mode = check_qmode(*str, mode);
 		if (*str == '$' && (mode == 0 || mode == 2))
 		{
-			name= find_name(str);
-            if (*name == '?' || symtab_lookup(symtab, name))
+			name = find_name(str);
+			if (*name == '?' || symtab_lookup(symtab, name))
 				i = expand_value(name, i, temp, symtab);
 			else
 			{
-				while(*str != '$')
+				while (*str != '$')
 					str++;
 				free(name);
 			}
@@ -122,10 +119,12 @@ char	*ft_expand(char *str, char *temp, t_symtab **symtab)
 			temp[i] = *str;
 			i++;
 		}
+		temp[i] = '\0';
 		str++;
 	}
 	return (temp);
 }
+
 void	ft_expander(t_word_list *word_list, t_symtab **symtab)
 {
 	char	*temp;
