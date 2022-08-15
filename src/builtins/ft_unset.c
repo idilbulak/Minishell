@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 14:53:19 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/14 18:12:03 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/15 13:19:46 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	ft_unset(char **argv, t_symtab **symtab)
 		return (1);
 	}
 	else
-		symtab_delete(symtab, argv[1]);
+		symtab_lookup(symtab, argv[1])->value = "";
+		symtab_lookup(symtab, argv[1])->flag = 0;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 16:44:08 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/14 18:28:09 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/15 13:15:02 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static char	*get_next_path(char *path_env, char *cmd, int i, int j)
 	return (path);
 }
 
-char	*search_path_var(char *cmd)
+char	*search_path_var(char *cmd, t_symtab **symtab)
 {
 	char		*path_env;
 	char		*path;
@@ -97,8 +97,8 @@ char	*search_path_var(char *cmd)
 	int			j;
 
 	i = 0;
-	path_env = getenv("PATH");
-	while (path_env[i])
+	path_env = symtab_lookup(symtab, "PATH")->value;
+	while (path_env != NULL && path_env[i])
 	{
 		j = i;
 		while (path_env[i] && path_env[i] != ':')

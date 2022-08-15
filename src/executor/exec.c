@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/09 13:13:21 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/14 18:31:02 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/15 14:55:27 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,22 @@ void	ft_error(int exit_code, char *error_message)
 	exit(g_exit_code);
 }
 
-static void	do_execute(char **args, char **envp)
+static void	do_execute(char **args, t_symtab **symtab)
 {
+	char	**envp;
 	char	*pathname;
 
 	pathname = args[0];
 	if (!ft_strchr(pathname, '/'))
-		pathname = search_path_var(args[0]);
+		pathname = search_path_var(args[0], symtab);
 	if (!pathname)
 		return ;
+	envp = create_env_array(symtab);
 	execve(pathname, args, envp);
 }
 
 static void	do_simple_command(char **args, t_child *child, t_symtab **symtab)
 {
-	char	**envp;
 
 	if (!args[0])
 		return ;
@@ -48,8 +49,7 @@ static void	do_simple_command(char **args, t_child *child, t_symtab **symtab)
 		ft_error(EXIT_FAILURE, "fork failed");
 	if (child->pid == 0)
 	{
-		envp = create_env_array(symtab);
-		do_execute(args, envp);
+		do_execute(args, symtab);
 		if (errno == ENOENT)
 			ft_error(127, args[0]);
 		if (errno == EACCES)
@@ -81,5 +81,7 @@ void	executor(t_word_list *list, t_symtab **symtab)
 	if (waitpid(child.pid, &child.status, 0) > 0)
 		if (WIFEXITED(child.status) || WIFSIGNALED(child.status))
 			g_exit_code = WEXITSTATUS(child.status);
+	// while (!WIFEXITED(child.status) && !WIFSIGNALED(child.status))
+	// 	waitpid(0, &child.status, 0);
 	reset_fd(&fd);
 }
