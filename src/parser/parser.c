@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:24:53 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/15 12:48:16 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/15 19:01:56 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	var_assignment(t_word_list *word_list, t_symtab **symtab)
 		word_list = word_list->next;
 	}
 }
-
+// 25 lines
 int	parse_string_helper(char *str, int len)
 {
 	while (*str != ' ' && *str != '\0')
@@ -60,7 +60,7 @@ int	parse_string_helper(char *str, int len)
 	}
 	return (len);
 }
-
+// 25 lines
 t_word_list	*parse_string(char *str, t_word_list *word_list)
 {
 	char		*temp_str;
@@ -125,7 +125,7 @@ int	check_ifexpand(t_word_list *word_list)
 	}
 	return (0);
 }
-
+// extra funtions move them to another file
 int	check_null(t_token *tokens)
 {
 	while (tokens)

@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/14 20:57:02 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/15 15:19:46 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/15 19:02:47 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ char	*fill_rest(char *temp, int i, char *str, char *name)
 	}
 	return (str);
 }
-
+// 25 lines
 char	*ft_expand(char *str, char *temp, t_symtab **symtab)
 {
 	char	*name;
@@ -124,7 +124,7 @@ char	*ft_expand(char *str, char *temp, t_symtab **symtab)
 	}
 	return (temp);
 }
-
+// extra function
 void	ft_expander(t_word_list *word_list, t_symtab **symtab)
 {
 	char	*temp;
