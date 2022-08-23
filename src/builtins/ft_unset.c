@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 14:53:19 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/15 13:19:46 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/23 14:27:38 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,19 @@
 
 int	ft_unset(char **argv, t_symtab **symtab)
 {
-	if (ft_strchr(argv[1], '='))
+	int	i;
+
+	i = 1;
+	while (argv[i])
 	{
-		printf("'%s': not a valid identifier\n", argv[1]);
-		return (1);
+		if (ft_strchr(argv[i], '='))
+		{
+			printf("unset:'%s': not a valid identifier\n", argv[i]);
+			g_exit_code = 1;
+		}
+		else if (symtab_lookup(symtab, argv[i]))
+			symtab_delete(symtab, argv[i]);
+		i++;	
 	}
-	else
-		symtab_lookup(symtab, argv[1])->value = "";
-		symtab_lookup(symtab, argv[1])->flag = 0;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 14:48:21 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/14 18:12:51 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/23 14:00:06 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ int	is_builtin(char **args, t_symtab **symtab)
 		if (ft_strcmp(args[0], builtins[j].name) == 0)
 		{
 			g_exit_code = builtins[j].funct(args, symtab);
-			return (0);
+			return (1);
 		}
 		j++;
 	}
-	return (1);
+	return (0);
 }	

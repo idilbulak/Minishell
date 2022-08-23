@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 16:44:08 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/15 13:15:02 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/23 14:00:06 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,18 @@ char	**create_args_array(t_word_list *list)
 	return (args);
 }
 
-static int	check_path(char *path)
-{
-	struct stat	sb;
+// static int	check_path(char *path)
+// {
+// 	struct stat	sb;
 
-	if (stat(path, &sb) == 0)
-	{
-		if (!(sb.st_mode & S_IXUSR))
-			errno = EACCES;
-		return (0);
-	}
-	return (1);
-}
+// 	if (stat(path, &sb) == 0)
+// 	{
+// 		if (!(sb.st_mode & S_IXUSR))
+// 			errno = EACCES;
+// 		return (0);
+// 	}
+// 	return (1);
+// }
 
 static char	*get_next_path(char *path_env, char *cmd, int i, int j)
 {
@@ -91,6 +91,7 @@ static char	*get_next_path(char *path_env, char *cmd, int i, int j)
 
 char	*search_path_var(char *cmd, t_symtab **symtab)
 {
+	struct stat	sb;
 	char		*path_env;
 	char		*path;
 	int			i;
@@ -104,8 +105,10 @@ char	*search_path_var(char *cmd, t_symtab **symtab)
 		while (path_env[i] && path_env[i] != ':')
 			i++;
 		path = get_next_path(path_env, cmd, i, j);
-		if (check_path(path) == 0)
+		if (stat(path, &sb) == 0)
 			return (path);
+		// if (check_path(path) == 0)
+		// 	return (path);
 		else
 			free(path);
 		if (path_env[i] == ':')
@@ -113,4 +116,18 @@ char	*search_path_var(char *cmd, t_symtab **symtab)
 	}
 	errno = ENOENT;
 	return (NULL);
+}
+
+char	*replace_dot_with_cwd(char *cmd)
+{
+	char	*path;
+	char	*cwd;
+
+	cwd = getcwd(NULL, 0);
+	path = malloc(sizeof(char) * ft_strlen(cwd) + ft_strlen(cmd) + 1);
+	if (!path)
+		ft_error(EXIT_FAILURE, "malloc failed");
+	ft_strlcpy(path, cwd, ft_strlen(cwd) + 1);
+	ft_strlcpy(&path[ft_strlen(cwd)], cmd, ft_strlen(cmd) + 1);
+	return (path);
 }

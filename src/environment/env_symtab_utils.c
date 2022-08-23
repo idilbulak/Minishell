@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 11:54:25 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/14 18:14:08 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/23 14:20:52 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,13 @@ t_symtab	*new_entry(char *str)
 	int			i;
 
 	i = 0;
+	while (str[i] && str[i] != '=')
+		i++;
+	if (!str[i])
+		return (NULL);
 	new_entry = malloc(sizeof(t_symtab));
 	if (!new_entry)
 		return (NULL);
-	while (str[i] != '=')
-		i++;
 	new_entry->name = ft_substr(str, 0, i);
 	new_entry->value = ft_substr(str, i + 1, ft_strlen(str) - i);
 	return (new_entry);
@@ -91,6 +93,7 @@ void	symtab_delete(t_symtab **symtab, char *name)
 	else
 		prev->next = tmp->next;
 	free(tmp->name);
-	free(tmp->value);
+	if (tmp->value != NULL)
+		free(tmp->value);
 	free(tmp);
 }

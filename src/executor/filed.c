@@ -6,21 +6,18 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 17:09:38 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/14 18:29:45 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/23 13:53:37 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/filed.h"
 #include "../../inc/environment.h"
 
-void	reset_fd(t_filed *fd)
+void	init_fd(t_filed *fd)
 {
-	if (dup2(fd->tmpin, STDIN_FILENO) == -1)
-		ft_error(EXIT_FAILURE, "dup2 failed");
-	if (dup2(fd->tmpout, STDOUT_FILENO) == -1)
-		ft_error(EXIT_FAILURE, "dup2 failed");
-	close(fd->tmpin);
-	close(fd->tmpout);
+	fd->tmpin = dup(STDIN_FILENO);
+	fd->tmpout = dup(STDOUT_FILENO);
+	fd->in = dup(STDIN_FILENO);
 }
 
 void	create_pipe(t_filed *fd)
@@ -65,9 +62,12 @@ int	set_fd(t_word_list *list, t_filed *fd)
 	return (0);
 }
 
-void	init_fd(t_filed *fd)
+void	reset_fd(t_filed *fd)
 {
-	fd->tmpin = dup(STDIN_FILENO);
-	fd->tmpout = dup(STDOUT_FILENO);
-	fd->in = dup(STDIN_FILENO);
+	if (dup2(fd->tmpin, STDIN_FILENO) == -1)
+		ft_error(EXIT_FAILURE, "dup2 failed");
+	if (dup2(fd->tmpout, STDOUT_FILENO) == -1)
+		ft_error(EXIT_FAILURE, "dup2 failed");
+	close(fd->tmpin);
+	close(fd->tmpout);
 }
