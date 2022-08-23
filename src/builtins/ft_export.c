@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 14:52:44 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/23 14:00:06 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/08/23 15:28:37 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,24 @@
 #include "../../libft/libft.h"
 
 #include <stdio.h>
+
+int	valid_name_indentifier(char *name)
+{
+	int			i;
+	
+	i = 0;
+	while (name[i] != '=')
+	{
+		if (ft_isdigit(name[0])
+		|| (!ft_isalpha(name[i]) && !ft_isdigit(name[i]) && name[i] != '_'))
+		{
+			printf("export:'%s': not a valid identifier\n", name);
+			return (0);
+		}
+		i++;	
+	}
+	return (1);
+}
 
 int	ft_export(char **argv, t_symtab **symtab)
 {
@@ -23,9 +41,11 @@ int	ft_export(char **argv, t_symtab **symtab)
 	i = 0;
 	while (argv[++i])
 	{
+		if (!valid_name_indentifier(argv[i]))
+			continue ;
 		tmp = new_entry(argv[i]);
 		if (!tmp && !(symtab_lookup(symtab, argv[i])))
-			continue;
+			continue ;
 		else if (!tmp && (symtab_lookup(symtab, argv[i])))
 			symtab_lookup(symtab, argv[i])->flag = FLAG_EXPORT;
 		else if (tmp)
@@ -38,35 +58,3 @@ int	ft_export(char **argv, t_symtab **symtab)
 	}
 	return (0);
 }
-
-// int	ft_export(char **argv, t_symtab **symtab)
-// {
-// 	t_symtab	*tmp;
-// 	int			i;
-
-// 	i = 1;
-// 	while (argv[i])
-// 	{
-// 		tmp = new_entry(argv[i]);
-// 		if (!tmp)
-// 		{
-// 			tmp = symtab_lookup(symtab, argv[i]);
-// 			if (!tmp)
-// 				return (0);
-// 			tmp->flag = FLAG_EXPORT;
-// 		}
-// 		else if (!symtab_lookup(symtab, tmp->name))
-// 		{
-// 			tmp->flag = FLAG_EXPORT;
-// 			symtab_insert(symtab, tmp);
-// 		}
-// 		else
-// 		{
-// 			symtab_delete(symtab, tmp->name);
-// 			tmp->flag = FLAG_EXPORT;
-// 			symtab_insert(symtab, tmp);
-// 		}
-// 		i++;
-// 	}
-// 	return (0);
-// }
