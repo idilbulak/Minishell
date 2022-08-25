@@ -5,12 +5,15 @@ SRCS =	\
 	tokenizer/tokenizer.c \
 	tokenizer/tokenlist_utils.c \
 	tokenizer/tokenizer_helper.c \
+	tokenizer/tokenizer_helper2.c \
 	tokenizer/tokenizer_checks.c \
 	parser/parser.c \
 	parser/parser_utils.c \
 	parser/parser_helper.c \
+	parser/parser_helper2.c \
 	parser/parser_checks.c \
 	parser/expander.c \
+	parser/expander_helper.c \
 	parser/quote_remover.c \
 	main.c \
 	signals/signals.c \
@@ -38,8 +41,8 @@ HEADER = inc/minishell.h
 all:	$(NAME)
 
 $(NAME): $(OBJS) libft/libft.a
-	$(GCC) $(FLAGS) -L libft -l ft -L/Users/dsaat/.brew/opt/readline/lib -I/Users/dsaat/.brew/opt/readline/lib -lreadline -o $(NAME) $(OBJS)
-# $(GCC) $(FLAGS) -L libft -l ft -L/Users/ibulak/.brew/opt/readline/lib -I/Users/ibulak/.brew/opt/readline/lib -lreadline -o $(NAME) $(OBJS)
+# $(GCC) $(FLAGS) -L libft -l ft -L/Users/dsaat/.brew/opt/readline/lib -I/Users/dsaat/.brew/opt/readline/lib -lreadline -o $(NAME) $(OBJS)
+	$(GCC) $(FLAGS) -L libft -l ft -L/Users/ibulak/.brew/opt/readline/lib -I/Users/ibulak/.brew/opt/readline/lib -lreadline -o $(NAME) $(OBJS)
 # $(GCC) $(FLAGS) -L libft -l ft -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/lib -lreadline -o $(NAME) $(OBJS)
 # $(GCC) $(FLAGS) -L libft -l ft -L/opt/homebrew/opt/readline/lib -I/opt/homebrew/opt/readline/include -lreadline -o $(NAME) $(OBJS)
 

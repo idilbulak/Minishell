@@ -1,37 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   signals.c                                          :+:    :+:            */
+/*   tokenizer_helper2.c                                :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/08/12 17:32:59 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/25 20:39:28 by ibulak        ########   odam.nl         */
+/*   Created: 2022/08/25 20:48:54 by ibulak        #+#    #+#                 */
+/*   Updated: 2022/08/25 20:49:45 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/signals.h"
+#include "../../inc/tokenizer.h"
 
-void	sig_handler(int sig)
+char	*ft_rearrange(char *temp_str, int len)
 {
-	if (sig == SIGINT)
+	int	count;
+
+	count = 0;
+	while (count < len -1)
 	{
-		write(1, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-		g_exit_code = 1;
+		temp_str++;
+		count++;
 	}
-	if (sig == SIGQUIT)
-	{
-		rl_on_new_line();
-		rl_redisplay();
-		g_exit_code = 0;
-	}
+	return (temp_str);
 }
 
-void	init_signals(void)
+int	check_len(char *temp_str, int len)
 {
-	signal(SIGINT, sig_handler);
-	signal(SIGQUIT, sig_handler);
+	if (temp_str[len - 1] == ' ')
+		len = len - 1;
+	return (len);
 }

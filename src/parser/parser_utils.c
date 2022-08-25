@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 12:29:45 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/14 13:25:18 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/25 20:23:31 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	print_wordlist(t_word_list *word_list)
 		printf(YELLOW);
 		printf("word_list [%d]: \n", i);
 		printf(PURPLE);
-		printf("\t word: %s\n", word_list->word->word);
+		printf("\t word: %s1\n", word_list->word->word);
 		printf(GREEN);
 		printf("\t flag: %d\n\n", word_list->word->flags);
 		printf(RESET);
