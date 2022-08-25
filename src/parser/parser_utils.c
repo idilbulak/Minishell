@@ -59,7 +59,7 @@ void	free_word_list(t_word_list *word_list)
 	while (word_list)
 	{
 		temp = word_list->next;
-		if (word_list->word->flags == TOKEN_STRING)
+		if (word_list->word->flags == TOKEN_STRING || word_list->word->flags == TOKEN_ENV || word_list->word->flags == TOKEN_CENV)
 			free(word_list->word->word);
 		free(word_list->word);
 		free(word_list);
@@ -78,7 +78,7 @@ void	print_wordlist(t_word_list *word_list)
 		printf(YELLOW);
 		printf("word_list [%d]: \n", i);
 		printf(PURPLE);
-		printf("\t word: %s1\n", word_list->word->word);
+		printf("\t word: %s\n", word_list->word->word);
 		printf(GREEN);
 		printf("\t flag: %d\n\n", word_list->word->flags);
 		printf(RESET);
