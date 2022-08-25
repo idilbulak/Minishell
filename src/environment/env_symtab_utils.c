@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 11:54:25 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/23 14:58:39 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/08/25 14:44:01 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_symtab	*symtab_lookup(t_symtab **symtab, char *name)
 		return (NULL);
 	index = hash(name);
 	tmp = symtab[index];
-	while (tmp != NULL && ft_strncmp(tmp->name, name, ft_strlen(name)) != 0)
+	while (tmp != NULL && ft_strcmp(tmp->name, name) != 0)
 		tmp = tmp->next;
 	return (tmp);
 }
@@ -81,7 +81,7 @@ void	symtab_delete(t_symtab **symtab, char *name)
 	index = hash(name);
 	tmp = symtab[index];
 	prev = NULL;
-	while (tmp != NULL && ft_strncmp(tmp->name, name, ft_strlen(name)) != 0)
+	while (tmp != NULL && ft_strcmp(tmp->name, name) != 0)
 	{
 		prev = tmp;
 		tmp = tmp->next;

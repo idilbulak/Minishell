@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 15:06:53 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/25 13:43:47 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/25 13:45:39 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_symtab	**init_env_symtab(char **environ)
 	if (!symtab)
 		perror("malloc failed");
 	i = 0;
-	while (i < TABLE_SIZE) // needed???
+	while (i < TABLE_SIZE)
 	{
 		symtab[i] = NULL;
 		i++;
