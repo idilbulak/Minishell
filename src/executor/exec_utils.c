@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 16:44:08 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/23 14:00:06 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/08/25 15:13:47 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,12 @@ char	*search_path_var(char *cmd, t_symtab **symtab)
 			i++;
 		path = get_next_path(path_env, cmd, i, j);
 		if (stat(path, &sb) == 0)
+		{
+			if (sb.st_mode & S_IFDIR)//S_IFMT)
+				ft_error(2, cmd);
+				// if (S_IFDIR)
 			return (path);
+		}
 		// if (check_path(path) == 0)
 		// 	return (path);
 		else
