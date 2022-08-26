@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:55:38 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/13 16:24:05 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/25 20:50:44 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,10 @@ t_token		*tokenizer(char *line, t_token *tokens);
 char		*find_delimiter( char *str, t_token *new_token);
 char		*find_char(char *str, t_token *new_token);
 char		*typeoftoken(char *str, t_token *new_token);
+
+// tokenizer helper 2
+char		*ft_rearrange(char *temp_str, int len);
+int			check_len(char *temp_str, int len);
 
 // tokenizer checks
 int			check_ifpath(t_token *tokens);

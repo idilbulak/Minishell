@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:39:46 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/15 12:39:48 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/25 20:49:14 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,9 @@ char	*find_char(char *str, t_token *new_token)
 {
 	char	*temp_str;
 	int		len;
-	int		count;
 
 	temp_str = str;
 	len = 0;
-	count = 0;
 	while (*str != '>' && *str != '<' && *str != '|' && *str != '\0')
 	{
 		if (*str == '"' || *str == '\'')
@@ -46,15 +44,10 @@ char	*find_char(char *str, t_token *new_token)
 		len++;
 		str++;
 	}
-	if (temp_str[len - 1] == ' ')
-		len = len - 1;
+	len = check_len(temp_str, len);
 	new_token->tokentype = TOKEN_STRING;
 	new_token->data = ft_substr(temp_str, 0, len);
-	while (count < len -1)
-	{
-		temp_str++;
-		count++;
-	}
+	temp_str = ft_rearrange(temp_str, len);
 	return (temp_str);
 }
 

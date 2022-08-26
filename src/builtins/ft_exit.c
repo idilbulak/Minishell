@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 14:51:58 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/23 14:00:06 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/08/26 10:31:08 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,38 @@ static void	free_symtab(t_symtab **symtab)
 int	ft_exit(char **argv, t_symtab **symtab)
 {
 	int	status;
+	int	i;
 
-	(void)argv;
-	status = 0;
+	status = g_exit_code;
 	if (argv[1])
+	{
 		status = ft_atoi(argv[1]);
-	else
-		status = g_exit_code;
+		i = 0;
+		while (argv[1][i])
+		{
+			if (!ft_isdigit(argv[1][i]))
+			{
+				ft_putstr_fd("exit\n", 1);
+				ft_putstr_fd("exit: ", 2);
+				ft_putstr_fd(argv[1], 2);
+				ft_putstr_fd(": numeric argument required\n", 2);
+				exit(255);
+				// status = 255;
+				// break ;
+			}
+			i++;
+		}
+	}
+	if (argv[2])
+	{
+		ft_putstr_fd("exit\n", 1);
+		ft_putstr_fd("exit: too many arguments\n", 2);
+		return (1);
+	}
+	// else
+		// status = g_exit_code;
 	free(argv);
 	free_symtab(symtab);
-	printf("exit\n");
+	ft_putstr_fd("exit\n", 1);
 	exit(status);
 }
