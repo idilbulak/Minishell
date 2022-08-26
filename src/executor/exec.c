@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/09 13:13:21 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/26 10:12:22 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/08/26 17:06:55 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,13 @@
 void	ft_error(int exit_code, char *error_message)
 {
 	g_exit_code = exit_code;
-	perror(error_message);
+	if (exit_code == 127)
+	{
+		ft_putstr_fd(error_message, 2);
+		ft_putstr_fd(": command not found\n", 2);
+	}
+	else
+		perror(error_message);
 	exit(g_exit_code);
 }
 
