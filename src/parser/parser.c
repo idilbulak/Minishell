@@ -44,15 +44,21 @@ int	parse_string_helper(char *str, int len)
 		{
 			str = str + 1;
 			len++;
-			while (*str++ != '"')
+			while (*str != '"')
+			{
 				len++;
+				str++;
+			}
 		}
 		if (*str == '\'')
 		{
 			str = str + 1;
 			len++;
-			while (*str++ != '\'')
+			while (*str != '\'')
+			{
 				len++;
+				str++;
+			}
 		}
 		len++;
 		str++;
