@@ -36,6 +36,7 @@ int	main(int argc, char **argv, char **environ)
 			free(str);
 			free_tokens(tokens);
 			free_word_list(word_list);
+			str = NULL;
 		}
 	}
 	return (0);

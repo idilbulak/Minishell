@@ -53,7 +53,9 @@ t_token	*tokenizer(char *str, t_token *tokens)
 			addto_end(tokens, new_token);
 		else
 			free (new_token);
-		str++;
+		str = find_startoftoken(str);
+		if (*str != '\0')
+			str++;
 	}
 	return (tokens);
 }
