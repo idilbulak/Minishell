@@ -6,12 +6,27 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 15:06:53 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/25 13:45:39 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/29 16:04:13 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/environment.h"
+#include "../../inc/parser.h"
+#include "../../libft/libft.h"
 #include <stdio.h>
+
+void	ft_error(int exit_code, char *error_message)
+{
+	g_exit_code = exit_code;
+	if (exit_code == 127)
+	{
+		ft_putstr_fd(error_message, 2);
+		ft_putstr_fd(": command not found\n", 2);
+	}
+	else
+		perror(error_message);
+	exit(g_exit_code);
+}
 
 t_symtab	**init_env_symtab(char **environ)
 {

@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 18:17:15 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/23 14:00:06 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/08/29 16:01:13 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ typedef struct s_child
 {
 	pid_t	pid;
 	int		status;
-	int		is_pipeline;
 }			t_child;
 
 void	executor(t_word_list *cmds, t_symtab **symtab);
