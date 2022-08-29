@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 14:52:44 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/25 19:14:38 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/29 08:55:00 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,6 @@ static int	invalid_name_indentifier(char *name)
 	}
 	return (0);
 }
-
-// static int	invalid_option(char **argv)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	if (argv[1][0] == '-')
-// 	{
-// 		ft_putstr_fd("export:'", 2);
-// 		while (argv[1][i] && argv[1][i] != '=')
-// 			ft_putchar_fd(argv[1][i++], 2);
-// 		ft_putstr_fd("': invalid option\n", 2);
-// 		return (1);
-// 	}
-// 	return (0);
-// }
 
 static void	print_export_variables(t_symtab **symtab)
 {
@@ -86,8 +70,6 @@ int	ft_export(char **argv, t_symtab **symtab)
 	i = 0;
 	if (!argv[1])
 		print_export_variables(symtab);
-	// if (invalid_option(argv))
-	// 	return (2);
 	while (argv[++i])
 	{
 		if (invalid_name_indentifier(argv[i]))

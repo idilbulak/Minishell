@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/09 13:13:21 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/26 17:06:55 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/29 08:54:11 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,18 +103,13 @@ void	executor(t_word_list *list, t_symtab **symtab)
 		list = list->next;
 	}
 	reset_fd(&fd);
-	// {
 	if (waitpid(child.pid, &child.status, 0) > 0)
 	{
-		if (WIFEXITED(child.status))// || WIFSIGNALED(child.status))
+		if (WIFEXITED(child.status))
 			g_exit_code = WEXITSTATUS(child.status);
 		else if (WIFSIGNALED(child.status))
 			g_exit_code = WTERMSIG(child.status) + 128;	
 	}
-	// }
-	// while (!WIFEXITED(child.status) && !WIFSIGNALED(child.status))
-	while (waitpid(-1, &child.status, 0) > 0)
+	while (waitpid(-1, NULL, 0) > 0)
 		;
-	// 	waitpid(0, &child.status, 0);
-	// printf("%d\n", g_exit_code);
 }
