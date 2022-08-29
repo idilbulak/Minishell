@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/09 13:13:21 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/29 08:54:11 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/08/29 10:32:06 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ static void	execute_non_builtin(char **args, t_symtab **symtab)
 
 static void	do_simple_command(char **args, t_child *child, t_symtab **symtab, t_filed *fd)
 {
-
 	if (!args[0])
 		return ;
 	if (!child->is_pipeline && is_builtin(args, symtab))
@@ -67,7 +66,7 @@ static void	do_simple_command(char **args, t_child *child, t_symtab **symtab, t_
 		if (errno == EACCES)
 			ft_error(126, args[0]);
 		else
-			ft_error(EXIT_FAILURE, args[0]);//"execve failed");
+			ft_error(EXIT_FAILURE, args[0]);
 	}
 }
 
@@ -108,7 +107,7 @@ void	executor(t_word_list *list, t_symtab **symtab)
 		if (WIFEXITED(child.status))
 			g_exit_code = WEXITSTATUS(child.status);
 		else if (WIFSIGNALED(child.status))
-			g_exit_code = WTERMSIG(child.status) + 128;	
+			g_exit_code = WTERMSIG(child.status) + 128;
 	}
 	while (waitpid(-1, NULL, 0) > 0)
 		;
