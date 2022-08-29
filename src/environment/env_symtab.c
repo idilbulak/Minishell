@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 15:06:53 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/29 16:04:13 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/29 16:11:26 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,28 +53,3 @@ t_symtab	**init_env_symtab(char **environ)
 	}
 	return (symtab);
 }
-
-// void	print_table(t_symtab **symtab)
-// {
-// 	int	        i;
-// 	t_symtab    *tmp;
-
-// 	i = 0;
-// 	while (i < TABLE_SIZE)
-// 	{
-// 		if (symtab[i] == NULL)
-// 			printf("%d\t------\n", i);
-// 		else
-// 		{
-// 			tmp = symtab[i];
-// 			printf("%d\t", i);
-// 			while (tmp != NULL)
-// 			{
-// 				printf("%s:%s || ", tmp->name, tmp->value);
-// 				tmp = tmp->next;
-// 			}
-// 			printf("\n");
-// 		}
-// 		i++;
-// 	}
-// }

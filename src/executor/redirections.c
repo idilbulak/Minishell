@@ -6,38 +6,40 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 17:11:52 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/14 18:29:40 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/29 16:30:29 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../libft/libft.h"
 #include "../../inc/filed.h"
 #include "../../inc/parser.h"
+#include "../../inc/minishell.h"
 #include <fcntl.h>
 
 int	set_here_document(t_filed *fd, char *delimiter)
 {
-	char	buff[1];
-	char	line[1024];
-	int		i;
+	char	*str;
 
-	i = 0;
 	fd->redirect_in = open("tmp.txt", O_RDWR | O_CREAT | O_TRUNC, 0777);
-	while (read(STDIN_FILENO, buff, 1))
+	while (1)
 	{
-		line[i] = buff[0];
-		if (line[i] == '\n')
+		str = readline("> ");
+		if (!str)
+			exit(EXIT_FAILURE);
+		if (ft_strcmp(str, delimiter) == 0)
 		{
-			line[i] = '\0';
-			if (ft_strcmp(line, delimiter) == 0)
-				break ;
-			line[i] = '\n';
-			write(fd->redirect_in, line, i + 1);
-			i = -1;
+			free(str);
+			break ;
 		}
-		i++;
+		write(fd->redirect_in, str, ft_strlen(str));
+		write(fd->redirect_in, "\n", 1);
+		free(str);
 	}
 	close(fd->redirect_in);
+	fd->redirect_in = open("tmp.txt", O_RDWR | O_CREAT, 0777);
+	dup2(fd->redirect_in, STDIN_FILENO);
+	close(fd->redirect_in);
+	unlink("tmp.txt");
 	return (0);
 }
 
@@ -93,13 +95,7 @@ int	check_redirections(t_word_list *list, t_filed *fd)
 			if (set_append_output(list, fd))
 				return (1);
 		if (list->word->flags == TOKEN_DOUBLELESS)
-		{
 			set_here_document(fd, list->next->word->word);
-			fd->redirect_in = open("tmp.txt", O_RDWR | O_CREAT, 0777);
-			dup2(fd->redirect_in, STDIN_FILENO);
-			close(fd->redirect_in);
-			unlink("tmp.txt");
-		}
 		list = list->next;
 	}
 	return (0);
