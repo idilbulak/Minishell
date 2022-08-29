@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 17:11:52 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/29 16:30:29 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/29 17:15:10 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,33 +15,6 @@
 #include "../../inc/parser.h"
 #include "../../inc/minishell.h"
 #include <fcntl.h>
-
-int	set_here_document(t_filed *fd, char *delimiter)
-{
-	char	*str;
-
-	fd->redirect_in = open("tmp.txt", O_RDWR | O_CREAT | O_TRUNC, 0777);
-	while (1)
-	{
-		str = readline("> ");
-		if (!str)
-			exit(EXIT_FAILURE);
-		if (ft_strcmp(str, delimiter) == 0)
-		{
-			free(str);
-			break ;
-		}
-		write(fd->redirect_in, str, ft_strlen(str));
-		write(fd->redirect_in, "\n", 1);
-		free(str);
-	}
-	close(fd->redirect_in);
-	fd->redirect_in = open("tmp.txt", O_RDWR | O_CREAT, 0777);
-	dup2(fd->redirect_in, STDIN_FILENO);
-	close(fd->redirect_in);
-	unlink("tmp.txt");
-	return (0);
-}
 
 int	set_input(t_word_list *list, t_filed *fd)
 {
@@ -82,7 +55,7 @@ int	set_append_output(t_word_list *list, t_filed *fd)
 }
 
 int	check_redirections(t_word_list *list, t_filed *fd)
-{
+{	
 	while (list && list->word->flags != TOKEN_PIPE)
 	{
 		if (list->word->flags == TOKEN_LESS)
@@ -95,7 +68,8 @@ int	check_redirections(t_word_list *list, t_filed *fd)
 			if (set_append_output(list, fd))
 				return (1);
 		if (list->word->flags == TOKEN_DOUBLELESS)
-			set_here_document(fd, list->next->word->word);
+			if (init_here_document(fd, list->next->word->word))
+				return (1);
 		list = list->next;
 	}
 	return (0);

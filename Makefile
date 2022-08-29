@@ -20,6 +20,7 @@ SRCS =	\
 	executor/exec.c \
 	executor/exec_utils.c \
 	executor/filed.c \
+	executor/here_doc.c \
 	executor/redirections.c \
 	environment/env_symtab_utils.c \
 	environment/env_symtab.c \
