@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 14:49:35 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/25 13:07:47 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/29 13:25:42 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ int	ft_echo(char **argv, t_symtab **symtab)
 			else
 				mode = 1;
 		}
-		if (mode == 1)
+		if (mode == 1 && argv[i + 1] != NULL)
 			printf("%s ", argv[i]);
+		else if (mode == 1)
+			printf("%s", argv[i]);
 		i++;
 	}
 	if (!flag)
