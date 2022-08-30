@@ -6,14 +6,12 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 14:52:44 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/29 10:20:10 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/30 13:24:23 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/environment.h"
 #include "../../libft/libft.h"
-
-#include <stdio.h>
 
 static int	invalid_name_indentifier(char *name)
 {
