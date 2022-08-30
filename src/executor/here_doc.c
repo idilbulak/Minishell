@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/29 17:12:46 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/29 17:20:47 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/30 08:00:31 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 static void	sig_here_doc(int sig)
 {
 	(void)sig;
+	unlink("tmp.txt");
 	exit(EXIT_FAILURE);
 }
 
