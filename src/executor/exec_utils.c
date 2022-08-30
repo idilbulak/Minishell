@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 16:44:08 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/29 15:50:35 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/30 13:25:24 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,19 +62,6 @@ char	**create_args_array(t_word_list *list)
 	args[i] = NULL;
 	return (args);
 }
-
-// static int	check_path(char *path)
-// {
-// 	struct stat	sb;
-
-// 	if (stat(path, &sb) == 0)
-// 	{
-// 		if (!(sb.st_mode & S_IXUSR))
-// 			errno = EACCES;
-// 		return (0);
-// 	}
-// 	return (1);
-// }
 
 static char	*get_next_path(char *path_env, char *cmd, int i, int j)
 {

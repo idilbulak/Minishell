@@ -63,11 +63,13 @@ clean:
 	@$(MAKE) -C libft clean
 	@echo "Cleaning objects..."
 	@rm -rdf $(OBJS_DIR)
+	@printf "\033[0m"
 
 fclean: clean
-	@echo "Cleaning executable..."
+	@echo "\033[0;31mCleaning executable..."
 	@rm -f $(NAME)
 	@rm -f libft/libft.a
+	@printf "\033[0m"
 
 re: fclean all
 
