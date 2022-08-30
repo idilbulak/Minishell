@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:24:53 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/25 21:30:48 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/30 13:48:30 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,9 @@ int	parse_string_helper(char *str, int len)
 		}
 		if (*str == '\'')
 		{
-			str = str + 1;
 			len++;
-			while (*str != '\'')
-			{
+			while (*++str != '\'')
 				len++;
-				str++;
-			}
 		}
 		len++;
 		str++;

@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 12:29:45 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/25 20:23:31 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/30 13:45:37 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,9 @@ void	free_word_list(t_word_list *word_list)
 	while (word_list)
 	{
 		temp = word_list->next;
-		if (word_list->word->flags == TOKEN_STRING || word_list->word->flags == TOKEN_ENV || word_list->word->flags == TOKEN_CENV)
+		if (word_list->word->flags == TOKEN_STRING
+			|| word_list->word->flags == TOKEN_ENV
+			|| word_list->word->flags == TOKEN_CENV)
 			free(word_list->word->word);
 		free(word_list->word);
 		free(word_list);
