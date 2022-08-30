@@ -92,6 +92,11 @@ void	adjust_wordlist(t_word_list *word_list)
 	check_validenv(word_list);
 	while (word_list->next)
 	{
+		if (word_list->word->flags == TOKEN_STRING)
+		{
+			int	end = ft_strlen(word_list->word->word);
+			word_list->word->word[end] = '\0';
+		}
 		if (word_list->word->flags == TOKEN_ENV)
 		{
 			if (word_list->next->word->flags == TOKEN_CENV)
