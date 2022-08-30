@@ -42,12 +42,12 @@ HEADER = inc/minishell.h
 all:	$(NAME)
 
 $(NAME): $(OBJS) libft/libft.a
-	@echo "\n\033[0;32mCompiling minishell..."
+	@echo "\033[0;32mCompiling minishell..."
 	@$(GCC) $(FLAGS) -L libft -l ft -L/Users/dsaat/.brew/opt/readline/lib -I/Users/dsaat/.brew/opt/readline/lib -lreadline -o $(NAME) $(OBJS)
 # $(GCC) $(FLAGS) -L libft -l ft -L/Users/ibulak/.brew/opt/readline/lib -I/Users/ibulak/.brew/opt/readline/lib -lreadline -o $(NAME) $(OBJS)
 # @$(GCC) $(FLAGS) -L libft -l ft -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/lib -lreadline -o $(NAME) $(OBJS)
 # $(GCC) $(FLAGS) -L libft -l ft -L/opt/homebrew/opt/readline/lib -I/opt/homebrew/opt/readline/include -lreadline -o $(NAME) $(OBJS)
-	@echo "\n\033[0mDone!"
+	@echo "\033[0mDone!"
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(HEADER)
 	@printf "\033[0;33mGenerating minishell objects... %-33.33s\r" $@
@@ -55,17 +55,17 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(HEADER)
 	@$(GCC) $(FLAGS) -c $< -o $@
 
 libft/libft.a:
-	@echo "\n"
+	@printf "\n"
 	@$(MAKE) -C libft
 
 clean:
 	@echo "\033[0;31mCleaning libft..."
 	@$(MAKE) -C libft clean
-	@echo "\nCleaning objects..."
+	@echo "Cleaning objects..."
 	@rm -rdf $(OBJS_DIR)
 
 fclean: clean
-	@echo "\nCleaning executable...\n"
+	@echo "Cleaning executable..."
 	@rm -f $(NAME)
 	@rm -f libft/libft.a
 

@@ -19,7 +19,7 @@ OBJS		=	$(SRCS:.c=.o)
 endif
 
 $(NAME): $(OBJS)
-	@echo "\n\n\033[0;32mCompiling libft..."
+	@echo "\n\033[0;32mCompiling libft..."
 	@ar rc $(NAME) $(OBJS)
 
 all: 	$(NAME)
