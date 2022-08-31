@@ -100,7 +100,7 @@ int	ft_increase(char *str, int name_len, t_symtab **symtab )
 	}
 	if (!symtab_lookup(symtab, name))
 		name_len += 1;
-	else if (name == "?")
+	else if (ft_strcmp(name, "?"))
 		name_len += 3;
 	// free(value);
 	free(name);
@@ -143,7 +143,7 @@ int	find_len(char *str, t_symtab **symtab)
 					temp++;
 				}
 			}
-			if(*temp != '\0')
+			if(*temp != '\0' && *temp != '$')
 				temp++;
 		}
 		len = ft_strlen(str) - count + name_len;

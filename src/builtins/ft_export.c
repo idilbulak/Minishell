@@ -6,22 +6,22 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 14:52:44 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/29 10:20:10 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/30 17:31:39 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/environment.h"
 #include "../../libft/libft.h"
 
-#include <stdio.h>
-
 static int	invalid_name_indentifier(char *name)
 {
 	int			i;
 
 	i = 0;
-	while (name[i] && name[i] != '=')
+	while (name[i])
 	{
+		if (name[i] == '=' && i > 0)
+			break ;
 		if (ft_isdigit(name[0])
 			|| (!ft_isalpha(name[i]) && !ft_isdigit(name[i]) && name[i] != '_'))
 		{
@@ -49,11 +49,11 @@ static void	print_export_variables(t_symtab **symtab)
 		{
 			if (tmp->flag == FLAG_EXPORT)
 			{
-				ft_putstr_fd("declare -x ", 2);
-				ft_putstr_fd(tmp->name, 2);
-				ft_putstr_fd("=\"", 2);
-				ft_putstr_fd(tmp->value, 2);
-				ft_putstr_fd("\"\n", 2);
+				ft_putstr_fd("declare -x ", 1);
+				ft_putstr_fd(tmp->name, 1);
+				ft_putstr_fd("=\"", 1);
+				ft_putstr_fd(tmp->value, 1);
+				ft_putstr_fd("\"\n", 1);
 			}
 			tmp = tmp->next;
 		}

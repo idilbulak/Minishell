@@ -19,20 +19,22 @@ OBJS		=	$(SRCS:.c=.o)
 endif
 
 $(NAME): $(OBJS)
-		ar rc $(NAME) $(OBJS)
+	@echo "\n\033[0;32mCompiling libft..."
+	@ar rc $(NAME) $(OBJS)
 
 all: 	$(NAME)
 
 %.o: 	%.c	
-		gcc $(CFLAGS) -o $@ -c $<
+	@printf "\033[0;33mGenerating libft objects... %-33.33s\r" $@
+	@gcc $(CFLAGS) -o $@ -c $<
 
 bonus:	
-		$(MAKE) EXTRA=OK
+	$(MAKE) EXTRA=OK
 
 clean:
-		rm -f $(SRCS:.c=.o) $(BONUS:.c=.o) 
+	@rm -f $(SRCS:.c=.o) $(BONUS:.c=.o) 
 
 fclean:	clean
-		rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: 	fclean all

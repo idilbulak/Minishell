@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 14:49:35 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/29 13:25:42 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/29 16:11:02 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ int	ft_echo(char **argv, t_symtab **symtab)
 	int	flag;
 
 	(void)symtab;
-	i = 1;
+	i = 0;
 	mode = 0;
 	flag = 0;
-	while (argv[i])
+	while (argv[++i])
 	{
 		if (mode == 0)
 		{
@@ -55,29 +55,8 @@ int	ft_echo(char **argv, t_symtab **symtab)
 			printf("%s ", argv[i]);
 		else if (mode == 1)
 			printf("%s", argv[i]);
-		i++;
 	}
 	if (!flag)
 		printf("\n");
 	return (0);
 }
-
-// int	ft_echo(char **argv, t_symtab **symtab)
-// {
-// 	int	i;
-
-// 	(void)symtab;
-// 	i = 1;
-// 	while (argv[i])
-// 	{
-// 		if (i == 1 && ft_strcmp(argv[1], "-n") == 0)
-// 			i++;
-// 		if (argv[i])
-// 			printf("%s ", argv[i]);
-// 		i++;
-// 	}
-// 	if (argv[1] && ft_strcmp(argv[1], "-n") == 0)
-// 		return (0);
-// 	printf("\n");
-// 	return (0);
-// }

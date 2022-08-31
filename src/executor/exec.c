@@ -6,27 +6,43 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/09 13:13:21 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/29 10:32:06 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/29 16:05:46 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libft/libft.h"
 #include "../../inc/exec.h"
 #include "../../inc/builtins.h"
 #include "../../inc/filed.h"
+#include "../../inc/environment.h"
 #include <errno.h>
 
-void	ft_error(int exit_code, char *error_message)
+static void	set_pipeline_var(t_word_list *list, t_symtab **symtab)
 {
-	g_exit_code = exit_code;
-	if (exit_code == 127)
+	t_symtab	*entry;
+
+	if (symtab_lookup(symtab, "PIPESTATUS"))
+		symtab_delete(symtab, "PIPESTATUS");
+	entry = new_entry("PIPESTATUS=0");
+	symtab_insert(symtab, entry);
+	while (list)
 	{
-		ft_putstr_fd(error_message, 2);
-		ft_putstr_fd(": command not found\n", 2);
+		if (list->word->flags == TOKEN_PIPE)
+			symtab_lookup(symtab, "PIPESTATUS")->value[0] = '1';
+		list = list->next;
 	}
-	else
-		perror(error_message);
-	exit(g_exit_code);
+}
+
+static void	wait_for_children(t_child *child)
+{
+	if (waitpid(child->pid, &child->status, 0) > 0)
+	{
+		if (WIFEXITED(child->status))
+			g_exit_code = WEXITSTATUS(child->status);
+		else if (WIFSIGNALED(child->status))
+			g_exit_code = WTERMSIG(child->status) + 128;
+	}
+	while (waitpid(-1, NULL, 0) > 0)
+		;
 }
 
 static void	execute_non_builtin(char **args, t_symtab **symtab)
@@ -45,11 +61,13 @@ static void	execute_non_builtin(char **args, t_symtab **symtab)
 	execve(pathname, args, envp);
 }
 
-static void	do_simple_command(char **args, t_child *child, t_symtab **symtab, t_filed *fd)
+static void	do_simple_command(char **args, t_child *child, t_symtab **symtab,
+							t_filed *fd)
 {
 	if (!args[0])
 		return ;
-	if (!child->is_pipeline && is_builtin(args, symtab))
+	if (symtab_lookup(symtab, "PIPESTATUS")->value[0] == '0'
+		&& is_builtin(args, symtab))
 		return ;
 	child->pid = fork();
 	if (child->pid == -1)
@@ -70,17 +88,6 @@ static void	do_simple_command(char **args, t_child *child, t_symtab **symtab, t_
 	}
 }
 
-static int	check_if_pipeline(t_word_list *list)
-{
-	while (list)
-	{
-		if (list->word->flags == TOKEN_PIPE)
-			return (1);
-		list = list->next;
-	}
-	return (0);
-}
-
 void	executor(t_word_list *list, t_symtab **symtab)
 {
 	t_filed	fd;
@@ -88,7 +95,7 @@ void	executor(t_word_list *list, t_symtab **symtab)
 	char	**args;
 
 	init_fd(&fd);
-	child.is_pipeline = check_if_pipeline(list);
+	set_pipeline_var(list, symtab);
 	while (list)
 	{
 		if (set_fd(list, &fd) == 0)
@@ -102,13 +109,5 @@ void	executor(t_word_list *list, t_symtab **symtab)
 		list = list->next;
 	}
 	reset_fd(&fd);
-	if (waitpid(child.pid, &child.status, 0) > 0)
-	{
-		if (WIFEXITED(child.status))
-			g_exit_code = WEXITSTATUS(child.status);
-		else if (WIFSIGNALED(child.status))
-			g_exit_code = WTERMSIG(child.status) + 128;
-	}
-	while (waitpid(-1, NULL, 0) > 0)
-		;
+	wait_for_children(&child);
 }

@@ -20,6 +20,7 @@ SRCS =	\
 	executor/exec.c \
 	executor/exec_utils.c \
 	executor/filed.c \
+	executor/here_doc.c \
 	executor/redirections.c \
 	environment/env_symtab_utils.c \
 	environment/env_symtab.c \
@@ -41,25 +42,34 @@ HEADER = inc/minishell.h
 all:	$(NAME)
 
 $(NAME): $(OBJS) libft/libft.a
-# $(GCC) $(FLAGS) -L libft -l ft -L/Users/dsaat/.brew/opt/readline/lib -I/Users/dsaat/.brew/opt/readline/lib -lreadline -o $(NAME) $(OBJS)
-	$(GCC) $(FLAGS) -L libft -l ft -L/Users/ibulak/.brew/opt/readline/lib -I/Users/ibulak/.brew/opt/readline/lib -lreadline -o $(NAME) $(OBJS)
-# $(GCC) $(FLAGS) -L libft -l ft -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/lib -lreadline -o $(NAME) $(OBJS)
+	@echo "\033[0;32mCompiling minishell..."
+	@$(GCC) $(FLAGS) -L libft -l ft -L/Users/dsaat/.brew/opt/readline/lib -I/Users/dsaat/.brew/opt/readline/lib -lreadline -o $(NAME) $(OBJS)
+# $(GCC) $(FLAGS) -L libft -l ft -L/Users/ibulak/.brew/opt/readline/lib -I/Users/ibulak/.brew/opt/readline/lib -lreadline -o $(NAME) $(OBJS)
+# @$(GCC) $(FLAGS) -L libft -l ft -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/lib -lreadline -o $(NAME) $(OBJS)
 # $(GCC) $(FLAGS) -L libft -l ft -L/opt/homebrew/opt/readline/lib -I/opt/homebrew/opt/readline/include -lreadline -o $(NAME) $(OBJS)
+	@echo "\033[0mDone!"
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(HEADER)
+	@printf "\033[0;33mGenerating minishell objects... %-33.33s\r" $@
 	@mkdir -p $(OBJS_DIR){$(SUB_DIR)}
-	$(GCC) $(FLAGS) -c $< -o $@
+	@$(GCC) $(FLAGS) -c $< -o $@
 
 libft/libft.a:
-	$(MAKE) -C libft
+	@printf "\n"
+	@$(MAKE) -C libft
 
 clean:
-	rm -rdf $(OBJS_DIR)
-	$(MAKE) -C libft clean
+	@echo "\033[0;31mCleaning libft..."
+	@$(MAKE) -C libft clean
+	@echo "Cleaning objects..."
+	@rm -rdf $(OBJS_DIR)
+	@printf "\033[0m"
 
 fclean: clean
-	rm -f $(NAME)
-	rm -f libft/libft.a
+	@echo "\033[0;31mCleaning executable..."
+	@rm -f $(NAME)
+	@rm -f libft/libft.a
+	@printf "\033[0m"
 
 re: fclean all
 

@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 13:44:20 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/13 13:44:32 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/30 17:31:03 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int	parser_checks(t_token *tokens)
 		{
 			if (tokens->next == NULL)
 				return (-1);
-			if (tokens->next->tokentype == TOKEN_PIPE)
+			if (tokens->next->tokentype == TOKEN_PIPE
+				|| check_ifredirection(tokens->next))
 				return (-1);
 		}
 		tokens = tokens->next;
