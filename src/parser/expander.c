@@ -67,27 +67,102 @@ char	*ft_expand(char *str, char *temp, t_symtab **symtab, int mode)
 				str = expand_helper(str, name);
 			str = fill_rest(temp, i, str, name);
 		}
-		else if ((*str != '$' && (mode == 0 || mode == 2)) || mode == 1)
+		else
 		{
 			temp[i] = *str;
 			i++;
 		}
-		temp[i] = '\0';
 		str++;
 	}
+	temp[i] = '\0';
 	return (temp);
+}
+
+int	ft_increase(char *str, int name_len, t_symtab **symtab )
+{
+	int	len;
+	char	*temp;
+
+	len = 0;
+	temp = str;
+	while (*temp != '$' && *temp != ' ' && *temp != '\'' && *temp != '"' && *temp != '\0')
+	{
+		len++;
+		temp++;
+	}
+	char	*name = ft_substr(str, 0, len);
+	char *value = NULL;
+	if (symtab_lookup(symtab, name))
+	{
+		value = symtab_lookup(symtab, name)->value;
+		name_len += ft_strlen(value);
+		// free(value);
+	}
+	if (!symtab_lookup(symtab, name))
+		name_len += 1;
+	else if (name == "?")
+		name_len += 3;
+	// free(value);
+	free(name);
+	return(name_len);
+}
+
+int	find_len(char *str, t_symtab **symtab)
+{
+	char	*temp;
+	int		yes;
+	int		len;
+
+	yes = 0;
+	temp = str;
+	while(*temp)
+	{
+		if (*temp == '$')
+			yes = 1;
+		temp++;
+	}
+	temp = str;
+	if (yes == 0)
+	{
+		len = ft_strlen(str);
+	}
+	else
+	{
+		int count = 0; //dolardan sonra dolarla beraber kac tane oldugu
+		int name_len = 0; //name_len dolarsiz 
+		while (*temp)
+		{
+			if (*temp == '$')
+			{
+				temp++;
+				name_len = ft_increase(temp, name_len, symtab);
+				count++;
+				while (*temp != '$' && *temp != ' ' && *temp != '\'' && *temp != '"' && *temp != '\0')
+				{
+					count++;
+					temp++;
+				}
+			}
+			if(*temp != '\0')
+				temp++;
+		}
+		len = ft_strlen(str) - count + name_len;
+	}
+	return (len);
 }
 
 void	ft_expander(t_word_list *word_list, t_symtab **symtab)
 {
 	char	*temp;
 	int		mode;
+	int		len;
 
 	while (word_list)
 	{
-		temp = malloc(sizeof(char *));
 		if (word_list->word->flags == TOKEN_STRING)
 		{
+			len = find_len(word_list->word->word, symtab);
+			temp = malloc(sizeof(char) * len);
 			mode = 0;
 			temp = ft_expand(word_list->word->word, temp, symtab, mode);
 			free(word_list->word->word);

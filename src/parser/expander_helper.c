@@ -17,7 +17,7 @@ int	name_len(char *str)
 	int	count;
 
 	count = 0;
-	while (*str != '$' && *str != '\0' && *str != '"')
+	while (*str != '$' && *str != '\0' && *str != '"' && *str != '\'' && *str != ' ')
 	{
 		if (*str == '?')
 			return (1);
