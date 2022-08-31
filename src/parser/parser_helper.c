@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 13:44:15 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/25 18:34:03 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/31 10:58:22 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,16 @@ void	check_validenv(t_word_list *word_list)
 
 void	adjust_wordlist(t_word_list *word_list)
 {
+	int	end;
+
+	end = 0;
 	check_envorder(word_list);
 	check_validenv(word_list);
 	while (word_list->next)
 	{
 		if (word_list->word->flags == TOKEN_STRING)
 		{
-			int	end = ft_strlen(word_list->word->word);
+			end = ft_strlen(word_list->word->word);
 			word_list->word->word[end] = '\0';
 		}
 		if (word_list->word->flags == TOKEN_ENV)
@@ -104,4 +107,19 @@ void	adjust_wordlist(t_word_list *word_list)
 		}
 		word_list = word_list->next;
 	}
+}
+
+char	*fill_rest(char *temp, int i, char *str, char *name)
+{
+	int	len;
+
+	len = ft_strlen(name);
+	while (i < (int)ft_strlen(temp))
+		temp[i] = '\0';
+	while (len > 0)
+	{
+		str++;
+		len--;
+	}
+	return (str);
 }

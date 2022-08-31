@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/25 21:29:45 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/25 21:33:11 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/31 11:13:19 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,32 @@ t_word_list	*create_null_list(t_word_list *word_list)
 	word_list->word->word = NULL;
 	word_list->word->flags = TOKEN_null;
 	return (word_list);
+}
+
+int	calculate_new_len(int len, t_symtab **symtab, char *temp)
+{
+	int		count;
+	int		name_len;
+
+	count = 0;
+	name_len = 0;
+	while (*temp)
+	{
+		if (*temp == '$')
+		{
+			temp++;
+			name_len = ft_increase(temp, name_len, symtab);
+			count++;
+			while (*temp != '$' && *temp != ' ' && *temp != '\''
+				&& *temp != '"' && *temp != '\0')
+			{
+				count++;
+				temp++;
+			}
+		}
+		if (*temp != '\0' && *temp != '$')
+				temp++;
+	}
+		len = -count + name_len;
+	return (len);
 }

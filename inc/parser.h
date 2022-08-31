@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 17:12:49 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/25 21:33:06 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/08/31 11:13:33 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,14 @@ void		adjust_wordlist(t_word_list *word_list);
 void		check_env(t_word_list *word_list);
 void		check_validenv(t_word_list *word_list);
 void		check_envorder(t_word_list *word_list);
+char		*fill_rest(char *temp, int i, char *str, char *name);
 
 // parser helper 2
 char		*ft_helper(char *str, char *temp_str);
 int			check_ifexpand(t_word_list *word_list);
 int			check_null(t_token *tokens);
 t_word_list	*create_null_list(t_word_list *word_list);
+int			calculate_new_len(int len, t_symtab **symtab, char *temp);
 
 //quote remover
 void		ft_split_quotes(t_word_list *word_list);
@@ -59,6 +61,8 @@ void		ft_expander(t_word_list *word_list, t_symtab **symtab);
 char		*expand_helper(char *str, char *name);
 char		*find_name(char *str);
 int			name_len(char *str);
+int			ft_increase(char *str, int name_len, t_symtab **symtab);
+int			find_name_len(int name_len, t_symtab **symtab, char *name);
 
 // word_list utils
 t_word_list	*init_new_word(t_word_list *new_word);
