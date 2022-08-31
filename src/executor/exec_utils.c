@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 16:44:08 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/30 13:25:24 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/08/31 17:10:00 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,22 +85,24 @@ char	*search_path_var(char *cmd, t_symtab **symtab)
 	int			j;
 
 	i = 0;
-	path_env = symtab_lookup(symtab, "PATH")->value;
-	while (path_env != NULL && path_env[i])
+	if (symtab_lookup(symtab, "PATH"))
 	{
-		j = i;
-		while (path_env[i] && path_env[i] != ':')
-			i++;
-		path = get_next_path(path_env, cmd, i, j);
-		if (stat(path, &sb) == 0)
-			return (path);
-		else
-			free(path);
-		if (path_env[i] == ':')
-			i++;
+		path_env = symtab_lookup(symtab, "PATH")->value;
+		while (path_env != NULL && path_env[i])
+		{
+			j = i;
+			while (path_env[i] && path_env[i] != ':')
+				i++;
+			path = get_next_path(path_env, cmd, i, j);
+			if (stat(path, &sb) == 0)
+				return (path);
+			else
+				free(path);
+			if (path_env[i] == ':')
+				i++;
+		}
 	}
-	errno = ENOENT;
-	return (NULL);
+	errno = ENOENT;return (NULL);
 }
 
 char	*replace_dot_with_cwd(char *cmd)

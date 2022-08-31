@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/29 17:12:46 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/30 08:00:31 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/08/31 17:19:59 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,17 @@ int	set_here_document(t_filed *fd, char *delimiter)
 	fd->redirect_in = open("tmp.txt", O_RDWR | O_CREAT | O_TRUNC, 0777);
 	while (1)
 	{
+		dup2(fd->tmpin, STDIN_FILENO);
 		str = readline("> ");
 		if (!str)
 			exit(EXIT_FAILURE);
 		if (ft_strcmp(str, delimiter) == 0)
-		{
-			free(str);
 			break ;
-		}
 		write(fd->redirect_in, str, ft_strlen(str));
 		write(fd->redirect_in, "\n", 1);
 		free(str);
 	}
+	free(str);
 	close(fd->redirect_in);
 	fd->redirect_in = open("tmp.txt", O_RDWR | O_CREAT, 0777);
 	dup2(fd->redirect_in, STDIN_FILENO);
