@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/29 17:12:46 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/31 17:19:59 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/09/01 17:08:35 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	set_here_document(t_filed *fd, char *delimiter)
 	while (1)
 	{
 		dup2(fd->tmpin, STDIN_FILENO);
+		dup2(fd->tmpout, STDOUT_FILENO);
 		str = readline("> ");
 		if (!str)
 			exit(EXIT_FAILURE);
