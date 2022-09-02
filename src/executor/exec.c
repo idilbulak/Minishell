@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/09 13:13:21 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/29 16:05:46 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/09/02 08:44:48 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void	do_simple_command(char **args, t_child *child, t_symtab **symtab,
 		return ;
 	child->pid = fork();
 	if (child->pid == -1)
-		ft_error(EXIT_FAILURE, "fork failed");
+		ft_error(-1, "fork failed");//ft_error(EXIT_FAILURE, "fork failed");
 	if (child->pid == 0)
 	{
 		close(fd->in);
@@ -96,7 +96,7 @@ void	executor(t_word_list *list, t_symtab **symtab)
 
 	init_fd(&fd);
 	set_pipeline_var(list, symtab);
-	while (list)
+	while (list && g_exit_code != -1) //
 	{
 		if (set_fd(list, &fd) == 0)
 		{

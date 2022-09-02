@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 15:06:53 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/30 14:59:37 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/09/02 08:47:13 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ void	ft_error(int exit_code, char *error_message)
 	}
 	else
 		perror(error_message);
-	exit(g_exit_code);
+	if (exit_code == -1)
+		g_exit_code = -1;
+	else
+		exit(g_exit_code);
 }
 
 t_symtab	**init_env_symtab(char **environ)

@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:25:01 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/30 13:44:22 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/02 08:43:14 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static void	init_minishell(char **environ, struct termios original_tcattr)
 	register_signals();
 	while (1)
 	{
+		g_exit_code = 0;
 		str = ft_readline(original_tcattr);
 		if (!str)
 			exit(EXIT_FAILURE);
