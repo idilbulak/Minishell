@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/09 13:13:21 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/09/02 08:44:48 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/09/02 08:49:25 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void	executor(t_word_list *list, t_symtab **symtab)
 	t_child	child;
 	char	**args;
 
+	g_exit_code = 0;
 	init_fd(&fd);
 	set_pipeline_var(list, symtab);
 	while (list && g_exit_code != -1) //
