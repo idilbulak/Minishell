@@ -25,7 +25,7 @@ char	*ft_readline(struct termios original_tcattr)
 	register_signals();
 	str = readline("minishell$ ");
 	if (!str)
-		exit(EXIT_FAILURE);
+		exit(0);
 	tcsetattr(STDIN_FILENO, TCSANOW, &original_tcattr);
 	unregister_signals();
 	return (str);
