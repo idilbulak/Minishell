@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/05 11:25:33 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/09/05 11:49:23 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/09/05 12:16:10 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ char	*ft_expand_heredoc(char *str, char *temp, t_symtab **symtab)
 	i = 0;
 	while (*str != '\0')
 	{
-		if (*str == '$')
+		if (*str == '$' && (*(str + 1) == ' ' || *(str + 1) == '\0'))
+			temp[i++] = '$';
+		else if (*str == '$')
 		{
 			name = find_name(str);
 			if (*name == '?' || symtab_lookup(symtab, name))
@@ -40,10 +42,7 @@ char	*ft_expand_heredoc(char *str, char *temp, t_symtab **symtab)
 			str = fill_rest(temp, i, str, name);
 		}
 		else
-		{
-			temp[i] = *str;
-			i++;
-		}
+			temp[i++] = *str;
 		str++;
 	}
 	temp[i] = '\0';
