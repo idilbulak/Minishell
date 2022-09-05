@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/14 20:57:02 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/31 11:13:16 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/05 10:24:36 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ void	ft_expander(t_word_list *word_list, t_symtab **symtab)
 		{
 			len = find_len(word_list->word->word, symtab);
 			temp = malloc(sizeof(char) * len);
+			if (!temp)
+				ft_error(EXIT_FAILURE, "malloc failed");
 			mode = 0;
 			temp = ft_expand(word_list->word->word, temp, symtab, mode);
 			free(word_list->word->word);

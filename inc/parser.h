@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 17:12:49 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/31 11:13:33 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/05 11:32:39 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,10 @@ void		ft_split_quotes(t_word_list *word_list);
 int			check_qmode(char str, int mode);
 
 //expander
+int			expand_value(char *name, int i, char *temp, t_symtab **symtab);
+char		*ft_expand(char *str, char *temp, t_symtab **symtab, int mode);
+int			if_dollar(char *str);
+int			find_len(char *str, t_symtab **symtab);
 void		ft_expander(t_word_list *word_list, t_symtab **symtab);
 
 // expander helper
@@ -63,6 +67,11 @@ char		*find_name(char *str);
 int			name_len(char *str);
 int			ft_increase(char *str, int name_len, t_symtab **symtab);
 int			find_name_len(int name_len, t_symtab **symtab, char *name);
+
+// expander_redirection
+char		*ft_expand_redirection(char *str, char *temp, t_symtab **symtab);
+void		ft_expander_redirection(char *str, t_symtab **symtab);
+int			check_ifexpand_redirection(char *str);
 
 // word_list utils
 t_word_list	*init_new_word(t_word_list *new_word);
