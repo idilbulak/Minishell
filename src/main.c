@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:25:01 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/09/02 08:49:14 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/09/05 11:03:12 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ char	*ft_readline(struct termios original_tcattr)
 	register_signals();
 	str = readline("minishell$ ");
 	if (!str)
+	{
+		ft_putstr_fd("exit\n", 2);	
 		exit(0);
+	}
 	tcsetattr(STDIN_FILENO, TCSANOW, &original_tcattr);
 	unregister_signals();
 	return (str);
@@ -42,10 +45,12 @@ static void	init_minishell(char **environ, struct termios original_tcattr)
 	register_signals();
 	while (1)
 	{
+		g_exit_code = 0;
 		str = ft_readline(original_tcattr);
-		if (!str)
-			exit(EXIT_FAILURE);
+		// if (!str)
+		// 	exit(EXIT_FAILURE);
 		add_history(str);
+		tokens = NULL;
 		tokens = tokenizer(str, tokens);
 		word_list = parser(tokens, symtab);
 		executor(word_list, symtab);
