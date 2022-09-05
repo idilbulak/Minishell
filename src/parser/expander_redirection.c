@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/05 11:25:33 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/09/05 11:32:17 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/05 11:36:39 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,5 @@ void	ft_expander_redirection(char *str, t_symtab **symtab)
 		ft_error(EXIT_FAILURE, "malloc failed");
 	temp = ft_expand_redirection(str, temp, symtab);
 	free(str);
+	str = temp;
 }
