@@ -14,6 +14,7 @@ SRCS =	\
 	parser/parser_checks.c \
 	parser/expander.c \
 	parser/expander_helper.c \
+	parser/expander_heredoc.c \
 	parser/quote_remover.c \
 	main.c \
 	signals/signals.c \

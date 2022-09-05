@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 17:11:52 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/29 17:15:10 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/09/05 11:43:19 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	set_append_output(t_word_list *list, t_filed *fd)
 	return (0);
 }
 
-int	check_redirections(t_word_list *list, t_filed *fd)
+int	check_redirections(t_word_list *list, t_filed *fd, t_symtab **symtab)
 {	
 	while (list && list->word->flags != TOKEN_PIPE)
 	{
@@ -68,7 +68,7 @@ int	check_redirections(t_word_list *list, t_filed *fd)
 			if (set_append_output(list, fd))
 				return (1);
 		if (list->word->flags == TOKEN_DOUBLELESS)
-			if (init_here_document(fd, list->next->word->word))
+			if (init_here_document(fd, list->next->word->word, symtab))
 				return (1);
 		list = list->next;
 	}

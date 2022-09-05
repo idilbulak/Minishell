@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/29 17:12:46 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/09/05 11:07:27 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/09/05 11:48:49 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,20 @@ static void	sig_here_doc(int sig)
 	exit(EXIT_FAILURE);
 }
 
-static void	check_expension(char *str, t_symtab **symtab)
-{
-	t_word_list	word_list;
+// static void	check_expension(char *str, t_symtab **symtab)
+// {
+// 	t_word_list	word_list;
 	
-	word_list.word = str;
-	word_list.flags = TOKEN_STRING;
-	if (check_ifexpand(word_list) == 1)
-			ft_expander(word_list, symtab);
-	ft_split_quotes(word_list);
-}
+// 	word_list.word = str;
+// 	word_list.flags = TOKEN_STRING;
+// 	if (check_ifexpand(word_list) == 1)
+// 			ft_expander(word_list, symtab);
+// 	ft_split_quotes(word_list);
+// }
 
-int	set_here_document(t_filed *fd, char *delimiter)
+int	set_here_document(t_filed *fd, char *delimiter, t_symtab **symtab)
 {
 	char		*str;
-	// t_word_list	*word_list;
 	
 	fd->redirect_in = open("tmp.txt", O_RDWR | O_CREAT | O_TRUNC, 0777);
 	while (1)
@@ -45,6 +44,8 @@ int	set_here_document(t_filed *fd, char *delimiter)
 		dup2(fd->tmpin, STDIN_FILENO);
 		dup2(fd->tmpout, STDOUT_FILENO);
 		str = readline("> ");
+		if (ft_strrchr(str, '$'))
+			str = ft_expander_heredoc(str, symtab);
 		if (!str)
 			exit(EXIT_FAILURE);
 		if (ft_strcmp(str, delimiter) == 0)
@@ -61,7 +62,7 @@ int	set_here_document(t_filed *fd, char *delimiter)
 	exit(EXIT_SUCCESS);
 }
 
-int	init_here_document(t_filed *fd, char *delimiter)
+int	init_here_document(t_filed *fd, char *delimiter, t_symtab **symtab)
 {
 	int	pid;
 	int	status;
@@ -70,7 +71,7 @@ int	init_here_document(t_filed *fd, char *delimiter)
 	if (pid == 0)
 	{
 		signal(SIGINT, sig_here_doc);
-		set_here_document(fd, delimiter);
+		set_here_document(fd, delimiter, symtab);
 	}
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))

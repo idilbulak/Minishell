@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 18:17:46 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/29 17:10:35 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/09/05 11:45:06 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ typedef struct s_filed
 void	init_fd(t_filed *fd);
 void	create_pipe(t_filed *fd);
 void	reset_fd(t_filed *fd);
-int		set_fd(t_word_list *list, t_filed *fd);//, t_child *child);
+int		set_fd(t_word_list *list, t_filed *fd, t_symtab **symtab);//, t_child *child);
 
-int		check_redirections(t_word_list *list, t_filed *fd);
+int		check_redirections(t_word_list *list, t_filed *fd, t_symtab **symtab);
 int		set_input(t_word_list *list, t_filed *fd);
 int		set_output(t_word_list *list, t_filed *fd);
 int		set_append_output(t_word_list *list, t_filed *fd);
-int		init_here_document(t_filed *fd, char *delimiter);
-int		set_here_document(t_filed *fd, char *delimiter);
+int		init_here_document(t_filed *fd, char *delimiter, t_symtab **symtab);
+int		set_here_document(t_filed *fd, char *delimiter, t_symtab **symtab);
 
 #endif

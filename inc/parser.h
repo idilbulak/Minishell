@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 17:12:49 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/09/05 11:32:39 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/05 11:49:43 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@ int			name_len(char *str);
 int			ft_increase(char *str, int name_len, t_symtab **symtab);
 int			find_name_len(int name_len, t_symtab **symtab, char *name);
 
-// expander_redirection
-char		*ft_expand_redirection(char *str, char *temp, t_symtab **symtab);
-void		ft_expander_redirection(char *str, t_symtab **symtab);
-int			check_ifexpand_redirection(char *str);
+// expander_heredoc
+char		*ft_expand_heredoc(char *str, char *temp, t_symtab **symtab);
+char		*ft_expander_heredoc(char *str, t_symtab **symtab);
+// int			check_ifexpand_heredoc(char *str);
 
 // word_list utils
 t_word_list	*init_new_word(t_word_list *new_word);

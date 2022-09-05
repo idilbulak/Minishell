@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 17:09:38 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/23 13:53:37 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/09/05 11:42:57 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	is_final_cmd(t_word_list *list)
 	return (1);
 }
 
-int	set_fd(t_word_list *list, t_filed *fd)
+int	set_fd(t_word_list *list, t_filed *fd, t_symtab **symtab)
 {
 	if (dup2(fd->in, STDIN_FILENO) == -1)
 		ft_error(EXIT_FAILURE, "dup2 failed");
@@ -50,7 +50,7 @@ int	set_fd(t_word_list *list, t_filed *fd)
 		fd->out = dup(fd->tmpout);
 	else
 		create_pipe(fd);
-	if (check_redirections(list, fd) != 0)
+	if (check_redirections(list, fd, symtab) != 0)
 	{
 		close(fd->out);
 		g_exit_code = 1;
