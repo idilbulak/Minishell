@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 16:44:08 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/31 17:10:00 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/09/02 08:52:12 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ char	**create_args_array(t_word_list *list)
 
 	i = 0;
 	args = malloc(sizeof(char *) * calc_num_args(list) + 1);
+	if (!args)
+		ft_error(EXIT_FAILURE, "malloc failed");
 	while (list && list->word->flags != TOKEN_PIPE)
 	{
 		if (list->word->flags == TOKEN_STRING)
