@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:24:53 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/31 16:26:00 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/08 12:24:11 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ t_word_list	*parser(t_token *tokens, t_symtab **symtab)
 	if (parser_checks(tokens) == -1)
 	{
 		g_exit_code = 258;
-		ft_putstr_fd("syntax error\n", 2);
+		ft_putstr_fd("minishell: syntax error\n", 2);
 		return (NULL);
 	}
 	if (check_null(tokens))

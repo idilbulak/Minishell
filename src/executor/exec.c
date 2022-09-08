@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/09 13:13:21 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/09/05 11:42:36 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/09/08 12:25:29 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,12 @@ static void	execute_non_builtin(char **args, t_symtab **symtab)
 {
 	char	**envp;
 	char	*pathname;
+	int		i;
 
 	pathname = args[0];
+	i = 0;
 	if (!ft_strchr(pathname, '/'))
-		pathname = search_path_var(args[0], symtab);
+		pathname = search_path_var(args[0], symtab, i);
 	else if (args[0][0] == '.' && args[0][1] == '/')
 		pathname = replace_dot_with_cwd(pathname + 1);
 	if (!pathname)
@@ -71,7 +73,7 @@ static void	do_simple_command(char **args, t_child *child, t_symtab **symtab,
 		return ;
 	child->pid = fork();
 	if (child->pid == -1)
-		ft_error(-1, "fork failed");//ft_error(EXIT_FAILURE, "fork failed");
+		ft_error(-1, "fork failed");
 	if (child->pid == 0)
 	{
 		close(fd->in);
@@ -96,7 +98,7 @@ void	executor(t_word_list *list, t_symtab **symtab)
 
 	init_fd(&fd);
 	set_pipeline_var(list, symtab);
-	while (list && g_exit_code != -1) //
+	while (list)
 	{
 		if (set_fd(list, &fd, symtab) == 0)
 		{

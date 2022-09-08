@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 16:44:08 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/09/02 08:52:12 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/09/08 16:49:06 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	**create_args_array(t_word_list *list)
 	int			i;
 
 	i = 0;
-	args = malloc(sizeof(char *) * calc_num_args(list) + 1);
+	args = malloc(sizeof(char *) * (calc_num_args(list) + 1));
 	if (!args)
 		ft_error(EXIT_FAILURE, "malloc failed");
 	while (list && list->word->flags != TOKEN_PIPE)
@@ -78,15 +78,13 @@ static char	*get_next_path(char *path_env, char *cmd, int i, int j)
 	return (path);
 }
 
-char	*search_path_var(char *cmd, t_symtab **symtab)
+char	*search_path_var(char *cmd, t_symtab **symtab, int i)
 {
 	struct stat	sb;
 	char		*path_env;
 	char		*path;
-	int			i;
 	int			j;
 
-	i = 0;
 	if (symtab_lookup(symtab, "PATH"))
 	{
 		path_env = symtab_lookup(symtab, "PATH")->value;
@@ -104,7 +102,8 @@ char	*search_path_var(char *cmd, t_symtab **symtab)
 				i++;
 		}
 	}
-	errno = ENOENT;return (NULL);
+	errno = ENOENT;
+	return (NULL);
 }
 
 char	*replace_dot_with_cwd(char *cmd)

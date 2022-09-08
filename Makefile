@@ -45,8 +45,8 @@ all:	$(NAME)
 $(NAME): $(OBJS) libft/libft.a
 	@echo "\033[0;32mCompiling minishell..."
 # @$(GCC) $(FLAGS) -L libft -l ft -L/Users/dsaat/.brew/opt/readline/lib -I/Users/dsaat/.brew/opt/readline/lib -lreadline -o $(NAME) $(OBJS)
-# $(GCC) $(FLAGS) -L libft -l ft -L/Users/ibulak/.brew/opt/readline/lib -I/Users/ibulak/.brew/opt/readline/lib -lreadline -o $(NAME) $(OBJS)
-	@$(GCC) $(FLAGS) -L libft -l ft -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/lib -lreadline -o $(NAME) $(OBJS)
+	@$(GCC) $(FLAGS) -L libft -l ft -L/Users/ibulak/.brew/opt/readline/lib -I/Users/ibulak/.brew/opt/readline/lib -lreadline -o $(NAME) $(OBJS)
+# @$(GCC) $(FLAGS) -L libft -l ft -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/lib -lreadline -o $(NAME) $(OBJS)
 # $(GCC) $(FLAGS) -L libft -l ft -L/opt/homebrew/opt/readline/lib -I/opt/homebrew/opt/readline/include -lreadline -o $(NAME) $(OBJS)
 	@echo "\033[0mDone!"
 

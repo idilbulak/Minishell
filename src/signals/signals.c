@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 17:32:59 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/09/05 09:32:34 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/08 12:47:09 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ void	child_sig_handler(int sig)
 {
 	if (sig == SIGINT)
 	{
-		ft_putstr_fd("ˆC\n", 2);
+		ft_putstr_fd("\n", 2);
 		rl_on_new_line();
 		rl_replace_line("", 1);
 		g_exit_code = 130;
 	}
 	else if (sig == SIGQUIT)
 	{
-		ft_putstr_fd("ˆ\\Quit: 3\n", 2);
+		ft_putstr_fd("Quit: 3\n", 2);
 		rl_on_new_line();
 		g_exit_code = 131;
 	}
