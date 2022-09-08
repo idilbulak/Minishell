@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:24:53 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/09/08 12:24:11 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/08 17:22:05 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,15 +116,25 @@ t_word_list	*create_word_list(t_token *tokens, t_word_list *word_list)
 	return (word_list);
 }
 
+void	syntax_error(int e)
+{
+	if (e == -1)
+		ft_putstr_fd("minishell: syntax error near unexpected token `|'\n", 2);
+	else if (e == -2)
+		ft_putstr_fd("minishell: syntax error near unexpected token `newline'\n", 2);
+	else if (e == -3)
+		ft_putstr_fd("minishell: syntax error near unexpected token `>'\n", 2);
+}
+
 t_word_list	*parser(t_token *tokens, t_symtab **symtab)
 {
 	t_word_list	*word_list;
 
 	word_list = NULL;
-	if (parser_checks(tokens) == -1)
+	if (parser_checks(tokens) != 1)
 	{
 		g_exit_code = 258;
-		ft_putstr_fd("minishell: syntax error\n", 2);
+		syntax_error(parser_checks(tokens));
 		return (NULL);
 	}
 	if (check_null(tokens))
