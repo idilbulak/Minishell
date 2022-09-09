@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/29 17:12:46 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/09/08 10:09:06 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/09 13:36:36 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,6 @@ static void	sig_here_doc(int sig)
 	unlink("tmp.txt");
 	exit(EXIT_FAILURE);
 }
-
-// static void	check_expension(char *str, t_symtab **symtab)
-// {
-// 	t_word_list	word_list;
-// 	word_list.word = str;
-// 	word_list.flags = TOKEN_STRING;
-// 	if (check_ifexpand(word_list) == 1)
-// 			ft_expander(word_list, symtab);
-// 	ft_split_quotes(word_list);
-// }
 
 int	set_here_document(t_filed *fd, char *delimiter, t_symtab **symtab)
 {
