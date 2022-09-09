@@ -71,7 +71,7 @@ int	find_name_len(int name_len, t_symtab **symtab, char *name)
 	if (!symtab_lookup(symtab, name))
 		name_len += 1;
 	else if (ft_strcmp(name, "?"))
-		name_len += 3;
+		name_len += ft_strlen(ft_itoa(g_exit_code) + 1);
 	return (name_len);
 }
 
