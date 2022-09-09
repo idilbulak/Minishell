@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 15:27:18 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/23 14:00:06 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/09/09 13:03:49 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	**create_env_array(t_symtab **symtab)
 
 	i = 0;
 	j = 0;
-	env = malloc(sizeof(char *) * total_export_entries(symtab) + 1);
+	env = malloc(sizeof(char *) * (total_export_entries(symtab) + 1));
 	if (!env)
 		ft_error(EXIT_FAILURE, "malloc failed");
 	while (i < TABLE_SIZE)
