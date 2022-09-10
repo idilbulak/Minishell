@@ -12,23 +12,25 @@
 
 #include "../../inc/environment.h"
 #include "../../libft/libft.h"
+#include <stdio.h>
 
 int	hash(char *name)
 {
-	int	hash_value;
+	unsigned int	hash_value;
 	int	i;
 	int	len;
 
 	i = 0;
 	hash_value = 0;
 	len = ft_strlen(name);
-	while (i < len)
+	while (i < len - 2) //added -2
 	{
 		hash_value += name[i];
-		hash_value *= name[i];
+		// hash_value *= name[i];    //??????
 		i++;
 	}
-	return ((unsigned int)hash_value % TABLE_SIZE);
+	// printf("%ld\n", hash_value);
+	return (hash_value % TABLE_SIZE);
 }
 
 t_symtab	*new_entry(char *str)
@@ -45,7 +47,7 @@ t_symtab	*new_entry(char *str)
 	if (!new_entry)
 		return (NULL);
 	new_entry->name = ft_substr(str, 0, i);
-	new_entry->value = ft_substr(str, i + 1, ft_strlen(str) - i);
+	new_entry->value = ft_substr(str, i + 1, ft_strlen(str) - i - 1);
 	return (new_entry);
 }
 

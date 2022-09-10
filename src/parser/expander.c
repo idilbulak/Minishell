@@ -52,10 +52,15 @@ char	*ft_expand(char *str, char *temp, t_symtab **symtab, int mode)
 				i = expand_value(name, i, temp, symtab);
 			else
 				str = expand_helper(str, name);
+			name = find_name(str);
 			str = fill_rest(temp, i, str, name);
+			free(name);
 		}
 		else
-			temp[i++] = *str;
+		{
+			temp[i] = *str;
+			i++;
+		}
 		str++;
 	}
 	temp[i] = '\0';
@@ -103,7 +108,7 @@ void	ft_expander(t_word_list *word_list, t_symtab **symtab)
 		if (word_list->word->flags == TOKEN_STRING)
 		{
 			len = find_len(word_list->word->word, symtab);
-			temp = malloc(sizeof(char) * (len + 1));
+			temp = malloc(sizeof(char) * (len + 3));
 			if (!temp)
 				ft_error(EXIT_FAILURE, "malloc failed");
 			mode = 0;

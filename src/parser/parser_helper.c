@@ -114,6 +114,8 @@ char	*fill_rest(char *temp, int i, char *str, char *name)
 	int	len;
 
 	len = ft_strlen(name);
+	// printf("name %s\n", name);
+	// printf("len %d\n", len);
 	while (i < (int)ft_strlen(temp))
 		temp[i] = '\0';
 	while (len > 0)
@@ -121,5 +123,6 @@ char	*fill_rest(char *temp, int i, char *str, char *name)
 		str++;
 		len--;
 	}
+	// printf("str   %s\n", str);
 	return (str);
 }

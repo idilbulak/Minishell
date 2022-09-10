@@ -58,7 +58,7 @@ void	ft_split_quotes(t_word_list *word_list)
 		temp = word_list->word->word;
 		if (!temp)
 			ft_error(EXIT_FAILURE, "malloc failure");
-		if (word_list->word->flags == TOKEN_STRING)
+		if (word_list->word->flags == TOKEN_STRING || word_list->word->flags == TOKEN_ENV)
 		{
 			temp = qremover(word_list->word->word, mode, temp);
 			word_list->word->word = temp;

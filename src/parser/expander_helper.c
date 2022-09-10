@@ -18,7 +18,10 @@ int	name_len(char *str)
 
 	count = 0;
 	while (*str != '$' && *str != '\0' && *str != '"'
-		&& *str != '\'' && *str != ' ')
+		&& *str != '\'' && *str != ' ' /*&& *str != '/'
+		&& *str != '#' && *str != '%' && *str != '*'
+		&& *str != '+' && *str != ',' && *str != '='
+		&& *str != '-' && *str != ':' && *str != '.'*/)
 	{
 		if (*str == '?')
 			return (1);
@@ -31,28 +34,30 @@ int	name_len(char *str)
 char	*find_name(char *str)
 {
 	int		len;
-	int		i;
+	// int		i;
 	char	*name;
 
 	str++;
-	i = 0;
+	// i = 0;
 	len = name_len(str);
-	name = malloc(sizeof(char *) * len);
+	name = ft_substr(str, 0 , len);
+	// name = malloc(sizeof(char *) * (len + 1));
 	if (!name)
 		ft_error(EXIT_FAILURE, "malloc failed");
-	while (len > 0)
-	{
-		name[i] = *str;
-		i++;
-		str++;
-		len--;
-	}
+	// while (len > 0)
+	// {
+	// 	name[i] = *str;
+	// 	i++;
+	// 	str++;
+	// 	len--;
+	// }
+	// name[i] = '\0';
 	return (name);
 }
 
 char	*expand_helper(char *str, char *name)
 {
-	while (*str != '$')
+	while (*str != '$' && *str)
 		str++;
 	free(name);
 	return (str);
@@ -61,10 +66,12 @@ char	*expand_helper(char *str, char *name)
 int	find_name_len(int name_len, t_symtab **symtab, char *name)
 {
 	char	*value;
+	char	*exit_code;
 
 	value = NULL;
+	exit_code = ft_itoa(g_exit_code);
 	if (!ft_strcmp(name, "?"))
-		name_len += ft_strlen(ft_itoa(g_exit_code));
+		name_len += ft_strlen(exit_code);
 	else if (symtab_lookup(symtab, name))
 	{
 		value = symtab_lookup(symtab, name)->value;
@@ -72,6 +79,7 @@ int	find_name_len(int name_len, t_symtab **symtab, char *name)
 	}
 	else if (!symtab_lookup(symtab, name))
 		name_len += 1;
+	free (exit_code);
 	return (name_len);
 }
 
@@ -84,7 +92,10 @@ int	ft_increase(char *str, int name_len, t_symtab **symtab )
 	len = 0;
 	temp = str;
 	while (*temp != '$' && *temp != ' ' && *temp != '\''
-		&& *temp != '"' && *temp != '\0')
+		&& *temp != '"' && *temp != '\0' /*&& *str != '/'
+		&& *str != '#' && *str != '%' && *str != '*'
+		&& *str != '+' && *str != ',' && *str != '='
+		&& *str != '-' && *str != ':' && *str != '.'*/)
 	{
 		len++;
 		temp++;
