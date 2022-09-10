@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 18:17:15 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/09/08 11:53:00 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/09 13:48:53 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct s_child
 }			t_child;
 
 void	executor(t_word_list *cmds, t_symtab **symtab);
-char	**create_args_array(t_word_list *list);
+char	**create_argv_array(t_word_list *list);
 char	*search_path_var(char *cmd, t_symtab **symtab, int i);
 char	*replace_dot_with_cwd(char *pathname);
 

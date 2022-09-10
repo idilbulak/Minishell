@@ -37,7 +37,7 @@ SRCS =	\
 OBJS_DIR = obj/
 SUB_DIR = tokenizer,parser,executor,environment,signals,environment,builtins
 OBJS = $(SRCS:%.c=$(OBJS_DIR)%.o)
-FLAGS = -Wall -Wextra -Werror -fsanitize=address
+FLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 HEADER = inc/minishell.h
 
 all:	$(NAME)

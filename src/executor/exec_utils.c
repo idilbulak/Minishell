@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 16:44:08 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/09/08 16:49:06 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/09 13:45:50 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,20 @@ static int	calc_num_args(t_word_list *list)
 	return (i);
 }
 
-char	**create_args_array(t_word_list *list)
+char	**create_argv_array(t_word_list *list)
 {
-	char		**args;
+	char		**argv;
 	int			i;
 
 	i = 0;
-	args = malloc(sizeof(char *) * (calc_num_args(list) + 1));
-	if (!args)
+	argv = malloc(sizeof(char *) * (calc_num_args(list) + 1));
+	if (!argv)
 		ft_error(EXIT_FAILURE, "malloc failed");
 	while (list && list->word->flags != TOKEN_PIPE)
 	{
 		if (list->word->flags == TOKEN_STRING)
 		{
-			args[i] = list->word->word;
+			argv[i] = list->word->word;
 			i++;
 		}
 		if (list->word->flags == TOKEN_GREATER
@@ -61,8 +61,8 @@ char	**create_args_array(t_word_list *list)
 		else
 			list = list->next;
 	}
-	args[i] = NULL;
-	return (args);
+	argv[i] = NULL;
+	return (argv);
 }
 
 static char	*get_next_path(char *path_env, char *cmd, int i, int j)
