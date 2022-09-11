@@ -87,10 +87,13 @@ int	find_len(char *str, t_symtab **symtab)
 {
 	char	*temp;
 	int		len;
+	int		mode;
 
 	temp = str;
 	len = 0;
-	if (if_dollar(temp) == 0)
+	mode = 0;
+	mode = check_qmode(*str, mode);
+	if (if_dollar(temp) == 0 || mode == 1)
 		len = ft_strlen(str);
 	else
 		len = ft_strlen(str) + calculate_new_len(len, symtab, temp);
