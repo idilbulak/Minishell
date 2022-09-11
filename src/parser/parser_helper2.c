@@ -67,7 +67,10 @@ int	calculate_new_len(int len, t_symtab **symtab, char *temp)
 			name_len = ft_increase(temp, name_len, symtab);
 			count++;
 			while (*temp != '$' && *temp != ' ' && *temp != '\''
-				&& *temp != '"' && *temp != '\0')
+				&& *temp != '"' && *temp != '\0' && *temp != '/'
+		&& *temp != '#' && *temp != '%' && *temp != '*'
+		&& *temp != '+' && *temp != ',' && *temp != '='
+		&& *temp != '-' && *temp != ':' && *temp != '.')
 			{
 				count++;
 				temp++;

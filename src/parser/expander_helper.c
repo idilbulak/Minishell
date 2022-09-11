@@ -18,10 +18,10 @@ int	name_len(char *str)
 
 	count = 0;
 	while (*str != '$' && *str != '\0' && *str != '"'
-		&& *str != '\'' && *str != ' ' /*&& *str != '/'
+		&& *str != '\'' && *str != ' ' && *str != '/'
 		&& *str != '#' && *str != '%' && *str != '*'
 		&& *str != '+' && *str != ',' && *str != '='
-		&& *str != '-' && *str != ':' && *str != '.'*/)
+		&& *str != '-' && *str != ':' && *str != '.')
 	{
 		if (*str == '?')
 			return (1);
@@ -92,10 +92,10 @@ int	ft_increase(char *str, int name_len, t_symtab **symtab )
 	len = 0;
 	temp = str;
 	while (*temp != '$' && *temp != ' ' && *temp != '\''
-		&& *temp != '"' && *temp != '\0' /*&& *str != '/'
+		&& *temp != '"' && *temp != '\0' && *str != '/'
 		&& *str != '#' && *str != '%' && *str != '*'
 		&& *str != '+' && *str != ',' && *str != '='
-		&& *str != '-' && *str != ':' && *str != '.'*/)
+		&& *str != '-' && *str != ':' && *str != '.')
 	{
 		len++;
 		temp++;
