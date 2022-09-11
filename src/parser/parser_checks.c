@@ -39,6 +39,26 @@ int	parser_checks(t_token *tokens)
 				return (1);
 			}
 			else if (tokens->next->tokentype == TOKEN_PIPE)
+			{
+				char *str = readline("> ");
+				if (!str)
+				{
+					ft_putstr_fd("\b minishell: syntax error: unexpected end of file\n", 2);
+					g_exit_code = 258;
+					str = NULL;
+					return (1);
+				}
+				tokens = tokens->prev;
+				free(tokens->next->next->data);
+				free(tokens->next->next);
+				free(tokens->next->data);
+				free(tokens->next);
+				tokens->next = NULL;
+				free(str);
+				// str = NULL;
+				return (1);
+			}
+			else if (tokens->next->next->tokentype == TOKEN_PIPE)
 				return (-1);
 		}
 		else if (check_ifredirection(tokens) == 1)
