@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../inc/parser.h"
+#include "../../inc/minishell.h"
 
 int	parser_checks(t_token *tokens)
 {
@@ -21,7 +22,22 @@ int	parser_checks(t_token *tokens)
 			if (tokens->prev == NULL)
 				return (-1);
 			else if (tokens->next == NULL)
+			{
+				char *str = readline("> ");
+				if (!str)
+				{
+					ft_putstr_fd("minishell: syntax error: unexpected end of file\n", 2);
+					g_exit_code = 258;
+					str = NULL;
+					return (1);
+				}
+				t_token *new_token = NULL;
+				new_token = init_token(new_token);
+				new_token->tokentype = TOKEN_STRING;
+				new_token->data = str;
+				tokens->next = new_token;
 				return (1);
+			}
 			else if (tokens->next->tokentype == TOKEN_PIPE)
 				return (-1);
 		}
