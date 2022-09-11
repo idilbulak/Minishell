@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 11:54:25 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/25 14:44:01 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/09/11 15:20:48 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,11 @@ int	hash(char *name)
 	i = 0;
 	hash_value = 0;
 	len = ft_strlen(name);
-	while (i < len - 2) //added -2
+	while (i < len)
 	{
 		hash_value += name[i];
-		// hash_value *= name[i];    //??????
 		i++;
 	}
-	// printf("%ld\n", hash_value);
 	return (hash_value % TABLE_SIZE);
 }
 
