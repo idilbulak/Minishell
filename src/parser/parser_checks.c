@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 13:44:20 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/09/12 12:39:17 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/12 12:53:08 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ int	parser_checks(t_token *t)
 			else if (t->next == NULL)
 				t = pipe_without_next(t);
 			else if (t->next->tokentype == TOKEN_PIPE && t->next->next == NULL)
-				t = twopipes_without_next(t);
+				return (1);
+				// t = twopipes_without_next(t);
 			else if (t->next->tokentype == TOKEN_PIPE
 				&& t->next->next->tokentype == TOKEN_PIPE)
 				return (-1);
