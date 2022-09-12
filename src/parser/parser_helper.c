@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 13:44:15 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/31 10:58:22 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/12 09:43:45 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,6 @@ char	*fill_rest(char *temp, int i, char *str, char *name)
 	int	len;
 
 	len = ft_strlen(name);
-	// printf("name %s\n", name);
-	// printf("len %d\n", len);
 	while (i < (int)ft_strlen(temp))
 		temp[i] = '\0';
 	while (len > 0)
@@ -123,6 +121,5 @@ char	*fill_rest(char *temp, int i, char *str, char *name)
 		str++;
 		len--;
 	}
-	// printf("str   %s\n", str);
 	return (str);
 }

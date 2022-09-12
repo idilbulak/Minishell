@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/25 21:14:59 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/09/05 12:07:08 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/12 09:41:41 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,7 @@ int	ft_increase(char *str, int name_len, t_symtab **symtab )
 
 	len = 0;
 	temp = str;
-	while (*temp != '$' && *temp != ' ' && *temp != '\''
-		&& *temp != '"' && *temp != '\0' && *str != '/'
-		&& *str != '#' && *str != '%' && *str != '*'
-		&& *str != '+' && *str != ',' && *str != '='
-		&& *str != '-' && *str != ':' && *str != '.')
+	while (expand_until(*temp))
 	{
 		len++;
 		temp++;

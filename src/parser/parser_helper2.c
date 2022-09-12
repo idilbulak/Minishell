@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/25 21:29:45 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/31 11:13:19 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/12 09:40:23 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,7 @@ int	calculate_new_len(int len, t_symtab **symtab, char *temp)
 			temp++;
 			name_len = ft_increase(temp, name_len, symtab);
 			count++;
-			while (*temp != '$' && *temp != ' ' && *temp != '\''
-				&& *temp != '"' && *temp != '\0' && *temp != '/'
-		&& *temp != '#' && *temp != '%' && *temp != '*'
-		&& *temp != '+' && *temp != ',' && *temp != '='
-		&& *temp != '-' && *temp != ':' && *temp != '.')
+			while (expand_until(*temp))
 			{
 				count++;
 				temp++;
@@ -79,6 +75,6 @@ int	calculate_new_len(int len, t_symtab **symtab, char *temp)
 		if (*temp != '\0' && *temp != '$')
 				temp++;
 	}
-		len = -count + name_len;
+	len = -count + name_len;
 	return (len);
 }

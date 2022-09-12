@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 13:48:07 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/13 17:38:41 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/12 11:19:26 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,24 @@ void	ft_split_quotes(t_word_list *word_list)
 		temp = word_list->word->word;
 		if (!temp)
 			ft_error(EXIT_FAILURE, "malloc failure");
-		if (word_list->word->flags == TOKEN_STRING || word_list->word->flags == TOKEN_ENV)
+		if (word_list->word->flags == TOKEN_STRING
+			|| word_list->word->flags == TOKEN_ENV)
 		{
 			temp = qremover(word_list->word->word, mode, temp);
 			word_list->word->word = temp;
 		}
 		word_list = word_list->next;
 	}
+}
+
+int	expand_until(char temp)
+{
+	if (temp != '$' && temp != ' ' && temp != '\''
+		&& temp != '"' && temp != '\0' && temp != '/'
+		&& temp != '#' && temp != '%' && temp != '*'
+		&& temp != '+' && temp != ',' && temp != '='
+		&& temp != '-' && temp != ':' && temp != '.')
+		return (1);
+	else
+		return (0);
 }

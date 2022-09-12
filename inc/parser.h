@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 17:12:49 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/09/05 11:49:43 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/09/12 11:19:11 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int			calculate_new_len(int len, t_symtab **symtab, char *temp);
 //quote remover
 void		ft_split_quotes(t_word_list *word_list);
 int			check_qmode(char str, int mode);
+int			expand_until(char temp);
 
 //expander
 int			expand_value(char *name, int i, char *temp, t_symtab **symtab);
@@ -82,5 +83,6 @@ void		print_wordlist(t_word_list *word_list);
 
 //checks
 int			parser_checks(t_token *tokens);
+void		syntax_error(int e);
 
 #endif
