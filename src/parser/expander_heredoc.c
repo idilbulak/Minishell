@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/05 11:25:33 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/09/05 12:16:10 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/13 12:06:40 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ char	*ft_expand_heredoc(char *str, char *temp, t_symtab **symtab)
 				i = expand_value(name, i, temp, symtab);
 			else
 				str = expand_helper(str, name);
+			name = find_name(str);
 			str = fill_rest(temp, i, str, name);
 		}
 		else
@@ -55,7 +56,7 @@ char	*ft_expander_heredoc(char *str, t_symtab **symtab)
 	int		len;
 
 	len = find_len(str, symtab);
-	temp = malloc(sizeof(char) * len);
+	temp = malloc(sizeof(char) * (len + 3));
 	if (!temp)
 		ft_error(EXIT_FAILURE, "malloc failed");
 	temp = ft_expand_heredoc(str, temp, symtab);

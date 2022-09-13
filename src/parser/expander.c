@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/14 20:57:02 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/09/12 09:44:09 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/13 11:56:23 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ char	*ft_expand(char *str, char *temp, t_symtab **symtab, int mode)
 				str = expand_helper(str, name);
 			name = find_name(str);
 			str = fill_rest(temp, i, str, name);
-			free(name);
 		}
 		else
 			temp[i++] = *str;

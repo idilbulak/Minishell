@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 11:54:25 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/09/11 15:20:48 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/09/13 11:57:01 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 int	hash(char *name)
 {
 	unsigned int	hash_value;
-	int	i;
-	int	len;
+	int				i;
+	int				len;
 
 	i = 0;
 	hash_value = 0;

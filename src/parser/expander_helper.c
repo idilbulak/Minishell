@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/25 21:14:59 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/09/12 09:41:41 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/13 11:55:22 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,13 @@ int	name_len(char *str)
 char	*find_name(char *str)
 {
 	int		len;
-	// int		i;
 	char	*name;
 
 	str++;
-	// i = 0;
 	len = name_len(str);
-	name = ft_substr(str, 0 , len);
-	// name = malloc(sizeof(char *) * (len + 1));
+	name = ft_substr(str, 0, len);
 	if (!name)
 		ft_error(EXIT_FAILURE, "malloc failed");
-	// while (len > 0)
-	// {
-	// 	name[i] = *str;
-	// 	i++;
-	// 	str++;
-	// 	len--;
-	// }
-	// name[i] = '\0';
 	return (name);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 13:44:15 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/09/12 09:43:45 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/13 11:56:32 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,5 +121,6 @@ char	*fill_rest(char *temp, int i, char *str, char *name)
 		str++;
 		len--;
 	}
+	free(name);
 	return (str);
 }
