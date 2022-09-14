@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:39:46 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/25 20:49:14 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/14 10:36:48 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,21 @@ char	*find_char(char *str, t_token *new_token)
 	len = 0;
 	while (*str != '>' && *str != '<' && *str != '|' && *str != '\0')
 	{
-		if (*str == '"' || *str == '\'')
+		if (*str == '"')
 		{
 			len++;
 			str++;
-			while (*str != '"' && *str != '\'')
+			while (*str != '"')
+			{
+				len++;
+				str++;
+			}
+		}
+		if (*str == '\'')
+		{
+			len++;
+			str++;
+			while (*str != '\'')
 			{
 				len++;
 				str++;

@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 17:12:49 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/09/12 11:19:11 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/14 12:24:48 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,6 @@ void		print_wordlist(t_word_list *word_list);
 //checks
 int			parser_checks(t_token *tokens);
 void		syntax_error(int e);
+// void		expand_check(t_word_list *word_list);
 
 #endif

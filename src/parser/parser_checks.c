@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 13:44:20 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/09/13 11:55:48 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/14 12:17:40 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,68 @@ void	syntax_error(int e)
 	else if (e == -3)
 		ft_putstr_fd("minishell: syntax error near unexpected token `>'\n", 2);
 }
+
+// t_word_list	*split_words(t_word_list *word_list, char *word)
+// {
+// 	t_word_list	*temp;
+// 	char		**words;
+// 	t_word_list	*new_word;
+
+// 	temp = word_list;
+// 	while (temp)
+// 	{
+// 		new_word = NULL;
+// 		if (temp->word->word == word)
+// 		{
+// 			words = ft_split(word, ' ');
+// 			free(temp->word->word);
+// 			temp->word->word = malloc(sizeof(char *) * (ft_strlen(words[0]) + 1));
+// 			temp->word->word = words[0];
+// 			new_word = init_new_word(new_word);
+// 			new_word->word->word = malloc(sizeof(char *) * (ft_strlen(words[1]) + 1));
+// 			new_word->word->word = words[2];
+// 			print_wordlist(new_word);
+// 			new_word->next = temp->next;
+// 			temp->next = new_word;
+// 		}
+// 		temp = temp->next;
+// 	}
+// 	word_list = temp;
+// 	print_wordlist(word_list);
+// 	return (word_list);
+// }
+
+// void	expand_check(t_word_list *word_list)
+// {
+// 	char		*str;
+// 	int			i;
+// 	int			mode;
+// 	t_word_list	*temp;
+
+// 	str = NULL;
+// 	i = 0;
+// 	mode = 0;
+// 	temp = word_list;
+// 	while (temp)
+// 	{
+// 		str = temp->word->word;
+// 		if (temp->word->flags == TOKEN_STRING)
+// 		{
+// 			while (str[i])
+// 			{
+// 				mode = check_qmode(str[i], mode);
+// 				if (mode == 0 && str[i] == ' ')
+// 				{
+// 					word_list = split_words(word_list, temp->word->word);
+// 					break ;
+// 				}
+// 				i++;
+// 			}
+// 		}
+// 		temp = temp->next;
+// 	}
+// 	print_wordlist(word_list);
+// }
 
 // t_token	*pipe_without_next(t_token *tokens)
 // {
