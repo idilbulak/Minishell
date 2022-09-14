@@ -6,14 +6,14 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 14:52:44 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/30 17:31:39 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/09/14 15:01:31 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/environment.h"
 #include "../../libft/libft.h"
 
-static int	invalid_name_indentifier(char *name)
+static int	invalid_name_identifier(char *name)
 {
 	int			i;
 
@@ -25,7 +25,7 @@ static int	invalid_name_indentifier(char *name)
 		if (ft_isdigit(name[0])
 			|| (!ft_isalpha(name[i]) && !ft_isdigit(name[i]) && name[i] != '_'))
 		{
-			ft_putstr_fd("export:'", 2);
+			ft_putstr_fd("minishell: export:`", 2);
 			ft_putstr_fd(name, 2);
 			ft_putstr_fd("': not a valid identifier\n", 2);
 			g_exit_code = 1;
@@ -36,12 +36,61 @@ static int	invalid_name_indentifier(char *name)
 	return (0);
 }
 
-static void	print_export_variables(t_symtab **symtab)
+// static void	print_export_variables(t_symtab **symtab)
+// {
+// 	t_symtab	*tmp;
+// 	int			i;
+
+// 	i = 0;
+// 	while (i < TABLE_SIZE)
+// 	{
+// 		tmp = symtab[i];
+// 		while (tmp)
+// 		{
+// 			if (tmp->flag == FLAG_EXPORT)
+// 			{
+// 				ft_putstr_fd("declare -x ", 1);
+// 				ft_putstr_fd(tmp->name, 1);
+// 				ft_putstr_fd("=\"", 1);
+// 				ft_putstr_fd(tmp->value, 1);
+// 				ft_putstr_fd("\"\n", 1);
+// 			}
+// 			tmp = tmp->next;
+// 		}
+// 		i++;
+// 	}
+// }
+
+static void	sort_list(t_symtab **list)
 {
-	t_symtab	*tmp;
 	int			i;
+	t_symtab	*tmp;
 
 	i = 0;
+	while (list[i] && list[i + 1])
+	{
+		if (ft_strcmp(list[i]->name, list[i + 1]->name) > 0)
+		{
+			tmp = list[i];
+			list[i] = list[i + 1];
+			list[i + 1] = tmp;
+			i = 0;
+		}
+		else
+			i++;
+	}
+}
+
+static t_symtab	**create_export_variables_list(t_symtab **symtab)
+{
+	t_symtab	**list;
+	t_symtab	*tmp;
+	int			i;
+	int			j;
+
+	list = malloc(sizeof(t_symtab *) * (total_export_entries(symtab) + 1));
+	i = 0;
+	j = 0;
 	while (i < TABLE_SIZE)
 	{
 		tmp = symtab[i];
@@ -49,16 +98,35 @@ static void	print_export_variables(t_symtab **symtab)
 		{
 			if (tmp->flag == FLAG_EXPORT)
 			{
-				ft_putstr_fd("declare -x ", 1);
-				ft_putstr_fd(tmp->name, 1);
-				ft_putstr_fd("=\"", 1);
-				ft_putstr_fd(tmp->value, 1);
-				ft_putstr_fd("\"\n", 1);
+				list[j] = tmp;
+				j++;
 			}
 			tmp = tmp->next;
 		}
 		i++;
 	}
+	list[j] = NULL;
+	return (list);
+}
+
+static void	print_export_variables(t_symtab **symtab)
+{
+	t_symtab	**list;
+	int 		i;
+	
+	list = create_export_variables_list(symtab);
+	sort_list(list);
+	i = 0;
+	while (list[i])
+	{
+		ft_putstr_fd("declare -x ", 1);
+		ft_putstr_fd(list[i]->name, 1);
+		ft_putstr_fd("=\"", 1);
+		ft_putstr_fd(list[i]->value, 1);
+		ft_putstr_fd("\"\n", 1);
+		i++;
+	}
+	free(list);
 }
 
 int	ft_export(char **argv, t_symtab **symtab)
@@ -71,7 +139,7 @@ int	ft_export(char **argv, t_symtab **symtab)
 		print_export_variables(symtab);
 	while (argv[++i])
 	{
-		if (invalid_name_indentifier(argv[i]))
+		if (invalid_name_identifier(argv[i]))
 			continue ;
 		tmp = new_entry(argv[i]);
 		if (!tmp && !(symtab_lookup(symtab, argv[i])))

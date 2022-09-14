@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/29 17:12:46 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/09/09 13:36:36 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/09/14 12:01:48 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	init_here_document(t_filed *fd, char *delimiter, t_symtab **symtab)
 	int	pid;
 	int	status;
 
+	signal(SIGQUIT, SIG_IGN);	
 	pid = fork();
 	if (pid == 0)
 	{

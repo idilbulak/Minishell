@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/09 13:13:21 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/09/14 11:35:40 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/09/14 15:27:37 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static void	execute_non_builtin(char **argv, t_symtab **symtab)
 {
 	char	**envp;
 	char	*pathname;
+	int		shlvl;
 	int		i;
 
 	pathname = argv[0];
@@ -59,6 +60,13 @@ static void	execute_non_builtin(char **argv, t_symtab **symtab)
 		pathname = replace_dot_with_cwd(pathname + 1);
 	if (!pathname)
 		return ;
+	if (ft_strcmp(argv[0], "./minishell") == 0)
+	{
+		shlvl = ft_atoi(symtab_lookup(symtab, "SHLVL")->value);
+		shlvl += 1;
+		free(symtab_lookup(symtab, "SHLVL")->value);
+		symtab_lookup(symtab, "SHLVL")->value = ft_itoa(shlvl);
+	}
 	envp = create_env_array(symtab);
 	execve(pathname, argv, envp);
 }

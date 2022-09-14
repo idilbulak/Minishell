@@ -6,14 +6,14 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 15:27:18 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/09/09 13:03:49 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/09/14 17:04:19 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/environment.h"
 #include "../../libft/libft.h"
 
-static int	total_export_entries(t_symtab **symtab)
+int	total_export_entries(t_symtab **symtab)
 {
 	t_symtab	*tmp;
 	int			i;

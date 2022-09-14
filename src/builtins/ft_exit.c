@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 14:51:58 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/29 15:48:47 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/09/14 12:23:40 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	check_valid_argument(char **argv)
 			i++;
 		if (!ft_isdigit(argv[1][i]))
 		{
-			ft_putstr_fd("exit: ", 2);
+			ft_putstr_fd("minishell: exit: ", 2);
 			ft_putstr_fd(argv[1], 2);
 			ft_putstr_fd(": numeric argument required\n", 2);
 			exit(255);
@@ -48,7 +48,7 @@ int	ft_exit(char **argv, t_symtab **symtab)
 		status = ft_atoi(argv[1]) + 256;
 		if (argv[2])
 		{
-			ft_putstr_fd("exit: too many arguments\n", 2);
+			ft_putstr_fd("minishell: exit: too many arguments\n", 2);
 			return (1);
 		}
 	}

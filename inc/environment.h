@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 18:16:23 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/29 16:02:48 by dsaat         ########   odam.nl         */
+/*   Updated: 2022/09/14 13:12:06 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ t_symtab	*symtab_lookup(t_symtab **symtab, char *name);
 t_symtab	*new_entry(char *str);
 t_symtab	**init_env_symtab(char **environ);
 
+int			total_export_entries(t_symtab **symtab);
 char		**create_env_array(t_symtab **symtab);
 void		delete_env_array(char **env);
 
