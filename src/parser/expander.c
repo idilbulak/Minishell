@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/14 20:57:02 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/09/13 11:56:23 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/14 10:53:32 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ char	*ft_expand(char *str, char *temp, t_symtab **symtab, int mode)
 	while (*str != '\0')
 	{
 		mode = check_qmode(*str, mode);
-		if (*str == '$' && (*(str + 1) == ' ' || *(str + 1) == '\0'))
+		if (*str == '$' && (*(str + 1) == ' ' || *(str + 1) == '\0'
+				|| *(str + 1) == '/' || *(str + 1) == '%' || *(str + 1) == '+'
+				|| *(str + 1) == ',' || *(str + 1) == '='
+				|| *(str + 1) == ':' || *(str + 1) == '.'))
 			temp[i++] = '$';
 		else if (*str == '$' && (mode == 0 || mode == 2))
 		{

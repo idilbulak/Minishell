@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:25:52 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/25 19:01:49 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/14 10:31:17 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ t_token	*tokenizer(char *str, t_token *tokens)
 	bool		state;
 
 	state = true;
-	tokens = NULL;
+	if (check_unclosedquotes(str))
+		return (error_unclosed(tokens));
 	while (if_endofdata(str, state))
 	{
 		str = find_startofdata(str);

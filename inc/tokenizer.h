@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:55:38 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/08/25 20:50:44 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/14 10:30:50 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,12 @@ char		*typeoftoken(char *str, t_token *new_token);
 // tokenizer helper 2
 char		*ft_rearrange(char *temp_str, int len);
 int			check_len(char *temp_str, int len);
+t_token		*error_unclosed(t_token *tokens);
 
 // tokenizer checks
 int			check_ifpath(t_token *tokens);
 int			check_ifredirection(t_token *tokens);
+int			check_unclosedquotes(char *str);
 
 // tokenlist_utils
 t_token		*init_token(t_token *token);
