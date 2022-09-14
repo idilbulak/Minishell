@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/09 13:13:21 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/09/09 13:44:47 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/09/14 11:35:40 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ static void	do_simple_command(char **argv, t_child *child, t_symtab **symtab,
 	if (child->pid == 0)
 	{
 		close(fd->in);
+		close(fd->tmpin);
+		close(fd->tmpout);
 		if (is_builtin(argv, symtab))
 			exit(g_exit_code);
 		else
@@ -87,6 +89,11 @@ static void	do_simple_command(char **argv, t_child *child, t_symtab **symtab,
 			ft_error(126, argv[0]);
 		else
 			ft_error(EXIT_FAILURE, argv[0]);
+	}
+	else if (ft_strcmp(argv[0], "./minishell") == 0)
+	{
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);	
 	}
 }
 
