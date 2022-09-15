@@ -6,21 +6,11 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/05 11:25:33 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/09/13 12:06:40 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/15 16:15:18 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/parser.h"
-
-// if (check_ifexpand_heredoc(str) == 1)
-// 			ft_expander_heredoc(str, symtab);
-
-// int	check_ifexpand_heredoc(char *str)
-// {
-// 	if (ft_strrchr(word_list->word->word, '$'))
-// 		return (1);
-// 	return (0);
-// }
 
 char	*ft_expand_heredoc(char *str, char *temp, t_symtab **symtab)
 {

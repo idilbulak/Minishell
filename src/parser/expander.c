@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/14 20:57:02 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/09/14 10:53:32 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/15 17:12:09 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,17 @@ int	expand_value(char *name, int i, char *temp, t_symtab **symtab)
 		free (value);
 	free (name);
 	return (i);
+}
+
+int	check_char(char *str)
+{
+	if (*str == '$' && (*(str + 1) == ' ' || *(str + 1) == '\0'
+			|| *(str + 1) == '/' || *(str + 1) == '%' || *(str + 1) == '+'
+			|| *(str + 1) == ',' || *(str + 1) == '='
+			|| *(str + 1) == ':' || *(str + 1) == '.'))
+		return (1);
+	else
+		return (0);
 }
 
 char	*ft_expand(char *str, char *temp, t_symtab **symtab, int mode)

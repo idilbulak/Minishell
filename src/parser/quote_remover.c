@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 13:48:07 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/09/13 11:55:37 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/15 16:53:57 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*qremover(char *str, int mode, char *temp)
 		}
 		str++;
 	}
-	while (temp[i] != '\0')
+	if (temp[i] != '\0')
 		temp[i] = '\0';
 	return (temp);
 }
@@ -74,7 +74,8 @@ int	expand_until(char temp)
 		&& temp != '"' && temp != '\0' && temp != '/'
 		&& temp != '#' && temp != '%' && temp != '*'
 		&& temp != '+' && temp != ',' && temp != '='
-		&& temp != '-' && temp != ':' && temp != '.')
+		&& temp != '-' && temp != ':' && temp != '.'
+		&& temp != '?')
 		return (1);
 	else
 		return (0);
