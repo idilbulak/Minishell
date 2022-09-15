@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 16:44:08 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/09/14 11:17:06 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/09/15 14:57:37 by dsaat         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	*search_path_var(char *cmd, t_symtab **symtab, int i)
 	char		*path;
 	int			j;
 
-	if (symtab_lookup(symtab, "PATH"))
+	if (symtab_lookup(symtab, "PATH") && cmd[0])
 	{
 		path_env = symtab_lookup(symtab, "PATH")->value;
 		while (path_env != NULL && path_env[i])
