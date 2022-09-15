@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 15:06:53 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/09/14 13:00:36 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/09/14 21:58:01 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,16 @@ void	ft_error(int exit_code, char *error_message)
 {
 	struct stat	sb;
 
-	g_exit_code = exit_code;
+	// g_exit_code = exit_code; // not neccessary?
+	ft_putstr_fd("minishell: ", 2);
 	if (exit_code == 127)
 	{
-		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(error_message, 2);
 		ft_putstr_fd(": command not found\n", 2);
 	}
 	else if (exit_code == 126 && stat(error_message, &sb) == 0
 		&& S_ISDIR(sb.st_mode))
 	{
-		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(error_message, 2);
 		ft_putstr_fd(": is a directory\n", 2);
 	}
@@ -39,7 +38,7 @@ void	ft_error(int exit_code, char *error_message)
 	if (exit_code == -1)
 		g_exit_code = -1;
 	else
-		exit(g_exit_code);
+		exit(exit_code);
 }
 
 t_symtab	**init_env_symtab(char **environ)
