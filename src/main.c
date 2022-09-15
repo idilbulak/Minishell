@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:25:01 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/09/08 12:22:48 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/14 21:39:16 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,16 @@ char	*ft_readline(struct termios original_tcattr)
 	return (str);
 }
 
+static void	add_shlvl(t_symtab **symtab)
+{
+	int		shlvl;
+	
+	shlvl = ft_atoi(symtab_lookup(symtab, "SHLVL")->value);
+	shlvl += 1;
+	free(symtab_lookup(symtab, "SHLVL")->value);
+	symtab_lookup(symtab, "SHLVL")->value = ft_itoa(shlvl);
+}
+
 static void	init_minishell(char **environ, struct termios original_tcattr)
 {
 	char		*str;
@@ -43,6 +53,7 @@ static void	init_minishell(char **environ, struct termios original_tcattr)
 
 	g_exit_code = 0;
 	symtab = init_env_symtab(environ);
+	add_shlvl(symtab);
 	register_signals();
 	while (1)
 	{

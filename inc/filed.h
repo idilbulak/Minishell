@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 18:17:46 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/09/08 10:11:09 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/15 09:44:21 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 
 typedef struct s_filed
 {
-	int	tmpin;
-	int	tmpout;
-	int	redirect_in;
 	int	in;
 	int	out;
+	int	redirect_in;
+	int	tmpin;
+	int	tmpout;
 }		t_filed;
 
 void	init_fd(t_filed *fd);
