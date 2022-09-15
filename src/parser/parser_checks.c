@@ -141,7 +141,7 @@ t_word_list	*expand_check(t_word_list *word_list)
 	i = 0;
 	mode = 0;
 	temp = word_list;
-	while (temp)
+	while (temp->next)
 	{
 		str = temp->word->word;
 		if (temp->word->flags == TOKEN_STRING)
@@ -159,7 +159,7 @@ t_word_list	*expand_check(t_word_list *word_list)
 		}
 		temp = temp->next;
 	}
-	free(temp);
+	// free(temp);
 	return (word_list);
 }
 
