@@ -59,9 +59,7 @@ void	free_word_list(t_word_list *word_list)
 	while (word_list)
 	{
 		temp = word_list->next;
-		if (word_list->word->flags == TOKEN_STRING
-			|| word_list->word->flags == TOKEN_ENV
-			|| word_list->word->flags == TOKEN_CENV)
+		if (word_list->word->word)
 			free(word_list->word->word);
 		free(word_list->word);
 		free(word_list);

@@ -136,9 +136,9 @@ t_word_list	*parser(t_token *tokens, t_symtab **symtab)
 		adjust_wordlist(word_list);
 		if (check_ifexpand(word_list) == 1)
 			ft_expander(word_list, symtab);
-		// expand_check(word_list);
-		ft_split_quotes(word_list);
 		var_assignment(word_list, symtab);
+		ft_split_quotes(word_list);
+		word_list = expand_check(word_list);
 	}
 	return (word_list);
 }

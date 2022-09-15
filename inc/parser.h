@@ -84,6 +84,6 @@ void		print_wordlist(t_word_list *word_list);
 //checks
 int			parser_checks(t_token *tokens);
 void		syntax_error(int e);
-// void		expand_check(t_word_list *word_list);
+t_word_list	*expand_check(t_word_list *word_list);
 
 #endif

@@ -57,67 +57,111 @@ void	syntax_error(int e)
 		ft_putstr_fd("minishell: syntax error near unexpected token `>'\n", 2);
 }
 
-// t_word_list	*split_words(t_word_list *word_list, char *word)
-// {
-// 	t_word_list	*temp;
-// 	char		**words;
-// 	t_word_list	*new_word;
+int	count_words(char **words)
+{
+	int	count;
 
-// 	temp = word_list;
-// 	while (temp)
-// 	{
-// 		new_word = NULL;
-// 		if (temp->word->word == word)
-// 		{
-// 			words = ft_split(word, ' ');
-// 			free(temp->word->word);
-// 			temp->word->word = malloc(sizeof(char *) * (ft_strlen(words[0]) + 1));
-// 			temp->word->word = words[0];
-// 			new_word = init_new_word(new_word);
-// 			new_word->word->word = malloc(sizeof(char *) * (ft_strlen(words[1]) + 1));
-// 			new_word->word->word = words[2];
-// 			print_wordlist(new_word);
-// 			new_word->next = temp->next;
-// 			temp->next = new_word;
-// 		}
-// 		temp = temp->next;
-// 	}
-// 	word_list = temp;
-// 	print_wordlist(word_list);
-// 	return (word_list);
-// }
+	count = 0;
+	while(words[count])
+		count++;
+	return (count);
+}
 
-// void	expand_check(t_word_list *word_list)
-// {
-// 	char		*str;
-// 	int			i;
-// 	int			mode;
-// 	t_word_list	*temp;
+enum e_tokentype	chose_flag(char *str)
+{
+	if (!ft_strcmp(str, "|"))
+		return (TOKEN_PIPE);
+	else if (!ft_strcmp(str, ">"))
+		return (TOKEN_GREATER);
+	else if (!ft_strcmp(str, ">>"))
+		return (TOKEN_DOUBLEGREATER);
+	else if (!ft_strcmp(str, "<"))
+		return (TOKEN_LESS);
+	else if (!ft_strcmp(str, "<<"))
+		return (TOKEN_DOUBLELESS);
+	else if (ft_strchr(str, '='))
+		return (TOKEN_ENV);
+	else
+		return (TOKEN_STRING);
+}
 
-// 	str = NULL;
-// 	i = 0;
-// 	mode = 0;
-// 	temp = word_list;
-// 	while (temp)
-// 	{
-// 		str = temp->word->word;
-// 		if (temp->word->flags == TOKEN_STRING)
-// 		{
-// 			while (str[i])
-// 			{
-// 				mode = check_qmode(str[i], mode);
-// 				if (mode == 0 && str[i] == ' ')
-// 				{
-// 					word_list = split_words(word_list, temp->word->word);
-// 					break ;
-// 				}
-// 				i++;
-// 			}
-// 		}
-// 		temp = temp->next;
-// 	}
-// 	print_wordlist(word_list);
-// }
+t_word_list	*split_words(t_word_list *word_list, char *word)
+{
+	t_word_list	*temp;
+	char		**words;
+	t_word_list	*new_word;
+	int			count;
+	int			i;
+
+	temp = word_list;
+	while (temp)
+	{
+		new_word = NULL;
+		if (temp->word->word == word)
+		{
+			words = ft_split(word, ' ');
+			count = count_words(words);
+			i = 1;
+			free(temp->word->word);
+			temp->word->word = words[0];
+			temp->word->flags = TOKEN_STRING;
+			while (i < count)
+			{
+				new_word = init_new_word(new_word);
+				new_word->word->word = words[i];
+				new_word->word->flags = TOKEN_STRING;
+				if (temp->next == NULL)
+				{
+					word_list = addto_wend(word_list, new_word);
+					temp = temp->next;
+				}
+				// // else
+				// // {
+				// 	new_word->next = temp->next;
+				// 	temp->next = new_word;
+				// // }
+				i++;
+			}
+			free (words);
+		}
+		temp = temp->next;
+	}
+	// word_list = temp;
+	return (word_list);
+}
+
+t_word_list	*expand_check(t_word_list *word_list)
+{
+	char		*str;
+	int			i;
+	int			mode;
+	t_word_list	*temp;
+
+	str = NULL;
+	i = 0;
+	mode = 0;
+	temp = word_list;
+	while (temp)
+	{
+		str = temp->word->word;
+		if (temp->word->flags == TOKEN_STRING)
+		{
+			while (str[i])
+			{
+				mode = check_qmode(str[i], mode);
+				if (mode != 1 && str[i] == ' ')//???????????????????
+				{
+					word_list = split_words(word_list, temp->word->word);
+					break ;
+				}
+				i++;
+			}
+		}
+		temp = temp->next;
+	}
+	free(temp);
+	return (word_list);
+}
 
 // t_token	*pipe_without_next(t_token *tokens)
 // {
