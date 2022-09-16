@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 14:53:04 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/08/23 14:00:06 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/09/16 10:28:32 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_pwd(char **argv, t_symtab **symtab)
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
 	{
-		perror("pwd");
+		perror("minishell: pwd");
 		return (1);
 	}
 	printf("%s\n", cwd);
