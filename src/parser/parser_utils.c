@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 12:29:45 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/09/15 15:42:02 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/16 10:12:22 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,23 +70,35 @@ void	free_word_list(t_word_list *word_list)
 	}
 }
 
-void	print_wordlist(t_word_list *word_list)
+int	calculate_exit_code_len(void)
 {
-	int	i;
+	char	*exit_code;
+	int		name_len;
 
-	i = 0;
-	printf("%s------------------ WORD_LIST -----------------%s\n\n", BLUE, RESET);
-	while (word_list != NULL)
-	{
-		printf(YELLOW);
-		printf("word_list [%d]: \n", i);
-		printf(PURPLE);
-		printf("\t word: %s\n", word_list->word->word);
-		printf(GREEN);
-		printf("\t flag: %d\n\n", word_list->word->flags);
-		printf(RESET);
-		i++;
-		word_list = word_list->next;
-	}
-	printf("%s----------------------------------------------%s\n\n", BLUE, RESET);
+	name_len = 0;
+	exit_code = ft_itoa(g_exit_code);
+	name_len += ft_strlen(exit_code);
+	free(exit_code);
+	return (name_len);
 }
+
+// void	print_wordlist(t_word_list *word_list)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	printf("%s----------------- WORD_LIST ----------------%s\n\n", BLUE, RESET);
+// 	while (word_list != NULL)
+// 	{
+// 		printf(YELLOW);
+// 		printf("word_list [%d]: \n", i);
+// 		printf(PURPLE);
+// 		printf("\t word: %s\n", word_list->word->word);
+// 		printf(GREEN);
+// 		printf("\t flag: %d\n\n", word_list->word->flags);
+// 		printf(RESET);
+// 		i++;
+// 		word_list = word_list->next;
+// 	}
+// 	printf("%s---------------------------------------------s\n\n", BLUE, RESET);
+// }

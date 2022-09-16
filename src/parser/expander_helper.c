@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/25 21:14:59 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/09/15 16:51:33 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/16 10:11:11 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,15 @@ int	name_len(char *str)
 	int	count;
 
 	count = 0;
+	if (*str == '?')
+		return (1);
 	while (*str != '$' && *str != '\0' && *str != '"'
-		&& *str != '\'' && *str != ' ' /*&& *str != '/'
-		&& *str != '#' && *str != '%' && *str != '*'
-		&& *str != '+' && *str != ',' && *str != '='
-		&& *str != '-' && *str != ':' && *str != '.'*/)
+		&& *str != '\'' && *str != ' ' && *str != '?'
+		&& *str != '/' && *str != '#' && *str != '%'
+		&& *str != '*' && *str != '+' && *str != ','
+		&& *str != '=' && *str != '-' && *str != ':'
+		&& *str != '.')
 	{
-		if (*str == '?')
-			return (1);
 		count++;
 		str++;
 	}
@@ -72,26 +73,22 @@ int	find_name_len(int name_len, t_symtab **symtab, char *name)
 	return (name_len);
 }
 
-int	ft_increase(char *str, int name_len, t_symtab **symtab )
+int	ft_increase(char *str, int name_len, t_symtab **symtab)
 {
 	int		len;
 	char	*temp;
 	char	*name;
-	char	*exit_code;
 
 	len = 0;
 	temp = str;
-	exit_code = 0;
 	if (*temp == '?')
 	{
-		exit_code = ft_itoa(g_exit_code);
-		if (!ft_strcmp(name, "?"))
-		name_len += ft_strlen(exit_code);
+		name_len += calculate_exit_code_len();
+		temp++;
 	}
 	else
 	{
-		while (*temp != '$' && *temp != ' ' && *temp != '\''
-			&& *temp != '"' && *temp != '\0' && *temp != '?')
+		while (expand_until(*temp))
 		{
 			len++;
 			temp++;

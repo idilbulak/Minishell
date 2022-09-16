@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:25:01 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/09/14 21:39:16 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/09/16 10:15:04 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*ft_readline(struct termios original_tcattr)
 static void	add_shlvl(t_symtab **symtab)
 {
 	int		shlvl;
-	
+
 	shlvl = ft_atoi(symtab_lookup(symtab, "SHLVL")->value);
 	shlvl += 1;
 	free(symtab_lookup(symtab, "SHLVL")->value);

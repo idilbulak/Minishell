@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 13:44:20 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/09/15 14:44:54 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/16 09:56:02 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	count_words(char **words)
 	int	count;
 
 	count = 0;
-	while(words[count])
+	while (words[count])
 		count++;
 	return (count);
 }
