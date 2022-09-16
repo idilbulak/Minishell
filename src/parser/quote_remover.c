@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/13 13:48:07 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/09/15 16:53:57 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/16 10:03:03 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,26 @@ void	ft_split_quotes(t_word_list *word_list)
 	}
 }
 
-// int	expand_until(char temp)
-// {
-// 	if (temp != '$' && temp != ' ' && temp != '\''
-// 		&& temp != '"' && temp != '\0' && temp != '/'
-// 		&& temp != '#' && temp != '%' && temp != '*'
-// 		&& temp != '+' && temp != ',' && temp != '='
-// 		&& temp != '-' && temp != ':' && temp != '.'
-// 		&& temp != '?')
-// 		return (1);
-// 	else
-// 		return (0);
-// }
+int	expand_until(char temp)
+{
+	if (temp != '$' && temp != '\0' && temp != '"'
+		&& temp != '\'' && temp != ' ' && temp != '?'
+		&& temp != '/' && temp != '#' && temp != '%'
+		&& temp != '*' && temp != '+' && temp != ','
+		&& temp != '=' && temp != '-' && temp != ':'
+		&& temp != '.')
+		return (1);
+	else
+		return (0);
+}
+
+int	check_char(char *str)
+{
+	if (*str == '$' && (*(str + 1) == ' ' || *(str + 1) == '\0'
+			|| *(str + 1) == '/' || *(str + 1) == '%' || *(str + 1) == '+'
+			|| *(str + 1) == ',' || *(str + 1) == '='
+			|| *(str + 1) == ':' || *(str + 1) == '.'))
+		return (1);
+	else
+		return (0);
+}
