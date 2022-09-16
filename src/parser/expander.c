@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/14 20:57:02 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/09/16 10:02:59 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/16 11:58:36 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ char	*ft_expand(char *str, char *temp, t_symtab **symtab, int mode)
 		else if (*str == '$' && (mode == 0 || mode == 2))
 		{
 			name = find_name(str);
-			printf("name:%s\n", name);
 			if (*name == '?' || symtab_lookup(symtab, name))
 				i = expand_value(name, i, temp, symtab);
 			else
@@ -93,7 +92,7 @@ int	find_len(char *str, t_symtab **symtab)
 	count = 0;
 	name_len = 0;
 	mode = check_qmode(*str, mode);
-	if (if_dollar(temp) == 0 || mode == 1)
+	if (if_dollar(temp) == 0)
 		len = ft_strlen(str);
 	else
 		len = ft_strlen(str) + calculate_new_len(name_len, count, symtab, temp);
@@ -111,7 +110,6 @@ void	ft_expander(t_word_list *word_list, t_symtab **symtab)
 		if (word_list->word->flags == TOKEN_STRING)
 		{
 			len = find_len(word_list->word->word, symtab);
-			printf("%d\n", len);
 			temp = malloc(sizeof(char) * (len + 1));
 			if (!temp)
 				ft_error(EXIT_FAILURE, "malloc failed");
