@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/14 20:57:02 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/09/16 12:11:16 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/16 12:15:40 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ void	ft_expander(t_word_list *word_list, t_symtab **symtab)
 		if (word_list->word->flags == TOKEN_STRING)
 		{
 			len = find_len(word_list->word->word, symtab);
-			// printf("len:%d\n", len);
 			temp = malloc(sizeof(char) * (len + 1));
 			if (!temp)
 				ft_error(EXIT_FAILURE, "malloc failed");

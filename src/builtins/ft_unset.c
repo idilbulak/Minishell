@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 14:53:19 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/09/14 12:59:01 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/09/16 12:17:15 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_unset(char **argv, t_symtab **symtab)
 	while (argv[++i])
 	{
 		if (invalid_name_identifier(argv[i]))
-			continue;
+			continue ;
 		else if (symtab_lookup(symtab, argv[i]))
 			symtab_delete(symtab, argv[i]);
 	}

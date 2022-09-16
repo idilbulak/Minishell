@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/09 13:13:21 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/09/15 09:37:16 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/09/16 12:18:41 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,10 @@ void	executor(t_word_list *list, t_symtab **symtab)
 		{
 			argv = create_argv_array(list);
 			do_simple_command(argv, &child, symtab, &fd);
-			if (argv[0] && ft_strcmp(argv[0], "./minishell") == 0) //!!!! segv look at libft strcmp
+			if (argv[0] && ft_strcmp(argv[0], "./minishell") == 0)
 			{
 				signal(SIGINT, SIG_IGN);
-				signal(SIGQUIT, SIG_IGN);	
+				signal(SIGQUIT, SIG_IGN);
 			}
 			free(argv);
 		}

@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 15:06:53 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/09/14 21:58:01 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/09/16 12:17:44 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	ft_error(int exit_code, char *error_message)
 {
 	struct stat	sb;
 
-	// g_exit_code = exit_code; // not neccessary?
 	ft_putstr_fd("minishell: ", 2);
 	if (exit_code == 127)
 	{

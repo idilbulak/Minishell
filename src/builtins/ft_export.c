@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 14:52:44 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/09/14 15:01:31 by daansaat      ########   odam.nl         */
+/*   Updated: 2022/09/16 12:16:49 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,31 +35,6 @@ static int	invalid_name_identifier(char *name)
 	}
 	return (0);
 }
-
-// static void	print_export_variables(t_symtab **symtab)
-// {
-// 	t_symtab	*tmp;
-// 	int			i;
-
-// 	i = 0;
-// 	while (i < TABLE_SIZE)
-// 	{
-// 		tmp = symtab[i];
-// 		while (tmp)
-// 		{
-// 			if (tmp->flag == FLAG_EXPORT)
-// 			{
-// 				ft_putstr_fd("declare -x ", 1);
-// 				ft_putstr_fd(tmp->name, 1);
-// 				ft_putstr_fd("=\"", 1);
-// 				ft_putstr_fd(tmp->value, 1);
-// 				ft_putstr_fd("\"\n", 1);
-// 			}
-// 			tmp = tmp->next;
-// 		}
-// 		i++;
-// 	}
-// }
 
 static void	sort_list(t_symtab **list)
 {
@@ -112,8 +87,8 @@ static t_symtab	**create_export_variables_list(t_symtab **symtab)
 static void	print_export_variables(t_symtab **symtab)
 {
 	t_symtab	**list;
-	int 		i;
-	
+	int			i;
+
 	list = create_export_variables_list(symtab);
 	sort_list(list);
 	i = 0;
@@ -156,3 +131,28 @@ int	ft_export(char **argv, t_symtab **symtab)
 	}
 	return (g_exit_code);
 }
+
+// static void	print_export_variables(t_symtab **symtab)
+// {
+// 	t_symtab	*tmp;
+// 	int			i;
+
+// 	i = 0;
+// 	while (i < TABLE_SIZE)
+// 	{
+// 		tmp = symtab[i];
+// 		while (tmp)
+// 		{
+// 			if (tmp->flag == FLAG_EXPORT)
+// 			{
+// 				ft_putstr_fd("declare -x ", 1);
+// 				ft_putstr_fd(tmp->name, 1);
+// 				ft_putstr_fd("=\"", 1);
+// 				ft_putstr_fd(tmp->value, 1);
+// 				ft_putstr_fd("\"\n", 1);
+// 			}
+// 			tmp = tmp->next;
+// 		}
+// 		i++;
+// 	}
+// }

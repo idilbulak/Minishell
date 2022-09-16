@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/25 21:29:45 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/09/16 11:39:23 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/16 12:15:54 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_word_list	*create_null_list(t_word_list *word_list)
 	return (word_list);
 }
 
-int	calculate_new_len(int name_len, int count, t_symtab **symtab, char *temp)
+int	calculate_new_len(int name_len, int c, t_symtab **symtab, char *temp)
 {
 	while (*temp)
 	{
@@ -60,17 +60,17 @@ int	calculate_new_len(int name_len, int count, t_symtab **symtab, char *temp)
 		{
 			temp++;
 			name_len = ft_increase(temp, name_len, symtab);
-			count++;
+			c++;
 			if (*temp == '?')
 			{
 				temp++;
-				count++;
+				c++;
 			}
 			else
 			{
 				while (expand_until(*temp))
 				{
-					count++;
+					c++;
 					temp++;
 				}	
 			}
@@ -78,5 +78,5 @@ int	calculate_new_len(int name_len, int count, t_symtab **symtab, char *temp)
 		if (*temp != '\0' && *temp != '$')
 				temp++;
 	}
-	return (-count + name_len);
+	return (-c + name_len);
 }

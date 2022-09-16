@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/25 21:14:59 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/09/16 11:38:28 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/16 12:21:07 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	find_name_len(int name_len, t_symtab **symtab, char *name)
 
 	value = NULL;
 	exit_code = ft_itoa(g_exit_code);
-	if (!ft_strcmp(name, "?"))
+	if (name && !ft_strcmp(name, "?"))
 		name_len += ft_strlen(exit_code);
 	else if (symtab_lookup(symtab, name))
 	{
