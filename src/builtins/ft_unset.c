@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 14:53:19 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/09/16 12:17:15 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/16 13:39:15 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,24 +49,3 @@ int	ft_unset(char **argv, t_symtab **symtab)
 	}
 	return (g_exit_code);
 }
-
-// int	ft_unset(char **argv, t_symtab **symtab)
-// {
-// 	int	i;
-
-// 	i = 1;
-// 	while (argv[i])
-// 	{
-// 		if (ft_strchr(argv[i], '='))
-// 		{
-// 			ft_putstr_fd("unset:`", 2);
-// 			ft_putstr_fd(argv[i], 2);
-// 			ft_putstr_fd("': not a valid identifier\n", 2);
-// 			g_exit_code = 1;
-// 		}
-// 		else if (symtab_lookup(symtab, argv[i]))
-// 			symtab_delete(symtab, argv[i]);
-// 		i++;
-// 	}
-// 	return (g_exit_code);
-// }

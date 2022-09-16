@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/12 14:52:44 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/09/16 12:16:49 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/16 13:39:27 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,28 +131,3 @@ int	ft_export(char **argv, t_symtab **symtab)
 	}
 	return (g_exit_code);
 }
-
-// static void	print_export_variables(t_symtab **symtab)
-// {
-// 	t_symtab	*tmp;
-// 	int			i;
-
-// 	i = 0;
-// 	while (i < TABLE_SIZE)
-// 	{
-// 		tmp = symtab[i];
-// 		while (tmp)
-// 		{
-// 			if (tmp->flag == FLAG_EXPORT)
-// 			{
-// 				ft_putstr_fd("declare -x ", 1);
-// 				ft_putstr_fd(tmp->name, 1);
-// 				ft_putstr_fd("=\"", 1);
-// 				ft_putstr_fd(tmp->value, 1);
-// 				ft_putstr_fd("\"\n", 1);
-// 			}
-// 			tmp = tmp->next;
-// 		}
-// 		i++;
-// 	}
-// }
