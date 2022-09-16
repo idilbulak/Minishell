@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/14 20:57:02 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/09/16 11:58:36 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/16 12:11:16 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,15 @@ int	if_dollar(char *str)
 {
 	char	*temp;
 	int		yes;
+	int		mode;
 
 	yes = 0;
 	temp = str;
+	mode = 0;
 	while (*temp)
 	{
-		if (*temp == '$')
+		mode = check_qmode(*temp, mode);
+		if (*temp == '$' && mode != 1)
 			yes = 1;
 		temp++;
 	}
@@ -110,6 +113,7 @@ void	ft_expander(t_word_list *word_list, t_symtab **symtab)
 		if (word_list->word->flags == TOKEN_STRING)
 		{
 			len = find_len(word_list->word->word, symtab);
+			// printf("len:%d\n", len);
 			temp = malloc(sizeof(char) * (len + 1));
 			if (!temp)
 				ft_error(EXIT_FAILURE, "malloc failed");
