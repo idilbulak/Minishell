@@ -47,7 +47,7 @@ t_token		*tokenizer(char *line, t_token *tokens);
 
 // tokenizer helper
 char		*find_delimiter( char *str, t_token *new_token);
-char		*find_char(char *str, t_token *new_token);
+char		*find_char(char *str, t_token *new_token, int len, char *temp_str);
 char		*typeoftoken(char *str, t_token *new_token);
 
 // tokenizer helper 2

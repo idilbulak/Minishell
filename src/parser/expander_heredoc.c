@@ -20,7 +20,7 @@ char	*ft_expand_heredoc(char *str, char *temp, t_symtab **symtab)
 	i = 0;
 	while (*str != '\0')
 	{
-		if (*str == '$' && (*(str + 1) == ' ' || *(str + 1) == '\0'))
+		if (check_char(str))
 			temp[i++] = '$';
 		else if (*str == '$')
 		{
@@ -29,8 +29,7 @@ char	*ft_expand_heredoc(char *str, char *temp, t_symtab **symtab)
 				i = expand_value(name, i, temp, symtab);
 			else
 				str = expand_helper(str, name);
-			name = find_name(str);
-			str = fill_rest(temp, i, str, name);
+			str = fill_rest(temp, i, str, find_name(str));
 		}
 		else
 			temp[i++] = *str;
@@ -46,7 +45,7 @@ char	*ft_expander_heredoc(char *str, t_symtab **symtab)
 	int		len;
 
 	len = find_len(str, symtab);
-	temp = malloc(sizeof(char) * (len + 3));
+	temp = malloc(sizeof(char) * (len + 1));
 	if (!temp)
 		ft_error(EXIT_FAILURE, "malloc failed");
 	temp = ft_expand_heredoc(str, temp, symtab);

@@ -15,41 +15,33 @@
 
 char	*typeoftoken(char *str, t_token *new_token)
 {
-	if (*str == '|' || *str == '>' || *str == '<')
-		str = find_delimiter(str, new_token);
-	else if (*str != '\0')
-			str = find_char(str, new_token);
-	return (str);
-}
-
-char	*find_char(char *str, t_token *new_token)
-{
 	char	*temp_str;
 	int		len;
 
 	temp_str = str;
 	len = 0;
+	if (*str == '|' || *str == '>' || *str == '<')
+		str = find_delimiter(str, new_token);
+	else if (*str != '\0')
+			str = find_char(str, new_token, len, temp_str);
+	return (str);
+}
+
+char	*find_char(char *str, t_token *new_token, int len, char *temp_str)
+{
 	while (*str != '>' && *str != '<' && *str != '|' && *str != '\0')
 	{
 		if (*str == '"')
 		{
 			len++;
-			str++;
-			while (*str != '"')
-			{
+			while (*++str != '"')
 				len++;
-				str++;
-			}
 		}
 		if (*str == '\'')
 		{
 			len++;
-			str++;
-			while (*str != '\'')
-			{
+			while (*++str != '\'')
 				len++;
-				str++;
-			}
 		}
 		len++;
 		str++;
