@@ -68,15 +68,15 @@ void	ft_split_quotes(t_word_list *word_list)
 	}
 }
 
-int	expand_until(char temp)
-{
-	if (temp != '$' && temp != ' ' && temp != '\''
-		&& temp != '"' && temp != '\0' && temp != '/'
-		&& temp != '#' && temp != '%' && temp != '*'
-		&& temp != '+' && temp != ',' && temp != '='
-		&& temp != '-' && temp != ':' && temp != '.'
-		&& temp != '?')
-		return (1);
-	else
-		return (0);
-}
+// int	expand_until(char temp)
+// {
+// 	if (temp != '$' && temp != ' ' && temp != '\''
+// 		&& temp != '"' && temp != '\0' && temp != '/'
+// 		&& temp != '#' && temp != '%' && temp != '*'
+// 		&& temp != '+' && temp != ',' && temp != '='
+// 		&& temp != '-' && temp != ':' && temp != '.'
+// 		&& temp != '?')
+// 		return (1);
+// 	else
+// 		return (0);
+// }

@@ -66,19 +66,11 @@ int	calculate_new_len(int len, t_symtab **symtab, char *temp)
 			temp++;
 			name_len = ft_increase(temp, name_len, symtab);
 			count++;
-			if (*temp == '?')
+			while (*temp != '$' && *temp != ' ' && *temp != '\''
+				&& *temp != '"' && *temp != '\0')
 			{
-				name_len = ft_strlen(ft_itoa(g_exit_code));
-				count = 3;
+				count++;
 				temp++;
-			}
-			else
-			{
-				while (expand_until(*temp))
-				{
-					count++;
-					temp++;
-				}
 			}
 		}
 		if (*temp != '\0' && *temp != '$')

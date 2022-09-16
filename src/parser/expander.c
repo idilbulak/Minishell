@@ -34,16 +34,16 @@ int	expand_value(char *name, int i, char *temp, t_symtab **symtab)
 	return (i);
 }
 
-int	check_char(char *str)
-{
-	if (*str == '$' && (*(str + 1) == ' ' || *(str + 1) == '\0'
-			|| *(str + 1) == '/' || *(str + 1) == '%' || *(str + 1) == '+'
-			|| *(str + 1) == ',' || *(str + 1) == '='
-			|| *(str + 1) == ':' || *(str + 1) == '.'))
-		return (1);
-	else
-		return (0);
-}
+// int	check_char(char *str)
+// {
+// 	if (*str == '$' && (*(str + 1) == ' ' || *(str + 1) == '\0'
+// 			|| *(str + 1) == '/' || *(str + 1) == '%' || *(str + 1) == '+'
+// 			|| *(str + 1) == ',' || *(str + 1) == '='
+// 			|| *(str + 1) == ':' || *(str + 1) == '.'))
+// 		return (1);
+// 	else
+// 		return (0);
+// }
 
 char	*ft_expand(char *str, char *temp, t_symtab **symtab, int mode)
 {
@@ -54,10 +54,11 @@ char	*ft_expand(char *str, char *temp, t_symtab **symtab, int mode)
 	while (*str != '\0')
 	{
 		mode = check_qmode(*str, mode);
-		if (*str == '$' && (*(str + 1) == ' ' || *(str + 1) == '\0'
-				|| *(str + 1) == '/' || *(str + 1) == '%' || *(str + 1) == '+'
-				|| *(str + 1) == ',' || *(str + 1) == '='
-				|| *(str + 1) == ':' || *(str + 1) == '.'))
+		if (*str == '$' && (*(str + 1) == ' ' || *(str + 1) == '\0'))
+		// if (*str == '$' && (*(str + 1) == ' ' || *(str + 1) == '\0'
+		// 		|| *(str + 1) == '/' || *(str + 1) == '%' || *(str + 1) == '+'
+		// 		|| *(str + 1) == ',' || *(str + 1) == '='
+		// 		|| *(str + 1) == ':' || *(str + 1) == '.'))
 			temp[i++] = '$';
 		else if (*str == '$' && (mode == 0 || mode == 2))
 		{

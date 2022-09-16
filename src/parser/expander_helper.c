@@ -18,10 +18,10 @@ int	name_len(char *str)
 
 	count = 0;
 	while (*str != '$' && *str != '\0' && *str != '"'
-		&& *str != '\'' && *str != ' ' && *str != '/'
+		&& *str != '\'' && *str != ' ' /*&& *str != '/'
 		&& *str != '#' && *str != '%' && *str != '*'
 		&& *str != '+' && *str != ',' && *str != '='
-		&& *str != '-' && *str != ':' && *str != '.')
+		&& *str != '-' && *str != ':' && *str != '.'*/)
 	{
 		if (*str == '?')
 			return (1);
@@ -77,16 +77,28 @@ int	ft_increase(char *str, int name_len, t_symtab **symtab )
 	int		len;
 	char	*temp;
 	char	*name;
+	char	*exit_code;
 
 	len = 0;
 	temp = str;
-	while (expand_until(*temp))
+	exit_code = 0;
+	if (*temp == '?')
 	{
-		len++;
-		temp++;
+		exit_code = ft_itoa(g_exit_code);
+		if (!ft_strcmp(name, "?"))
+		name_len += ft_strlen(exit_code);
 	}
-	name = ft_substr(str, 0, len);
-	name_len = find_name_len(name_len, symtab, name);
-	free(name);
+	else
+	{
+		while (*temp != '$' && *temp != ' ' && *temp != '\''
+			&& *temp != '"' && *temp != '\0' && *temp != '?')
+		{
+			len++;
+			temp++;
+		}
+		name = ft_substr(str, 0, len);
+		name_len = find_name_len(name_len, symtab, name);
+		free(name);
+	}
 	return (name_len);
 }
