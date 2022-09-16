@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/25 21:14:59 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/09/16 12:21:07 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/16 15:10:47 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	ft_increase(char *str, int name_len, t_symtab **symtab)
 	temp = str;
 	if (*temp == '?')
 	{
-		name_len += calculate_exit_code_len();
+		name_len += calculate_exit_code_len() + 2;
 		temp++;
 	}
 	else
