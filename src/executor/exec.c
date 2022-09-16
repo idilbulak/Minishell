@@ -6,7 +6,7 @@
 /*   By: dsaat <dsaat@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/09 13:13:21 by dsaat         #+#    #+#                 */
-/*   Updated: 2022/09/16 12:18:41 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/09/16 13:27:58 by daansaat      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "../../inc/builtins.h"
 #include "../../inc/filed.h"
 #include "../../inc/environment.h"
+#include <sys/wait.h>
 #include <errno.h>
 
 static void	set_pipeline_var(t_word_list *list, t_symtab **symtab)
