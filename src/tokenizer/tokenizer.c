@@ -6,7 +6,7 @@
 /*   By: ibulak <ibulak@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/06 10:25:52 by ibulak        #+#    #+#                 */
-/*   Updated: 2022/09/14 10:31:17 by ibulak        ########   odam.nl         */
+/*   Updated: 2022/10/04 15:04:55 by ibulak        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_token	*tokenizer(char *str, t_token *tokens)
 			addto_end(tokens, new_token);
 		else
 			free (new_token);
-		str = find_startoftoken(str);
+		// str = find_startoftoken(str);
 		if (*str != '\0')
 			str++;
 	}
